@@ -65,37 +65,15 @@ function invalue() {
         data: { ma: ma, phone: phone },
         success: function (d) {
             $("#nutcheckphone").show();
-            if (d == "0") {
-                alert('Mã gd này đã tồn tại trong hệ thống hoặc đã trả thưởng.');
+            if(d.error)
+            {
+                alert(d.message);
             }
             else
-                if (d == 1) {
-                    alert('Hệ thống sẽ trả thưởng lại cho bạn sau vài giây.');
-                    checkma();
-                }
-                else
-                    if (d == 2) {
-                        alert('Hệ thống không có số này.');
-                    }
-                    else
-                        if (d == 3) {
-                            alert(' ' + ma + ' không tồn tại ' + phone + ' .');
-                        }
-                        else
-                            if (d == 4) {
-                                alert('' + phone + ' đang hoạt động.');
-                            }
-                            else
-                                if (d == 5) {
-                                    alert('Bạn cược sai nội dung min max hoặc không ghi nội dung (mất tiền)');
-                                }
-                                else
-                                    if (d == 7) {
-                                        alert('Mã gd này thua');
-                                    }
-                                    else {
-                                        alert('Co loi xay ra, chua xac dinh');
-                                    }
+            {
+                alert(d.message);
+                checkma();
+            }
         }
     })
 }
