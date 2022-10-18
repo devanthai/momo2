@@ -4,6 +4,7 @@ const Lichsuck = require('../models/LichSuCk')
 const Cuocs = require('../models/Cuoc')
 const Setting = require('../models/Setting')
 const AutoMomo = require('./autoMomo');
+const DayTask = require('../models/DayTask')
 
 const redisCache = require("../redisCache")
 
