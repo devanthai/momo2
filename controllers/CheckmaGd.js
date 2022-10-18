@@ -156,7 +156,7 @@ CheckMa = async (req, res) => {
                 }
             } catch (ex) { 
                 console.log(ex); 
-                if(ex.toString().include("Không tìm thấy mã gd này"))
+                if(ex.toString().includes("Không tìm thấy mã gd này"))
                 {
                     return res.send({ error: true, message: "Lỗi: Không tìm thấy mã này vui lòng kiểm tra lại!" }) 
                 }
