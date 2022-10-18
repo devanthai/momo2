@@ -238,48 +238,48 @@ autoBankMoney = async (phone) => {
 
 }
 
+const noidungs = [
+    { noidung: "c" },
+    { noidung: "C" },
+    { noidung: "l" },
+    { noidung: "L" },
+    { noidung: "c2" },
+    { noidung: "C2" },
+    { noidung: "l2" },
+    { noidung: "L2" },
+    { noidung: "a" },
+    { noidung: "A" },
+    { noidung: "b" },
+    { noidung: "B" },
+    { noidung: "t" },
+    { noidung: "T" },
+    { noidung: "x" },
+    { noidung: "X" },
+    { noidung: "a2" },
+    { noidung: "A2" },
+    { noidung: "b2" },
+    { noidung: "B2" },
+    { noidung: "t2" },
+    { noidung: "T2" },
+    { noidung: "x2" },
+    { noidung: "X2" },
+    { noidung: "G3" },
+    { noidung: "g3" },
+    { noidung: "s" },
+    { noidung: "S" },
+    { noidung: "n1" },
+    { noidung: "N1" },
+    { noidung: "N2" },
+    { noidung: "n2" },
+    { noidung: "n3" },
+    { noidung: "N3" }]
 
 async function sumWinmm() {
     var now = new Date();
     var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const sum = await Cuocs.aggregate([{
         $match: {
-            time: { $gte: startOfToday }, status: 1, $or: [
-                { noidung: "c" },
-                { noidung: "C" },
-                { noidung: "l" },
-                { noidung: "L" },
-                { noidung: "c2" },
-                { noidung: "C2" },
-                { noidung: "l2" },
-                { noidung: "L2" },
-                { noidung: "a" },
-                { noidung: "A" },
-                { noidung: "b" },
-                { noidung: "B" },
-                { noidung: "t" },
-                { noidung: "T" },
-                { noidung: "x" },
-                { noidung: "X" },
-                { noidung: "a2" },
-                { noidung: "A2" },
-                { noidung: "b2" },
-                { noidung: "B2" },
-                { noidung: "t2" },
-                { noidung: "T2" },
-                { noidung: "x2" },
-                { noidung: "X2" },
-                { noidung: "G3" },
-                { noidung: "g3" },
-                { noidung: "s" },
-                { noidung: "S" },
-                { noidung: "n1" },
-                { noidung: "N1" },
-                { noidung: "N2" },
-                { noidung: "n2" },
-                { noidung: "n3" },
-                { noidung: "N3" }
-            ]
+            time: { $gte: startOfToday }, status: 1, $or: noidungs
         },
     }, {
         $group: {
@@ -299,42 +299,7 @@ async function sumDemm() {
     var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const sum = await Cuocs.aggregate([{
         $match: {
-            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, $or: [
-                { noidung: "c" },
-                { noidung: "C" },
-                { noidung: "l" },
-                { noidung: "L" },
-                { noidung: "c2" },
-                { noidung: "C2" },
-                { noidung: "l2" },
-                { noidung: "L2" },
-                { noidung: "a" },
-                { noidung: "A" },
-                { noidung: "b" },
-                { noidung: "B" },
-                { noidung: "t" },
-                { noidung: "T" },
-                { noidung: "x" },
-                { noidung: "X" },
-                { noidung: "a2" },
-                { noidung: "A2" },
-                { noidung: "b2" },
-                { noidung: "B2" },
-                { noidung: "t2" },
-                { noidung: "T2" },
-                { noidung: "x2" },
-                { noidung: "X2" },
-                { noidung: "G3" },
-                { noidung: "g3" },
-                { noidung: "s" },
-                { noidung: "S" },
-                { noidung: "n1" },
-                { noidung: "N1" },
-                { noidung: "N2" },
-                { noidung: "n2" },
-                { noidung: "n3" },
-                { noidung: "N3" }]
-        },
+            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, $or: noidungs},
     }, {
         $group: {
             _id: null,
@@ -350,42 +315,7 @@ async function sumWinmmThang() {
     var startOfToday = new Date(now.getFullYear(), now.getMonth());
     const sum = await Cuocs.aggregate([{
         $match: {
-            time: { $gte: startOfToday }, status: 1, $or: [
-                { noidung: "c" },
-                { noidung: "C" },
-                { noidung: "l" },
-                { noidung: "L" },
-                { noidung: "c2" },
-                { noidung: "C2" },
-                { noidung: "l2" },
-                { noidung: "L2" },
-                { noidung: "a" },
-                { noidung: "A" },
-                { noidung: "b" },
-                { noidung: "B" },
-                { noidung: "t" },
-                { noidung: "T" },
-                { noidung: "x" },
-                { noidung: "X" },
-                { noidung: "a2" },
-                { noidung: "A2" },
-                { noidung: "b2" },
-                { noidung: "B2" },
-                { noidung: "t2" },
-                { noidung: "T2" },
-                { noidung: "x2" },
-                { noidung: "X2" },
-                { noidung: "G3" },
-                { noidung: "g3" },
-                { noidung: "s" },
-                { noidung: "S" },
-                { noidung: "n1" },
-                { noidung: "N1" },
-                { noidung: "N2" },
-                { noidung: "n2" },
-                { noidung: "n3" },
-                { noidung: "N3" }
-            ]
+            time: { $gte: startOfToday }, status: 1, $or: noidungs
         },
     }, {
         $group: {
@@ -405,41 +335,7 @@ async function sumDemmThang() {
     var startOfToday = new Date(now.getFullYear(), now.getMonth());
     const sum = await Cuocs.aggregate([{
         $match: {
-            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, $or: [
-                { noidung: "c" },
-                { noidung: "C" },
-                { noidung: "l" },
-                { noidung: "L" },
-                { noidung: "c2" },
-                { noidung: "C2" },
-                { noidung: "l2" },
-                { noidung: "L2" },
-                { noidung: "a" },
-                { noidung: "A" },
-                { noidung: "b" },
-                { noidung: "B" },
-                { noidung: "t" },
-                { noidung: "T" },
-                { noidung: "x" },
-                { noidung: "X" },
-                { noidung: "a2" },
-                { noidung: "A2" },
-                { noidung: "b2" },
-                { noidung: "B2" },
-                { noidung: "t2" },
-                { noidung: "T2" },
-                { noidung: "x2" },
-                { noidung: "X2" },
-                { noidung: "G3" },
-                { noidung: "g3" },
-                { noidung: "s" },
-                { noidung: "S" },
-                { noidung: "n1" },
-                { noidung: "N1" },
-                { noidung: "N2" },
-                { noidung: "n2" },
-                { noidung: "n3" },
-                { noidung: "N3" }]
+            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, $or: noidungs
         },
     }, {
         $group: {
@@ -497,7 +393,7 @@ const bot = require("../telegram/botadmin")
 bot.onText(/\/uptop (.+) (.+)/, async (msg, match) => {
     const sdt = match[1];
     const money = Number(match[2]);
-    var toptuan = await TopTuan.findOneAndUpdate({ sdt: sdt }, { $inc: { win: money } }, { new: true })
+    let toptuan = await TopTuan.findOneAndUpdate({ sdt: sdt }, { $inc: { win: money } }, { new: true })
     if (!toptuan) {
         toptuan = await new TopTuan({ sdt: sdt, win: money }).save()
     }
@@ -505,7 +401,7 @@ bot.onText(/\/uptop (.+) (.+)/, async (msg, match) => {
 })
 bot.onText(/\/xoatop (.+)/, async (msg, match) => {
     const sdt = match[1];
-    var toptuan = await TopTuan.findOneAndRemove({ sdt: sdt })
+    let toptuan = await TopTuan.findOneAndRemove({ sdt: sdt })
     await bot.sendMessage(groupID, "Đã xóa")
 })
 bot.onText(/\/help/, async (msg, match) => {
@@ -799,7 +695,7 @@ autoGETTTT = async () => {
     await AutoGet()
     setTimeout(async () => {
         autoGETTTT()
-    }, 6000)
+    }, 1500)
 }
 autoGETTTT()
 
@@ -818,7 +714,7 @@ autoCkKKKK = async () => {
     await autoCk()
     setTimeout(async () => {
         autoCkKKKK()
-    }, 3000)
+    }, 1500)
 }
 autoCkKKKK()
 
