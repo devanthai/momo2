@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"ee72bde6377d483bbdd3f5f2f3a0f88f","collectionName":"daytasks","type":"collection"}

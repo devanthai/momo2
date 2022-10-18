@@ -1,0 +1,689 @@
+<div class="mt-5">
+    <div class="col text-center">
+        <a class="btn btn-info font-weight-bold text-uppercase collapsed" data-toggle="collapse" href="#tab-play-game"
+            role="button" aria-expanded="false" aria-controls="tab-play-game">
+            <img src="/image/new2.gif" width="25px">Chơi game nhanh<img width="25px" src="/image/new2.gif"> </a>
+    </div>
+</div>
+
+
+
+
+<div class="mt-5 collapse" id="tab-play-game">
+    <div class="col-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                Chơi nhanh
+            </div>
+            <div class="panel-body">
+                <div class="text-center mt-5">
+                    <div class="" role="group" aria-label="...">
+                        <button style="
+    border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change" server-id="1000" server-rate="1000">
+                            Chẵn Lẻ
+                        </button>
+                        <button style="
+    
+    border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change" server-id="10000"
+                            server-rate="10000">
+                            Tài xỉu
+                        </button>
+                        <button style="
+    
+    border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change" server-id="1" server-rate="1">
+                            Chẵn Lẻ 2
+                        </button>
+                        <button style="
+    
+    border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change" server-id="2" server-rate="1">
+                            Gấp 3
+                        </button>
+                        <button style="
+    
+    border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change" server-id="5" server-rate="1">
+                            Tổng 3 số
+                        </button>
+
+                        <button style="
+    
+    border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change" server-id="6" server-rate="1">
+                            1 phần 3
+                        </button>
+
+                        <button style="
+                        border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change" server-id="2706"
+                            server-rate="1">
+                            Xiên
+                        </button>
+                        <button style="
+                        
+                        border-color: #ccc;" class="btn btn-info" id="btngame" server-action="change"
+                            server-id="270604" server-rate="1">
+                            Đoán số
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="panel-body turn active" turn-tab="270604" style="padding-top: 0px;">
+                    <br>
+
+                    - <b>Đoán số</b> là một game vô cùng dễ, tính kết quả bằng <b>1 số cuối mã giao
+                        dịch</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn vào nút play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi :
+                    <br>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Nội dung</th>
+                                    <th class="text-center text-white">Số cuối</th>
+                                    <th class="text-center text-white">Tiền nhận</th>
+
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="result-table" class="">
+
+
+
+                                <tr>
+                                    <td><b> D0 </b>
+
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D0')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code> 0 </code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b> D1 </b>
+
+
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D1')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+
+                                    </td>
+                                    <td><code>1 </code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b> D2 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D2')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+
+
+                                    </td>
+                                    <td><code> 2</code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b> D3 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D3')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code>3 </code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b> D4 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D4')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code>4 </code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b> D5 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D5')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code>5</code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b> D6 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D6')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code>6 </code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b> D7 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D7')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code>7 </code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b> D8 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D8')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code>8 </code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b> D9 </b>
+                                        <span class="label label-danger text-uppercase" onclick="playGame('D9')"><i
+                                                class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><code>9</code></td>
+                                    <td><b>x6.6 tiền cược</b></td>
+                                </tr>
+
+
+
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <br> - Nếu mã giao dịch có số cuối trùng với 1 trong 3 số trên, bạn sẽ chiến thắng.
+
+
+                </div>
+                <div class="panel-body turn" turn-tab="2706" style="padding-top: 0px;">
+                    <br>
+                    - <b>Xiên</b> là một game vô cùng dễ, tính kết quả bằng <b>1 số cuối mã giao
+                        dịch</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn nút Play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi : <br>
+
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Nội dung</th>
+                                    <th class="text-center text-white">Số cuối</th>
+                                    <th class="text-center text-white">Tiền nhận</th>
+
+                                </tr>
+                            </thead>
+
+
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="result-table" class="">
+
+                                <tr>
+                                    <td><b>CX</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('CX')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><code>0</code> <code>2</code> <code>4</code></td>
+                                    <td><b>x3.3 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>LT</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('LT')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><code>5</code> <code>7</code> <code>9</code></td>
+                                    <td><b>x3.3 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>CT</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('CT')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td> <code>6</code> <code>8</code></td>
+                                    <td><b>x3.3 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>LX</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('LX')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td> <code>1</code> <code>3</code></td>
+                                    <td><b>x3.3 tiền cược</b></td>
+                                </tr>
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <br> - Nếu mã giao dịch có số cuối trùng với 1 trong 3 số trên, bạn sẽ chiến thắng.
+
+
+                </div>
+                <div class="panel-body turn" turn-tab="10000" style="padding-top: 0px;">
+
+                    <br>
+                    - <b>Tài xỉu</b> là một game vô cùng dễ, tính kết quả bằng <b>1 số cuối mã giao
+                        dịch</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn nút Play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi : <br>
+
+                    - <b>T</b> hoặc <b>X</b> (nếu đuôi mã giao dịch có các số sau thì bạn sẽ thắng) <br>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Nội dung</th>
+                                    <th class="text-center text-white">Số</th>
+                                    <th class="text-center text-white">Tiền nhận</th>
+
+                                </tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="result-table" class="">
+
+                                <tr>
+                                    <td><b>X</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('X')"><i class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td> <b>1</b> - <b>2</b> - <b>3</b> - <b>4</b>
+                                    </td>
+                                    <td><b>x2.35 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>T</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('T')"><i class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><b>5</b> - <b>6</b> - <b>7</b> - <b>8</b>
+                                    </td>
+                                    <td><b>x2.35 tiền cược</b></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    - Tiền thắng sẽ = <b>Tiền cược*2.35</b> <br>
+                    - <b>Lưu ý : Mức cược mỗi số khác nhau, nếu chuyển sai hạn mức hoặc sai nội dung sẽ
+                        không được hoàn tiền.</b>
+
+
+
+
+                </div>
+                <div class="panel-body turn" turn-tab="1000" style="padding-top: 0px;">
+
+                    <br>
+                    - <b>Chẵn lẻ</b> là một game vô cùng dễ, tính kết quả bằng <b>1 số cuối mã giao
+                        dịch</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn nút Play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi : <br>
+
+                    - <b>A</b> hoặc <b>B</b> (nếu đuôi mã giao dịch có các số sau thì bạn sẽ thắng) <br>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Nội dung</th>
+                                    <th class="text-center text-white">Số</th>
+                                    <th class="text-center text-white">Tiền nhận</th>
+
+                                </tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="result-table" class="">
+
+                                <tr>
+                                    <td><b>B</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('B')"><i class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td> <b>1</b> - <b>3</b> - <b>5</b> - <b>7</b>
+                                    </td>
+                                    <td><b>x2.35 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>A</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('A')"><i class="fa fa-play" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td><b>2</b> - <b>4</b> - <b>6</b> - <b>8</b>
+                                    </td>
+                                    <td><b>x2.35 tiền cược</b></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    - Tiền thắng sẽ = <b>Tiền cược*2.35</b> <br>
+                    <b>- Lưu ý : Mức cược mỗi số khác nhau, nếu chuyển sai hạn mức hoặc sai nội dung sẽ không
+                        được hoàn tiền.</b>
+
+
+
+                </div>
+                <div class="panel-body turn" turn-tab="1" style="padding-top: 0px;">
+
+                    <br>
+                    - <b>Chẵn lẻ 2</b> là một game vô cùng dễ, tính kết quả bằng <b>1 số cuối mã giao
+                        dịch</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn nút Play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi : <br>
+
+                    - <b>A2</b> hoặc <b>B2</b> hoặc <b>T2</b> hoặc <b>X2</b> (nếu đuôi mã giao dịch có các số sau thì
+                    bạn sẽ thắng) <br>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Nội dung</th>
+                                    <th class="text-center text-white">Số</th>
+                                    <th class="text-center text-white">Tiền nhận</th>
+
+                                </tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="result-table" class="">
+
+                                <tr>
+                                    <td><b>B2</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('B2')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td> <b>1</b> - <b>3</b> - <b>5</b> - <b>7</b> -
+                                        <b>9</b>
+                                    </td>
+                                    <td><b>x1.96 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>A2</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('A2')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><b>0</b> -<b>2</b> - <b>4</b> - <b>6</b> -
+                                        <b>8</b>
+                                    </td>
+                                    <td><b>x1.96 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>X2</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('X2')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><b>0</b> -<b>1</b> - <b>2</b> - <b>3</b> -
+                                        <b>4</b>
+                                    </td>
+                                    <td><b>x1.96 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>T2</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('T2')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><b>5</b> -<b>6</b> - <b>7</b> - <b>8</b> -
+                                        <b>9</b>
+                                    </td>
+                                    <td><b>x1.96 tiền cược</b></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    - Tiền thắng sẽ = <b>Tiền cược*1.96</b> <br>
+                    <b>-Lưu ý : Mức cược mỗi số khác nhau, nếu chuyển sai hạn mức hoặc sai nội dung sẽ không
+                        được hoàn tiền.</b>
+
+
+
+                </div>
+                <div class="panel-body turn" turn-tab="2" style="padding-top: 0px;">
+
+                    <br>
+                    <button type="button" onclick="playGame('G3')" class="btn btn-primary btn-lg btn-block"> <b>Chơi
+                            ngay Gấp 3 <i class="fa fa-play" aria-hidden="true"></i></b></button>
+                    <br>
+                    <br>
+
+                    - <b>Gấp 3</b> <span class="label label-danger text-uppercase" onclick="playGame('G3')"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> là một game vô cùng dễ, tính kết quả bằng
+                    <b> số cuối mã giao
+                        dịch</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn nút Play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi : <br>
+
+                    - Nếu đuôi mã giao dịch trùng các số sau thì bạn sẽ thắng <br>
+
+
+
+
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Cách tính</th>
+                                    <th class="text-center text-white">Số</th>
+                                    <th class="text-center text-white">Tiền nhận</th>
+
+                                </tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="result-table" class="">
+                                <tr>
+                                    <td>2 số cuối mã GD</td>
+                                    <td>
+                                        <b>02</b> <b>13</b> - <b>17</b> - <b>19</b> - <b>21</b>- <b>29</b> -
+                                        <b>35</b> - <b>37</b> - <b>47</b> - <b>49</b> - <b>51</b> -
+                                        <b>54</b> - <b>57</b> - <b>63</b> - <b>64</b> - <b>74</b> -
+                                        <b>83</b> - <b>91</b> - <b>95</b> - <b>96</b>
+                                    </td>
+                                    <td><b>x3 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td>2 số cuối mã GD</td>
+                                    <td>
+                                        <b>66</b> - <b>99</b>
+                                    </td>
+                                    <td><b>x4 tiền cược</b></td>
+                                </tr>
+                                <tr>
+                                    <td>3 số cuối mã GD</td>
+                                    <td>
+                                        <b>123</b> - <b>234</b> - <b>456</b> - <b>678</b> - <b>789</b>
+                                    </td>
+                                    <td><b>x5 tiền cược</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+                <div class="panel-body turn" turn-tab="6" style="padding-top: 0px;">
+
+
+
+                    <br>
+                    - <b>1 phần 3</b> là một game vô cùng dễ, tính kết quả bằng <b>1 số cuối mã giao
+                        dịch</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn nút Play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi : <br>
+
+                    - <b>N1</b> hoặc <b>N2</b> hoặc <b>N3</b> (nếu đuôi mã giao dịch có các số sau thì bạn sẽ thắng)
+                    <br>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Nội dung</th>
+                                    <th class="text-center text-white">Số cuối</th>
+                                    <th class="text-center text-white">Tiền nhận</th>
+
+                                </tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="result-table" class="">
+
+                                <tr>
+                                    <td><b>N1</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('N1')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><b>1</b> - <b>2</b> - <b>3</b></td>
+                                    <td><b>x3 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>N2</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('N2')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><b>4</b> - <b>5</b> - <b>6</b></td>
+                                    <td><b>x3 tiền cược</b></td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>N3</b> <span class="label label-danger text-uppercase"
+                                            onclick="playGame('N3')"><i class="fa fa-play"
+                                                aria-hidden="true"></i></span></td>
+                                    <td><b>7</b> - <b>8</b> - <b>9</b></td>
+                                    <td><b>x3 tiền cược</b></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    - Tiền thắng sẽ = <b>Tiền cược*3</b> <br>
+                    <b>Lưu ý : Mức cược mỗi số khác nhau, nếu chuyển sai hạn mức hoặc sai nội dung sẽ không
+                        được hoàn tiền.
+                    </b>
+
+                </div>
+                <div class="panel-body turn" turn-tab="4" style="padding-top: 0px;">
+                    - Đoán số là một game vô cùng đơn giản, tỉ lệ ăn khá cao. <br>
+                    - Cách chơi rất đơn giản, - Chuyển tiền vào một trong các tài khoản : <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr role="row" class="bg-primary">
+                                    <th class="text-center text-white">Số điện thoại</th>
+                                    <th class="text-center text-white">Cược tối thiểu</th>
+                                    <th class="text-center text-white">Cược tối đa</th>
+                                </tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="game_5" class="">
+                            </tbody>
+                        </table>
+                    </div> <br>
+                    với nội dung : <b>số từ 0-9</b>.
+
+                    <br>
+                    - Nếu số cuối mã giao dịch trùng với số nội dung bạn nhập, bạn sẽ nhận được <b>x8 tiền
+                        cược</b>
+
+                    <br>
+                    - Ví dụ bạn chuyển <b>20.000 vnđ</b> với nội dung <b>0</b>, số cuối mã giao dịch là
+                    <b>0</b> bạn sẽ nhận được <b>40.000 vnđ</b>
+
+
+                </div>
+                <div class="panel-body turn" turn-tab="5" style="padding-top: 0px;">
+                    <br>
+                    <button type="button" onclick="playGame('S')" class="btn btn-primary btn-lg btn-block"> <b>Chơi ngay
+                            tổng 3 số <i class="fa fa-play" aria-hidden="true"></i></b></button>
+                    <br>
+                    <br>
+
+                    - <b>Tổng 3 số</b> là một game vô cùng dễ, tính kết quả bằng <b> 3 số cuối mã giao
+                        dịch cộng lại</b>. <br>
+                    - Cách chơi rất đơn giản, - Ấn nút Play <span class="label label-danger text-uppercase"><i
+                            class="fa fa-play" aria-hidden="true"></i></span> để chơi : <br>
+
+                    - Nếu đuôi mã giao dịch trùng các số sau thì bạn sẽ thắng <br>
+
+                    - Nội dung chuyển : <b>S</b> (nếu đuôi mã giao dịch có các số sau):
+
+                    <br>
+                    - Kết quả là tính tổng 3 số cuối của mã giao dịch. <br>
+
+                    - Nếu tổng 3 số cuối bằng <b>7</b>, <b>17</b>, <b>27</b> => Nhận <b>x2 tiền cược</b>
+                    <br>
+                    - Nếu tổng 3 số cuối bằng <b>8</b>, <b>18</b> => Nhận <b>x3 tiền cược</b> <br>
+
+                    - Nếu tổng 3 số cuối bằng <b>9</b>, <b>19</b> => Nhận <b>x3.5 tiền cược</b> <br>
+                    <br>
+                    <b>- Lưu ý : Mức cược mỗi số khác nhau, nếu chuyển sai hạn mức hoặc sai nội dung sẽ
+                        không được hoàn tiền.</b>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a style="display: none;" id="zzzzzzz2" role="button" href="" class="btn btn-primary btn-lg btn-block"></a>
+<script>
+
+    getGame = (nd) => {
+        try {
+            nd = nd.toString().toUpperCase()
+        }
+        catch {
+
+        }
+        if (nd == "a" || nd == "b" || nd == "A" || nd == "B" || nd == "C" || nd == "L") {
+            return "Chẵn lẻ"
+        }
+        else if (nd == "T" || nd == "X" || nd == "t" || nd == "x") {
+            return "Tài xỉu"
+        }
+        else if (nd == "A2" || nd == "B2" || nd == "a2" || nd == "b2" || nd == "T2" || nd == "X2" || nd == "t2" || nd == "x2" || nd == "C2" || nd == "L2") {
+            return "Chẵn lẻ 2"
+        }
+        else if ((nd == "g3" || nd == "G3")) {
+            return "Gấp 3"
+        }
+        else if ((nd == "s" || nd == "S")) {
+            return "Tổng 3 số"
+        }
+        else if ((nd == "N1" || nd == "n1")) {
+            return "1 phần 3"
+        }
+        else if ((nd == "N2" || nd == "n2")) {
+            return "1 phần 3"
+        }
+        else if ((nd == "N3" || nd == "n3")) {
+            return "1 phần 3"
+        }
+        else if ((nd == "CX" || nd == "LT" || nd == "CT" || nd == "LX")) {
+            return "Xiên"
+        }
+        else if ((nd == "D0" || nd == "D1" || nd == "D2" || nd == "D3" || nd == "D4" || nd == "D5" || nd == "D7" || nd == "D8" || nd == "D9")) {
+            return "Đoán số"
+        }
+    }
+    playGame = (game) => {
+        if (!detectMob()) return alert("Rất tiếc. Chức năng này chỉ dành cho điện thoại.")
+        let sotien = prompt("Nhập số tiền chơi game " + getGame(game), "");
+        if (isNaN(sotien) || sotien == "" || sotien == null) {
+            return alert("Số tiền nhập không hợp lệ")
+        }
+        else if (sotien < 6000) {
+            return alert("Số tiền phải lớn hơn 6,000 vnd")
+        }
+        else if (sotien > 2000000) {
+            return alert("Số tiền phải nhỏ hơn 2,000,000 vnd")
+        }
+        $.ajax({
+            url: '/getLink',
+            data: { game: game, sotien: sotien },
+            type: 'POST',
+            success: function (d) {
+                if (!d.error) {
+                    document.getElementById("zzzzzzz2").href = d.data;
+                    $("#zzzzzzz2")[0].click()
+                }
+                else {
+                    alert(d.message)
+                }
+            }
+        })
+    }
+</script>

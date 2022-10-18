@@ -1,0 +1,36 @@
+{
+  "name": "banking-service-standard",
+  "version": "1.0.0",
+  "description": "Standard for banking service ",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "https-proxy-agent": "^5.0.0",
+    "image-to-base64": "^2.2.0",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.32",
+    "mongoose": "^6.0.12",
+    "node-forge": "^0.10.0",
+    "node-telegram-bot-api": "^0.56.0",
+    "nodemon": "^2.0.14",
+    "redis": "^4.3.0",
+    "socket.io": "^4.5.1",
+    "uuid": "^8.3.1"
+  }
+}

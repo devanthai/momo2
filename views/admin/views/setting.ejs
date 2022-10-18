@@ -1,0 +1,262 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold">
+                </h3>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="mt-2">Tiêu đề web</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="tieude" value="<%=setting.tieude %>" type="text" class="form-control col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+                <h4 class="mt-2">Link nhóm telegram</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="linktelegram" value="<%=setting.linkTele %>" type="text" class="form-control col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+                <h4 class="mt-2">Link Logo</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="linklogo" value="<%=setting.linklogo %>" type="text" class="form-control col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+                <h4 class="card-title">Thông báo</h4>
+                <div class="form-group" id="editor">
+                    <p>This is the editor content.</p>
+                </div>
+                <br>
+
+                <h4 class="mt-2">Tỉ lệ</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+
+                        <textarea id="settingtile" style="
+                            height: 250px;
+                        " class="form-control"><%-JSON.stringify(setting.tile, undefined, 4)%></textarea>
+
+                    </div>
+                </div>
+
+
+
+                <h4 class="mt-2">Top 1 tuần</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="toptuan1" value="<%=setting.toptuan1 %>" type="text" class="form-control  col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+
+                <h4 class="mt-2">Top 2 tuần</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="toptuan2" value="<%=setting.toptuan2 %>" type="text" class="form-control  col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+
+                <h4 class="mt-2">Top 3 tuần</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="toptuan3" value="<%=setting.toptuan3 %>" type="text" class="form-control  col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+
+                <h4 class="mt-2">Top 4 tuần</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="toptuan4" value="<%=setting.toptuan4 %>" type="text" class="form-control  col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+
+                <h4 class="mt-2">Top 5 tuần</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="toptuan5" value="<%=setting.toptuan5 %>" type="text" class="form-control  col-md-4"
+                            placeholder="" aria-label="">
+                    </div>
+                </div>
+
+
+
+                <h4 class="mt-2 text-danger">SDT phát nhiệm vụ ngày</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="sdtdaytask" value="<%=setting.sdtdaytask %>" type="text"
+                            class="form-control  col-md-4" placeholder="" aria-label="">
+                    </div>
+                </div>
+
+
+                <h4 class="mt-2 text-danger">SDT phát giftcode</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="sdtGiftcode" value="<%=setting.sdtGiftcode %>" type="text"
+                            class="form-control  col-md-4" placeholder="" aria-label="">
+                    </div>
+                </div>
+
+                <h4 class="mt-2 text-danger">SDT phát giới thiệu</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="sdtGioithieu" value="<%=setting.sdtGioithieu %>" type="text"
+                            class="form-control  col-md-4" placeholder="" aria-label="">
+                    </div>
+                </div>
+
+                <h4 class="mt-2 text-danger">SDT bowm tieenf</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="sdtbomtien" value="<%=setting.SendMoneyMy.Phone %>" type="text"
+                            class="form-control  col-md-4" placeholder="" aria-label="">
+
+                    </div>
+                </div>
+
+                <h4 class="mt-2 text-danger">So tien bom</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="moneybomtien" value="<%=setting.SendMoneyMy.MaxMoney %>" type="number"
+                            class="form-control  col-md-4" placeholder="" aria-label="">
+
+                    </div>
+                </div>
+
+                <h4 class="mt-2 text-danger">SDT nhận tiền khi nhiều tiền</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="sdtnhieutien" value="<%=setting.ToMuchMoney.Phone %>" type="text"
+                            class="form-control  col-md-4" placeholder="" aria-label="">
+
+                    </div>
+                </div>
+
+                <h4 class="mt-2 text-danger">số tiền chừa lại</h4>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input id="moneynhieutien" value="<%=setting.ToMuchMoney.MaxMoney %>" type="number"
+                            class="form-control  col-md-4" placeholder="" aria-label="">
+
+                    </div>
+                </div>
+
+
+
+                <button class="btn btn-primary" onclick="save()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="thongbao" hidden="true">
+    <%=setting.thongbao %>
+</div>
+<div id="huongdan" hidden="true">
+    <%=setting.huongdan %>
+</div>
+<script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+
+<script>
+
+
+    CKEDITOR.editorConfig = function (config) {
+        // The toolbar groups arrangement, optimized for a single toolbar row.
+        config.toolbarGroups = [
+            { name: 'document', groups: ['mode', 'document', 'doctools'] },
+            { name: 'clipboard', groups: ['clipboard', 'undo'] },
+            { name: 'editing', groups: ['find', 'selection', 'spellchecker'] },
+            { name: 'forms' },
+            { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+            { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'] },
+            { name: 'links' },
+            { name: 'insert' },
+            { name: 'styles' },
+            { name: 'colors' },
+            { name: 'tools' },
+            { name: 'others' },
+            { name: 'about' }
+        ];
+
+        // The default plugins included in the basic setup define some toolbar buttons that
+        // are not needed in a basic editor. These are removed here.
+        config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript';
+
+        // Dialog windows are also simplified.
+        config.removeDialogTabs = 'link:advanced';
+
+        // Finally, configure editor placeholder text.
+        config.editorplaceholder = 'Type something here...';
+    };
+
+
+    function save() {
+        $.ajax({
+            url: "/setting",
+            type: "post",
+
+            data: {
+                thongbao: CKEDITOR.instances['editor'].getData(),
+                tieude: $("#tieude").val(),
+                linktelegram: $("#linktelegram").val(),
+                linklogo: $("#linklogo").val(),
+
+                sdtdaytask: $("#sdtdaytask").val(),
+                PhoneMoney: $("#sdtbomtien").val(),
+                MaxMoneyPhone: $("#moneybomtien").val(),
+
+                ToMuchMoneySdt: $("#sdtnhieutien").val(),
+                Moneynhieutien: $("#moneynhieutien").val(),
+                sdtGiftcode: $("#sdtGiftcode").val(),
+                sdtGioithieu: $("#sdtGioithieu").val(),
+
+                settingtile: $("#settingtile").val()
+            },
+            success: function (result) {
+
+                alert(result)
+            }
+        });
+    }
+
+    CKEDITOR.replace('editor', {
+        height: 400,
+        baseFloatZIndex: 10005,
+        removeButtons: 'PasteFromWord'
+    });
+
+    CKEDITOR.instances.editor.setData($('#thongbao').text())
+
+</script>

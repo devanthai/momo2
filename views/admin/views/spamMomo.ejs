@@ -1,0 +1,214 @@
+<h4>TOOOOLLLL RÁC CỦA MOMO</h4>
+<div class="card">
+    <div class="card-body">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Bảng Điều Khiển</h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Nội dung:</label>
+                        <input type="text" name="" id="content" class="form-control" placeholder="Nhập nội dung">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Số lần gửi / acc:</label>
+                        <input type="number" name="" id="one1acc" class="form-control" placeholder="Nhập số lần">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>SDT hệ thống:</label>
+                        <textarea type="text" name="" id="sdtSystem" rows="10" class="form-control"
+                            placeholder="Mỗi SDT 1 Dòng"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Nhập Vào List SDT:</label>
+                        <textarea type="text" name="" id="sdtSpam" rows="10" class="form-control"
+                            placeholder="Mỗi SDT 1 Dòng"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>SDT Đã gửi:</label>
+                        <textarea type="text" name="" id="sdtSended" rows="10" class="form-control"
+                            placeholder="List SDT "></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>SDT gửi lỗi:</label>
+                        <textarea type="text" name="" id="sdtSendError" rows="10" class="form-control"
+                            placeholder="List SDT "></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Logs:</label>
+                        <textarea type="text" name="" id="logs" rows="10" class="form-control"
+                            placeholder="Logs"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group button-action">
+                        <a href="/TokenAll" target="_blank" class="btn btn-success"
+                            rel="noopener noreferrer">Get Token All</a>
+                        <button id="btnStart" type="button" class="btn btn-success" onclick="Start();">Tiến
+                            Hành</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+
+    $("#sdtSystem")[0].value = `<%-listSDT%>`
+    $("#content")[0].value = 'AzMomo.vip web game kiếm tiền momo thanh toán 3s'
+
+
+    var ListSend = []
+
+    var vongLapSendMonney = null
+
+    var isAuto = false
+    var isVOnglap = true
+
+    Start = () => {
+        var content = $("#content").val()
+        var one1acc = $("#one1acc").val()
+
+        if (content == "" || one1acc == "") {
+            return alert("Vui lòng nhập đủ")
+        }
+
+        var sdt = $("#sdtSystem")[0];
+        var sdts = sdt.value.substr(0, sdt.selectionStart).split(/\r?\n/)
+
+
+        var sdtSpamsdoc = $("#sdtSpam")[0]
+        var sdtSpams = sdtSpamsdoc.value.substr(0, sdtSpamsdoc.selectionStart).split(/\r?\n/)
+        //console.log(sdtSpams)
+
+
+        var index = 0
+
+
+        var sdtsystem = sdts
+        if (sdtsystem.length == 0) {
+            return alert("Vui long kiem tra lai")
+        }
+
+
+        sdtsystem.forEach((element) => {
+            for (let i = 0; i < Number(one1acc); i++) {
+                var sdtz = sdtSpams[index++]
+                // console.log(sdtz)
+                if (element != "" && sdtz != undefined && sdtz != "") {
+                    ListSend.push({ Phone: element, SDTtranfer: sdtz })
+                }
+            }
+        });
+        if (isAuto == false) {
+            isAuto = true
+            vongLapSendMonney = setInterval(() => {
+                if (ListSend.length > 0 && isVOnglap) {
+                    console.log(ListSend[0])
+                    TransFer(ListSend[0].Phone, ListSend[0].SDTtranfer, content)
+                    ListSend.splice(0, 1);
+                }
+            }, 250)
+            alert("Đang bật auto " + ListSend.length)
+        }
+        else {
+            clearInterval(vongLapSendMonney)
+            alert("Đã tắt")
+            isAuto = false
+        }
+    }
+
+    TransFer = (Phone, PhoneTransFer, Content) => {
+        isVOnglap = false
+        try {
+            $.ajax({
+                url: "/TransFerSpam",
+                type: "post",
+                data: {
+                    Phone: Phone,
+                    PhoneTransFer: PhoneTransFer,
+                    Content: Content
+                },
+                success: function (result) {
+                    if (result.success) {
+                        Toastify({
+                            text: result.message,
+                            duration: 5000,
+                            close: true,
+                            gravity: "bottom",
+                            position: "right",
+                            backgroundColor: "#4fbe87",
+                        }).showToast();
+                        WriteToDone(PhoneTransFer)
+                    }
+                    else {
+                        Toastify({
+                            text: result.message,
+                            duration: 5000,
+                            close: true,
+                            gravity: "bottom",
+                            position: "right",
+                            backgroundColor: "#ff0000b5",
+                        }).showToast();
+                        WriteToError(PhoneTransFer)
+                        WriteToLogs(Phone + "  " + result.message)
+                        for (let i = 0; i < ListSend.length; i++) {
+                            if (ListSend[i].Phone == Phone) {
+                                ListSend.splice(i, 1);
+                            }
+                        }
+                    }
+                }
+            });
+        } catch
+        {
+
+        }
+        isVOnglap = true
+    }
+    WriteToDone = (Phone) => {
+        try {
+            var sdtss = $("#sdtSpam")[0].value.replace(Phone + "\n", "");
+            $("#sdtSpam").val(sdtss)
+        }
+        catch {
+            var sdtss = $("#sdtSpam")[0].value.replace(Phone, "");
+            $("#sdtSpam").val(sdtss)
+        }
+        var sdts = $("#sdtSended")[0].value += "\n" + Phone;
+        $("#sdtSended").val(sdts)
+    }
+    WriteToError = (Phone) => {
+        try {
+            var sdtss = $("#sdtSpam")[0].value.replace(Phone + "\n", "");
+            $("#sdtSpam").val(sdtss)
+        }
+        catch {
+            var sdtss = $("#sdtSpam")[0].value.replace(Phone, "");
+            $("#sdtSpam").val(sdtss)
+        }
+        var sdts = $("#sdtSendError")[0].value += "\n" + Phone;
+        $("#sdtSendError").val(sdts)
+    }
+    WriteToLogs = (Logs) => {
+        var sdts = $("#logs")[0].value += "\n" + Logs;
+        $("#logs").val(sdts)
+    }
+</script>

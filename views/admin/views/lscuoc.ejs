@@ -1,0 +1,195 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold">Lịch sử chuyển tiền
+                </h3>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="form-group col-md-6">
+        <div class="input-group">
+            <input id="magdtim" type="text" class="form-control" placeholder="Mã gd" aria-label="Mã gd">
+            <div class="input-group-append">
+                <button onclick="search()" class="btn btn-sm btn-primary" type="button">Tìm kiếm</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table class=" table table-striped table-borderless" id="lscuoctb">
+                        <thead>
+                            <tr>
+                                <th hidden>Thời gian</th>
+
+                                <th>Thời gian</th>
+                                <th>Acc</th>
+                                <th>Mã giao dịch</th>
+                                <th>Người chuyển</th>
+                                <th>Số điện thoại</th>
+                                <th>Số tiền</th>
+                                <th>Thắng</th>
+                                <th>Trạng thái</th>
+                                <th>Nội dung</th>
+                                <th>Hành động</th>
+                                <th>Hành động</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbtv">
+                            <% if (products.length<=0) { %>
+                                <tr class="text-center">
+                                    <td colspan="8">Không có lịch sử</td>
+                                </tr>
+                                <% } %>
+                                    <% for (var i=0; i < products.length; i++) { %>
+
+
+                                        <tr>
+                                            <td hidden scope="col">
+                                                <b>
+                                                    <%= new Date(Date.parse(products[i].time)).getTime()%>
+                                                </b>
+
+                                            </td>
+
+                                            <td scope="col">
+                                                <b>
+                                                    <%= new Date(Date.parse(products[i].time)).toLocaleString()%>
+                                                </b>
+
+                                            </td>
+
+                                            <td scope="col">
+                                                <b style="color: red;">
+                                                    <%= products[i].sdt %>
+                                                </b>
+                                            </td>
+                                            <td scope="col">
+                                                <b>
+                                                    <%= products[i].magd %>
+                                                </b>
+                                            </td>
+                                            <td scope="col">
+                                                <b>
+                                                    <%= products[i].name %>
+                                                </b>
+                                            </td>
+                                            <td scope="col">
+                                                <b>
+                                                    <%= products[i].sdtchuyen %>
+                                                </b>
+                                            </td>
+                                            <td scope="col">
+                                                <b>
+                                                    <%=
+                                                        String(products[i].tiencuoc).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                </b>
+                                            </td>
+                                            <td scope="col">
+                                                <b>
+                                                    <%=
+                                                        String(products[i].tienthang).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                </b>
+                                            </td>
+
+                                            <td scope="col">
+                                                <b>
+                                                    <%= products[i].status %>
+                                                </b>
+                                            </td>
+
+                                            <td scope="col">
+                                                <b>
+                                                    <%= products[i].noidung %>
+                                                </b>
+                                            </td>
+                                            <td scope="col">
+
+
+                                                <b> <a href="/chitietlichsu?phone=<%=products[i].sdt%>&tranid=<%=products[i].magd%>"
+                                                        target="_blank">Xem chi tiết</a></b>
+                                            </td>
+
+                                            <td scope="col">
+
+
+                                                <b> <a href="/thanhcongcuoc?magd=<%=products[i].magd%>"
+                                                        target="_blank">Set thanh cong</a></b>
+                                            </td>
+
+                                        </tr>
+
+
+                                        </tr>
+
+
+                                        <% } %>
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script>
+
+
+    $(document).ready(function () {
+        $('#lscuoctb').DataTable({
+            "order": [
+                [0, "desc"]
+            ]
+        });
+    });
+
+    function search() {
+
+        $.ajax({
+            url: "/search",
+            type: "post",
+            data: {
+
+                magd: $('#magdtim').val()
+
+            },
+            success: function (result) {
+                if (result.error == 0) {
+                    tbtv.innerHTML = result.table
+                }
+                else {
+                    alert(result.message)
+                }
+
+            }
+        });
+
+    }
+</script>

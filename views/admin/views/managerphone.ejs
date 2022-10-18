@@ -1,0 +1,296 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm số điện thoại</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="">Bước 1: Nhập sdt và mật khẩu</label>
+                <br>
+                <label for="">SĐT</label>
+                <input type="text" name="" id="sdt">
+                <br>
+
+                <label for="">PASS</label>
+                <input type="text" name="" id="pass">
+                <br>
+                <button onclick="getotp()">Lấy otp</button>
+                <button onclick="relogin()">Relogin</button>
+                <br>
+                <hr>
+                <label for="">Bước 2: Lấy mã otp và nhập vào</label>
+                <br>
+                <label for="">OTP</label>
+                <input type="text" name="" id="otp">
+                <br>
+                <button onclick="checkOtp()">Đăng nhập</button>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm số điện thoại</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <textarea name="" id="textarraymm" cols="30" rows="10"></textarea>
+                <button onclick="savejsonmm()"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+
+            </div>
+            <script>
+                function savejsonmm() {
+                    $.ajax({
+                        url: "/addsdt2",
+                        type: "post",
+                        data: {
+                            textarraymm: $('#textarraymm').val()
+                        },
+                        success: function (result) {
+                            alert(result.message)
+                        }
+                    });
+                }
+
+            </script>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 grid-margin stretch-card">
+
+    <div class="card">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Thêm số điện thoại
+        </button>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addad">
+            Thêm sdt nâng cao
+        </button>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class=" table table-striped table-borderless">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Số Tiền</th>
+                            <th>SĐT</th>
+                            <th>Giới hạn ngày</th>
+                            <th>Giới hạn tháng</th>
+                            <th>Trạng thái</th>
+                            <th>Số lần hôm nay</th>
+                            <th>Ngày thêm</th>
+                            <th>agentId</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbtv">
+
+
+                        <%-listsdt%>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <%-tongtien%>
+    </div>
+</div>
+<script>
+    function getuser(id) {
+
+     
+        $.ajax({
+            url: "/getuser",
+            type: "post",
+            data: {
+                id: id
+            },
+            success: function (result) {
+                alert(result)
+            }
+        });
+
+    }
+
+    function getotp() {
+
+        $.ajax({
+            url: "/api/momo/getOTP",
+            type: "post",
+            data: {
+                phone: $('#sdt').val(),
+                password: $('#pass').val()
+            },
+            success: function (result) {
+                if (result.success == false) {
+                    $('#sdt').val('')
+                    $('#pass').val('')
+                    $('#otp').val('')
+                    alert(result.message)
+                }
+                else {
+                    alert(result.message)
+                }
+
+            }
+        });
+
+    } function checkOtp() {
+
+        $.ajax({
+            url: "/api/momo/checkOTP",
+            type: "post",
+            data: {
+                phone: $('#sdt').val(),
+                otp: $('#otp').val()
+            },
+            success: function (result) {
+
+                $('#sdt').val('')
+                $('#pass').val('')
+                $('#otp').val('')
+                alert(result.message)
+
+
+            }
+        });
+
+    }
+
+    function relogin() {
+
+        $.ajax({
+            url: "/api/momo/Relogin",
+            type: "post",
+            data: {
+                phone: $('#sdt').val(),
+                password: $('#pass').val()
+            },
+            success: function (result) {
+
+
+
+                alert(result.message)
+
+
+            }
+        });
+
+    }
+    function battat(id, zzz) {
+
+        $.ajax({
+            url: "/battat",
+            type: "post",
+            data: {
+                id: id,
+                isbat: zzz.innerText
+            },
+            success: function (result) {
+
+                $('#battat').text('Bật')
+
+
+                alert(result)
+                location.reload();
+
+            }
+        });
+
+    }
+    function xoa(id) {
+
+        if (!confirm("Bạn có muốn xóa?")) {
+            return
+        }
+        $.ajax({
+            url: "/xoa",
+            type: "post",
+            data: {
+                id: id
+
+            },
+            success: function (result) {
+
+
+
+
+                alert(result)
+                location.reload();
+
+            }
+        });
+
+    }
+    function gentoken(id) {
+
+        if (!confirm("Bạn có muốn renewtoken?")) {
+            return
+        }
+        $.ajax({
+            url: "/gentoken",
+            type: "post",
+            data: {
+                id: id
+            },
+            success: function (result) {
+                alert(result)
+            }
+        });
+
+    }
+    function getBalance(id) {
+
+
+        $.ajax({
+            url: "/getBalance",
+            type: "post",
+            data: {
+                id: id
+            },
+            success: function (result) {
+                alert(result)
+            }
+        });
+
+    }
+    function Reset(id) {
+
+        if (!confirm("Bạn có muốn Reset số này?")) {
+            return
+        }
+        $.ajax({
+            url: "/reset",
+            type: "post",
+            data: {
+                id: id
+            },
+            success: function (result) {
+                alert(result)
+            }
+        });
+
+    }
+</script>
