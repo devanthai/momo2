@@ -151,9 +151,17 @@ CheckMa = async (req, res) => {
                     }
                 }
                 else {
+
                     return res.send({ error: true, message: "Lỗi: Không tìm thấy mã này vui lòng kiểm tra lại!" })
                 }
-            } catch (ex) { console.log(ex); return res.send({ error: true, message: "Lỗi: Lỗi không xác định vui lòng thử lại!" }) }
+            } catch (ex) { 
+                console.log(ex); 
+                if(ex.toString().include("Không tìm thấy mã gd này"))
+                {
+                    return res.send({ error: true, message: "Lỗi: Không tìm thấy mã này vui lòng kiểm tra lại!" }) 
+                }
+                return res.send({ error: true, message: "Lỗi: Lỗi không xác định vui lòng thử lại!" }) 
+            }
         }
     }
 }
