@@ -121,7 +121,7 @@ module.exports = (sotien, noidung, magd, setting) => {
         else if ((nd == "d9") && (s1so == 9)) {
             tiencuoc = sotien * setting.tile.doanso
         }
-        console.log(noidung, magd, tiencuoc)
+       // console.log(noidung, magd, tiencuoc)
         return Math.round(tiencuoc)
     } catch { return 0 }
 }
