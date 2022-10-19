@@ -802,6 +802,8 @@ function ChangeNumber11(phone) {
 
 
 async function CheckGd(phone, dateString, setting, limit = 20) {
+    console.log("checkgd2 "+phone.phone)
+
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
         let zz = hiss
@@ -1000,8 +1002,9 @@ async function AutoGet() {
         }
         else {
             try {
-                console.log("checkgd "+phone.phone)
-                await CheckGd(phone, dateString, setting)
+                console.log("checkgd1 "+phone.phone)
+                await timer(1000)
+                CheckGd(phone, dateString, setting)
 
             } catch (error) {
                 
