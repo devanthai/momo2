@@ -984,8 +984,8 @@ async function AutoGet() {
         }
         else {
             try {
-                CheckGd(phone, dateString, setting)
-                await timer(1500)
+               await CheckGd(phone, dateString, setting)
+                //await timer(1500)
 
 
             } catch (error) {
