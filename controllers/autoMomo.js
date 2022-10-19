@@ -1002,9 +1002,9 @@ async function AutoGet() {
         }
         else {
             try {
-                console.log("checkgd1 "+phone.phone)
-                await timer(1000)
                 CheckGd(phone, dateString, setting)
+                await timer(1500)
+
 
             } catch (error) {
                 
