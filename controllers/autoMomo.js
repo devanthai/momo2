@@ -935,6 +935,7 @@ async function CheckGd2(phone, setting) {
             const magdd = tranId
             let mwin = getWin(amount, comment, magdd, setting)
            
+            console.log(magdd+" - "+comment +" - "+mwin)
 
           //  console.log(mwin)
             //console.log(mwin)
