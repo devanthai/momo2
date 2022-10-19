@@ -930,11 +930,8 @@ async function CheckGd2(phone, setting) {
             } = noti
             const magdd = tranId
             let mwin = getWin(amount, comment, magdd, setting)
-            console.log(noti)
+           
 
-
-            console.log(mwin)
-            console.log(mwin)
           //  console.log(mwin)
             //console.log(mwin)
            // const checkGdredis = await checkMagdRedis(magdd)
@@ -1002,7 +999,12 @@ async function AutoGet() {
             await Momo.findByIdAndUpdate(phone._id, { status: 0 })
         }
         else {
-            CheckGd(phone, dateString, setting)
+            try {
+                CheckGd(phone, dateString, setting)
+
+            } catch (error) {
+                
+            }
         }
     }
 }
