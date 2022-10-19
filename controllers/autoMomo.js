@@ -805,6 +805,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
+        console.log(hiss)
         console.log("checkgd2 "+phone.phone +"  "+hiss.length)
 
         let zz = hiss
