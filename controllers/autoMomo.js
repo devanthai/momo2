@@ -1000,7 +1000,7 @@ async function AutoGet() {
         }
         else {
             try {
-                console.log("checkgd "+phone)
+                console.log("checkgd "+phone.phone)
                 CheckGd(phone, dateString, setting)
 
             } catch (error) {
