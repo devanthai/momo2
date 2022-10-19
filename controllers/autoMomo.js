@@ -299,7 +299,8 @@ async function sumDemm() {
     var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const sum = await Cuocs.aggregate([{
         $match: {
-            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, $or: noidungs},
+            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, $or: noidungs
+        },
     }, {
         $group: {
             _id: null,
@@ -506,7 +507,7 @@ getTop2 = async () => {
                 time: {
                     $gte: from,
                     $lt: to
-                },status:1
+                }, status: 1
             }
         },
         {
@@ -517,7 +518,7 @@ getTop2 = async () => {
                 tongtien: { $sum: "$tienthang" }
             }
         },
-      
+
         { $sort: { tongtien: -1 } }
     ])
     return ccc
@@ -805,8 +806,8 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
-       // console.log(hiss)
-        console.log("checkgd2 "+phone.phone +"  "+hiss.momoMsg.length)
+        // console.log(hiss)
+        console.log("checkgd2 " + phone.phone + "  " + hiss.momoMsg.length)
 
         let zz = hiss
         hiss = hiss.momoMsg
@@ -923,7 +924,7 @@ async function CheckGd2(phone, setting) {
 
             const io = 1
 
-            
+
             const {
                 tranId,
                 partnerId,
@@ -934,56 +935,34 @@ async function CheckGd2(phone, setting) {
             } = noti
             const magdd = tranId
             let mwin = getWin(amount, comment, magdd, setting)
-           
-            console.log(amount, comment, magdd, setting,mwin)
-
-          //  console.log(mwin)
-            //console.log(mwin)
-           // const checkGdredis = await checkMagdRedis(magdd)
-          //  if (checkGdredis) {
-               // console.log("check redis noti: " + checkGdredis, tranId)
-               
-
-                // const postBalance = -99999
-                // const checkz = await Lichsuck.findOne({ magd: tranId })
-                // console.log("Check cuocs", tranId)
-
-                // if (!checkz) {
-
-                //     await new Lichsuck({ sdt: phone.phone, sdtchuyen: ChangeNumber11(partnerId), name: partnerName, magd: tranId, sotien: amount, io: io, noidung: comment, status: 1 }).save()
-                //     if (io == 1) {
 
 
 
-
-                //         // if (mwin != 0) {
-                //         //     try {
-                //         //         const noidung = "👉 " + partnerId.substring(0, partnerId.length - 4) + "**** - (" + partnerName + ")" + " vừa chơi game " + getGame(comment) + " và thắng " + numberWithCommas(mwin) + "vnđ\nChơi kiếm tiền ngay tại AZMOMO.VIP"
-                //         //         Bot2.sendPhoto(Group2Id, "https://img.upanh.tv/2022/05/28/Capturee15e2f3ceeec7926.png", { caption: noidung });
-                //         //     }
-                //         //     catch {
-                //         //     }
-                //         // }
-
-
-                //         // const checkzz2 = await Cuocs.findOne({ magd: tranId })
-                //         // if (!checkzz2) {
-                //         //     if (mwin != 0) {
-                //         //         await new Cuocs({ sdt: phone.phone, sdtchuyen: ChangeNumber11(partnerId), name: partnerName, magd: tranId, tiencuoc: amount, tienthang: mwin, status: -1, sodu: postBalance, noidung: comment }).save()
-                //         //     }
-                //         //     else {
-                //         //         await new Cuocs({ sdt: phone.phone, sdtchuyen: ChangeNumber11(partnerId), name: partnerName, magd: tranId, tiencuoc: amount, tienthang: mwin, status: 2, sodu: postBalance, noidung: comment }).save()
-                //         //     }
-                //         // }
-
-                //         // const zzz = await DayTask.findOneAndUpdate({ sdt: ChangeNumber11(partnerId) }, { $inc: { totalPlay: amount } })
-                //         // if (!zzz) {
-                //         //     await new DayTask({ name: partnerName, sdt: ChangeNumber11(partnerId), totalPlay: amount }).save()
-                //         // }
-                //     }
-                // }
-
-            //}
+            const checkGdredis = await checkMagdRedis(magdd)
+            if (checkGdredis) {
+                console.log("check redis noti: " + checkGdredis, tranId)
+                const postBalance = -99999
+                const checkz = await Lichsuck.findOne({ magd: tranId })
+                console.log("Check cuocs", tranId)
+                if (!checkz) {
+                    await new Lichsuck({ sdt: phone.phone, sdtchuyen: ChangeNumber11(partnerId), name: partnerName, magd: tranId, sotien: amount, io: io, noidung: comment, status: 1 }).save()
+                    if (io == 1) {
+                        const checkzz2 = await Cuocs.findOne({ magd: tranId })
+                        if (!checkzz2) {
+                            if (mwin != 0) {
+                                await new Cuocs({ sdt: phone.phone, sdtchuyen: ChangeNumber11(partnerId), name: partnerName, magd: tranId, tiencuoc: amount, tienthang: mwin, status: -1, sodu: postBalance, noidung: comment }).save()
+                            }
+                            else {
+                                await new Cuocs({ sdt: phone.phone, sdtchuyen: ChangeNumber11(partnerId), name: partnerName, magd: tranId, tiencuoc: amount, tienthang: mwin, status: 2, sodu: postBalance, noidung: comment }).save()
+                            }
+                        }
+                        const zzz = await DayTask.findOneAndUpdate({ sdt: ChangeNumber11(partnerId) }, { $inc: { totalPlay: amount } })
+                        if (!zzz) {
+                            await new DayTask({ name: partnerName, sdt: ChangeNumber11(partnerId), totalPlay: amount }).save()
+                        }
+                    }
+                }
+            }
         }
     } catch (ex) {
         console.log(ex)
@@ -1010,7 +989,7 @@ async function AutoGet() {
 
 
             } catch (error) {
-                
+
             }
         }
     }
