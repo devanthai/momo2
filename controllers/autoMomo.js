@@ -695,7 +695,7 @@ autoGETTTT = async () => {
     await AutoGet()
     setTimeout(async () => {
         autoGETTTT()
-    }, 1500)
+    }, 3000)
 }
 autoGETTTT()
 
