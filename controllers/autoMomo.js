@@ -1008,7 +1008,7 @@ async function AutoGetNoti() {
             await Momo.findByIdAndUpdate(phone._id, { status: 0 })
         }
         else {
-            CheckGd2(phone, setting)
+           await CheckGd2(phone, setting)
         }
     }
 }
