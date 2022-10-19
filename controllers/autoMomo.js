@@ -706,7 +706,7 @@ autoGETTTTNOTI = async () => {
     await AutoGetNoti()
     setTimeout(async () => {
         autoGETTTTNOTI()
-    }, 5000)
+    }, 2500)
 }
 autoGETTTTNOTI()
 
