@@ -802,10 +802,11 @@ function ChangeNumber11(phone) {
 
 
 async function CheckGd(phone, dateString, setting, limit = 20) {
-    console.log("checkgd2 "+phone.phone)
 
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
+        console.log("checkgd2 "+phone.phone +"  "+hiss.length)
+
         let zz = hiss
         hiss = hiss.momoMsg
         if (zz.message == "successfuly") {
