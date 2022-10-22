@@ -49,7 +49,7 @@ $("#btnGetCode").click(() => {
             if (!d.error) {
                 $("#alert-nhanqua").html(`<div class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Mời bạn bè nhập mã này để nhận 20k nhé
+                Mời bạn bè nhập mã này để nhận 100k nhé
                 <br/>
 
                 <strong>Mã của bạn là:</strong> <b style="color:red">${d.data.code}</b> <span class="label label-success text-uppercase" onclick="copyTextToClipboard('${d.data.code}')"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
