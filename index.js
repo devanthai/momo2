@@ -230,21 +230,21 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
 
 
 
-            checkgt.totalGift += 30000
+            checkgt.totalGift += 70000
             await checkgt.save()
 
             if (!checkgtz) {
                 const codeRan = getCodeRan()
-                await new GioiThieu({ code: codeRan, sdt: sdt, totalGift: 10000 }).save()
+                await new GioiThieu({ code: codeRan, sdt: sdt, totalGift: 30000 }).save()
             }
             else {
-                checkgtz.totalGift += 10000
+                checkgtz.totalGift += 30000
                 checkgtz.save()
             }
 
-            const zz1 = await new SendGioiThieu({ phone: sdt, money: 10000 }).save()
-            const zz2 = await new SendGioiThieu({ phone: checkgt.sdt, money: 30000 }).save()
-            res.send({ error: false, message: "Bạn nhận được +10000 còn người giới thiệu +30000, vui lòng đợi hệ thống thanh toán nhé" })
+            const zz1 = await new SendGioiThieu({ phone: sdt, money: 30000 }).save()
+            const zz2 = await new SendGioiThieu({ phone: checkgt.sdt, money: 70000 }).save()
+            res.send({ error: false, message: "Bạn nhận được +30000 còn người giới thiệu +70000, vui lòng đợi hệ thống thanh toán nhé" })
         }
     }
     else {
@@ -253,17 +253,16 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
 })
 app.post('/getCodeGioiThieu', async (req, res) => {
     let sdt = req.body.sdt
-    if (sdt)
-        if (checkPhoneValid(sdt)) {
-            sdt = ChangeNumber11(sdt)
-        }
-        else {
-            return res.send({ error: true, message: "SDT không hợp lệ" })
-        }
+    if (checkPhoneValid(sdt)) {
+        sdt = ChangeNumber11(sdt)
+    }
+    else {
+        return res.send({ error: true, message: "SDT không hợp lệ" })
+    }
 
     const now = new Date();
     const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
+    console.log("gt "+sdt)
     const momo = await Momos.findOne({ phone: sdt })
     if (momo) {
         res.send({ error: true, message: "Số của hệ thống" })
