@@ -224,7 +224,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
 
             const checkzz = await getCuocsMoney(sdt)
             console.log(checkzz)
-            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 500000)) {
+            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 650000)) {
                 return res.send({ error: true, message: "Vui lòng chơi trên 500.000 vnđ để nhận thưởng nhé." })
             }
 
