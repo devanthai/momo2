@@ -185,6 +185,59 @@ getCuocsMoney = async (sdt) => {
     return sum
 }
 
+
+async function sumWinmmUID(sdt) {
+
+    const sum = await Cuocs.aggregate([{
+        $match: {
+            sdtchuyen: sdt, status: 1, $or: noidungs
+        },
+    }, {
+        $group: {
+            _id: null,
+            tienthang: {
+                $sum: "$tienthang"
+            },
+            tiencuoc: {
+                $sum: "$tiencuoc"
+            }
+        }
+    }])
+    return sum[0]
+}
+async function sumDemmUID(sdt) {
+
+    const sum = await Cuocs.aggregate([{
+        $match: {
+            sdtchuyen: sdt, status: 2, tiencuoc: { $gte: 0 }, $or: noidungs
+        },
+    }, {
+        $group: {
+            _id: null,
+            tiencuoc: {
+                $sum: "$tiencuoc"
+            },
+        }
+    }])
+    return sum[0]
+}
+
+async function checkDoanhThu(sdt) {
+    let tienthangtsr = await sumWinmmUID(sdt);
+    let thangtsr = 0;
+    let cuoctsrrr = 0;
+    if (tienthangtsr) {
+        thangtsr = Math.round(tienthangtsr.tienthang)
+        cuoctsrrr = Math.round(tienthangtsr.tiencuoc)
+    }
+    let tienthuatsr = await sumDemmUID(sdt);
+    let thuatsr = 0;
+    if (tienthuatsr) {
+        thuatsr = Math.round(tienthuatsr.tiencuoc)
+    }
+    console.log(thuatsr - (thangtsr - cuoctsrrr))
+    return thuatsr - (thangtsr - cuoctsrrr)
+}
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     let { code, sdt } = req.body
     if (checkPhoneValid(sdt)) {
@@ -223,11 +276,14 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             let DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
 
             const checkzz = await getCuocsMoney(sdt)
-            console.log(checkzz)
-            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 1000000)) {
+            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 500000)) {
                 return res.send({ error: true, message: "Vui lòng chơi trên 500.000 vnđ để nhận thưởng nhé." })
             }
-
+            let doanhthuZ = await checkDoanhThu(sdt)
+            console.log(sdt, doanhthuZ)
+            if (doanhthuZ > -99999) {
+                return res.send({ error: true, message: "Bạn chưa đủ điều kiện để nhận thưởng vui lòng tiếp tục chơi để nhận thưởng." })
+            }
 
 
             checkgt.totalGift += 70000
@@ -262,7 +318,7 @@ app.post('/getCodeGioiThieu', async (req, res) => {
 
     const now = new Date();
     const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    console.log("gt "+sdt)
+    console.log("gt " + sdt)
     const momo = await Momos.findOne({ phone: sdt })
     if (momo) {
         res.send({ error: true, message: "Số của hệ thống" })
