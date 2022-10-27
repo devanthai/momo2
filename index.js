@@ -186,6 +186,41 @@ getCuocsMoney = async (sdt) => {
 }
 
 
+const noidungs = [
+    { noidung: "c" },
+    { noidung: "C" },
+    { noidung: "l" },
+    { noidung: "L" },
+    { noidung: "c2" },
+    { noidung: "C2" },
+    { noidung: "l2" },
+    { noidung: "L2" },
+    { noidung: "a" },
+    { noidung: "A" },
+    { noidung: "b" },
+    { noidung: "B" },
+    { noidung: "t" },
+    { noidung: "T" },
+    { noidung: "x" },
+    { noidung: "X" },
+    { noidung: "a2" },
+    { noidung: "A2" },
+    { noidung: "b2" },
+    { noidung: "B2" },
+    { noidung: "t2" },
+    { noidung: "T2" },
+    { noidung: "x2" },
+    { noidung: "X2" },
+    { noidung: "G3" },
+    { noidung: "g3" },
+    { noidung: "s" },
+    { noidung: "S" },
+    { noidung: "n1" },
+    { noidung: "N1" },
+    { noidung: "N2" },
+    { noidung: "n2" },
+    { noidung: "n3" },
+    { noidung: "N3" }]
 async function sumWinmmUID(sdt) {
 
     const sum = await Cuocs.aggregate([{
