@@ -311,12 +311,12 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             let DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
 
             const checkzz = await getCuocsMoney(sdt)
-            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 500000)) {
-                return res.send({ error: true, message: "Vui lòng chơi trên 500.000 vnđ để nhận thưởng nhé." })
+            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 100000)) {
+                return res.send({ error: true, message: "Vui lòng chơi trên 100.000 vnđ để nhận thưởng nhé." })
             }
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
-            if (doanhthuZ > -99999) {
+            if (doanhthuZ > -90000) {
                 return res.send({ error: true, message: "Bạn chưa đủ điều kiện để nhận thưởng vui lòng tiếp tục chơi để nhận thưởng." })
             }
 
