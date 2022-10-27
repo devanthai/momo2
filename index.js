@@ -316,7 +316,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             }
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
-            if (doanhthuZ > -90000) {
+            if (doanhthuZ > -80000) {
                 return res.send({ error: true, message: "Bạn chưa đủ điều kiện để nhận thưởng vui lòng tiếp tục chơi để nhận thưởng." })
             }
 
@@ -359,7 +359,7 @@ app.post('/getCodeGioiThieu', async (req, res) => {
         res.send({ error: true, message: "Số của hệ thống" })
     }
     else {
-        const cuoc = await Cuocs.findOne({ time: { $gte: startOfToday }, sdtchuyen: sdt, tiencuoc: { $gte: 10000 } })
+        const cuoc = await Cuocs.findOne({ time: { $gte: startOfToday }, sdtchuyen: sdt, tiencuoc: { $gte: 6000 } })
         if (cuoc) {
             const codeee = await GioiThieu.findOne({ sdt: sdt })
             if (codeee) {
