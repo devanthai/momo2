@@ -284,14 +284,14 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
         return res.send({ error: true, message: "SDT không hợp lệ" })
     }
 
-    const checkyc = await checkKYC(sdt)
+    // const checkyc = await checkKYC(sdt)
 
-    if (checkyc.error) {
-        return res.send({ error: true, message: "Đã có lỗi xảy ra vui lòng thử lại" })
-    }
-    else if (!checkyc.kyc) {
-        return res.send({ error: true, message: "Momo của bạn chưa xác thực CMND" })
-    }
+    // if (checkyc.error) {
+    //     return res.send({ error: true, message: "Đã có lỗi xảy ra vui lòng thử lại" })
+    // }
+    // else if (!checkyc.kyc) {
+    //     return res.send({ error: true, message: "Momo của bạn chưa xác thực CMND" })
+    // }
     // let sdt05 = sdt.toString().substring(0, 2);
     // if (sdt05 == "05") {
     //     return res.send({ error: true, message: "Không hỗ trợ mạng VietNamMobie" })
@@ -318,7 +318,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             }
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
-            if (doanhthuZ > -80000) {
+            if (doanhthuZ > -50000) {
                 return res.send({ error: true, message: "Bạn chưa đủ điều kiện để nhận thưởng vui lòng tiếp tục chơi để nhận thưởng." })
             }
 
