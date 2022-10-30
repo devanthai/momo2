@@ -319,7 +319,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
             if (doanhthuZ > -50000) {
-                return res.send({ error: true, message: "Bạn chưa đủ điều kiện để nhận thưởng vui lòng tiếp tục chơi để nhận thưởng." })
+                return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             }
 
 
