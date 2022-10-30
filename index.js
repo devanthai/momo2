@@ -271,14 +271,14 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
         return res.send({ error: true, message: "SDT không hợp lệ" })
     }
 
-    // const checkyc = await checkKYC(sdt)
+    const checkyc = await checkKYC(sdt)
 
-    // if (checkyc.error) {
-    //     return res.send({ error: true, message: "Đã có lỗi xảy ra vui lòng thử lại" })
-    // }
-    // else if (!checkyc.kyc) {
-    //     return res.send({ error: true, message: "Momo của bạn chưa xác thực CMND" })
-    // }
+    if (checkyc.error) {
+        return res.send({ error: true, message: "Xác thực cmnd lỗi vui lòng thử lại trong giây lát" })
+    }
+    else if (!checkyc.kyc) {
+        return res.send({ error: true, message: "Momo của bạn chưa xác thực CMND" })
+    }
     // let sdt05 = sdt.toString().substring(0, 2);
     // if (sdt05 == "05") {
     //     return res.send({ error: true, message: "Không hỗ trợ mạng VietNamMobie" })
@@ -305,26 +305,26 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             }
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
-            if (doanhthuZ > -75000) {
-                return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
-            }
+            // if (doanhthuZ > -70000) {
+            //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
+            // }
 
 
-            checkgt.totalGift += 70000
+            checkgt.totalGift += 60000
             await checkgt.save()
 
             if (!checkgtz) {
                 const codeRan = getCodeRan()
-                await new GioiThieu({ code: codeRan, sdt: sdt, totalGift: 30000 }).save()
+                await new GioiThieu({ code: codeRan, sdt: sdt, totalGift: 40000 }).save()
             }
             else {
-                checkgtz.totalGift += 30000
+                checkgtz.totalGift += 40000
                 checkgtz.save()
             }
 
-            const zz1 = await new SendGioiThieu({ phone: sdt, money: 30000 }).save()
-            const zz2 = await new SendGioiThieu({ phone: checkgt.sdt, money: 70000 }).save()
-            res.send({ error: false, message: "Bạn nhận được +30000 còn người giới thiệu +70000, vui lòng đợi hệ thống thanh toán nhé" })
+            const zz1 = await new SendGioiThieu({ phone: sdt, money: 40000 }).save()
+            const zz2 = await new SendGioiThieu({ phone: checkgt.sdt, money: 60000 }).save()
+            res.send({ error: false, message: "Bạn nhận được +40000 còn người giới thiệu +60000, vui lòng đợi hệ thống thanh toán nhé" })
         }
     }
     else {
