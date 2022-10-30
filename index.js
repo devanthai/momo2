@@ -226,7 +226,7 @@ async function sumWinmmUID(sdt) {
 
     const sum = await Cuocs.aggregate([{
         $match: {
-            sdtchuyen: sdt, tiencuoc: { $gte: 6000 } , $or: noidungs
+            sdtchuyen: sdt, tiencuoc: { $gte: 6000 }, $or: noidungs
         },
     }, {
         $group: {
@@ -251,14 +251,14 @@ async function checkDoanhThu(sdt) {
         thangtsr = Math.round(tienthangtsr.tienthang)
         cuoctsrrr = Math.round(tienthangtsr.tiencuoc)
     }
-    
+
     return thangtsr - cuoctsrrr
 }
 bot.onText(/\/checkDT (.+)/, async (msg, match) => {
     const sdt = match[1];
     let aaa = await checkDoanhThu(sdt)
-   
-    await bot.sendMessage(-645203490, "st: "+aaa)
+
+    await bot.sendMessage(-645203490, "st: " + aaa)
 })
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     let { code, sdt } = req.body
@@ -306,7 +306,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
             if (doanhthuZ > -75000) {
-                return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
+                return res.send({ error: true, message: "Bạn đang lãi/lỗ " + numberWithCommas(doanhthuZ) + " VNĐ, nếu bạn chơi thua 75k thì mới có thể nhận thưởng" })
             }
 
 
