@@ -300,8 +300,8 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             let DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
 
             const checkzz = await getCuocsMoney(sdt)
-            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 100000)) {
-                return res.send({ error: true, message: "Vui lòng chơi trên 100.000 vnđ để nhận thưởng nhé." })
+            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
+                return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để nhận thưởng nhé." })
             }
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
