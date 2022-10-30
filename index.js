@@ -275,7 +275,9 @@ async function checkDoanhThu(sdt) {
 }
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     let { code, sdt } = req.body
-    if (checkPhoneValid(sdt)) {
+    let checksdt = checkPhoneValid(sdt)
+    console.log(checksdt)
+    if (checksdt) {
         sdt = ChangeNumber11(sdt)
     }
     else {
