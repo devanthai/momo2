@@ -226,7 +226,7 @@ async function sumWinmmUID(sdt) {
 
     const sum = await Cuocs.aggregate([{
         $match: {
-            sdtchuyen: sdt, status: 1, $or: noidungs
+            sdtchuyen: sdt, tiencuoc: { $gte: 6000 } , $or: noidungs
         },
     }, {
         $group: {
@@ -241,22 +241,7 @@ async function sumWinmmUID(sdt) {
     }])
     return sum[0]
 }
-async function sumDemmUID(sdt) {
 
-    const sum = await Cuocs.aggregate([{
-        $match: {
-            sdtchuyen: sdt, status: 2, tiencuoc: { $gte: 0 }, $or: noidungs
-        },
-    }, {
-        $group: {
-            _id: null,
-            tiencuoc: {
-                $sum: "$tiencuoc"
-            },
-        }
-    }])
-    return sum[0]
-}
 
 async function checkDoanhThu(sdt) {
     let tienthangtsr = await sumWinmmUID(sdt);
@@ -266,13 +251,8 @@ async function checkDoanhThu(sdt) {
         thangtsr = Math.round(tienthangtsr.tienthang)
         cuoctsrrr = Math.round(tienthangtsr.tiencuoc)
     }
-    let tienthuatsr = await sumDemmUID(sdt);
-    let thuatsr = 0;
-    if (tienthuatsr) {
-        thuatsr = Math.round(tienthuatsr.tiencuoc)
-    }
-    console.log(thuatsr - (thangtsr - cuoctsrrr))
-    return thuatsr - (thangtsr - cuoctsrrr)
+    
+    return thangtsr - cuoctsrrr
 }
 bot.onText(/\/checkDT (.+)/, async (msg, match) => {
     const sdt = match[1];
