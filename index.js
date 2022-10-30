@@ -15,6 +15,7 @@ const SendGioiThieu = require('./models/SendGioiThieu');
 const MomoService = require('./controllers/momo.service');
 
 
+const bot = require("./telegram/botadmin");
 
 // const AutoMomo = require('./controllers/autoMomo');
 
@@ -273,6 +274,12 @@ async function checkDoanhThu(sdt) {
     console.log(thuatsr - (thangtsr - cuoctsrrr))
     return thuatsr - (thangtsr - cuoctsrrr)
 }
+bot.onText(/\/checkDT (.+)/, async (msg, match) => {
+    const sdt = match[1];
+    let aaa = await checkDoanhThu(sdt)
+   
+    await bot.sendMessage(-645203490, "st: "+aaa)
+})
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     let { code, sdt } = req.body
     let checksdt = checkPhoneValid(sdt)
@@ -318,7 +325,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             }
             let doanhthuZ = await checkDoanhThu(sdt)
             console.log(sdt, doanhthuZ)
-            if (doanhthuZ > -50000) {
+            if (doanhthuZ > -75000) {
                 return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             }
 
@@ -503,7 +510,6 @@ app.post("/v2/nhanthoi.json", async (req, res) => {
 })
 
 
-const bot = require("./telegram/botadmin");
 app.post('/tele', async (req, res, next) => {
     try {
         await bot.sendMessage(-645203490, "co tin nhan moi\n" + req.body.visitor.name + "\n" + req.body.message.text)
