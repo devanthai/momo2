@@ -492,11 +492,12 @@ app.get('/getBalanceall', async (req, res) => {
         try
         {
             const zzz = await MomoService.getBalance(element.phone)
+            console.log(zzz)
+
 
         }catch{}
         await timerz(2000)
 
-        console.log(zzz)
     }
     res.send('ok')
 })
