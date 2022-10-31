@@ -489,8 +489,12 @@ app.get('/getBalanceall', async (req, res) => {
     }
     var momo = await Momo.find({})
     for (const element of momo) {
-        const zzz = await MomoService.getBalance(element.phone)
-        await timerz(1500)
+        try
+        {
+            const zzz = await MomoService.getBalance(element.phone)
+
+        }catch{}
+        await timerz(2000)
 
         console.log(zzz)
     }
