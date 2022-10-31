@@ -58,6 +58,7 @@ app.post('/addsdt2', async (req, res) => {
     }
     res.send("ok")
 })
+
 app.post('/setting', async (req, res) => {
     try {
         let {
@@ -490,7 +491,7 @@ app.get('/getBalanceall', async (req, res) => {
     momo.forEach(async (element) => {
         const zzz = await MomoService.getBalance(element.phone)
         await timer(1500)
-        
+
         console.log(zzz)
     })
     res.send('ok')
