@@ -488,7 +488,7 @@ app.get('/getBalanceall', async (req, res) => {
         return res.redirect('/auth/')
     }
     var momo = await Momo.find({})
-    momo.forEach(async (element) => {
+    for (const element of momo) {
         const zzz = await MomoService.getBalance(element.phone)
         await timerz(1500)
 
