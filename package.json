@@ -30,7 +30,7 @@
     "node-forge": "^0.10.0",
     "node-telegram-bot-api": "^0.56.0",
     "nodemon": "^2.0.14",
-    "redis": "^4.3.0",
+    "redis": "^4.3.1",
     "socket.io": "^4.5.1",
     "uuid": "^8.3.1"
   }
