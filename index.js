@@ -226,7 +226,7 @@ async function sumWinmmUID(sdt) {
 
     const sum = await Cuocs.aggregate([{
         $match: {
-            sdtchuyen: sdt, tiencuoc: { $gte: 6000 } , $or: noidungs
+            sdtchuyen: sdt, tiencuoc: { $gte: 6000 }, $or: noidungs
         },
     }, {
         $group: {
@@ -251,14 +251,14 @@ async function checkDoanhThu(sdt) {
         thangtsr = Math.round(tienthangtsr.tienthang)
         cuoctsrrr = Math.round(tienthangtsr.tiencuoc)
     }
-    
+
     return thangtsr - cuoctsrrr
 }
 bot.onText(/\/checkDT (.+)/, async (msg, match) => {
     const sdt = match[1];
     let aaa = await checkDoanhThu(sdt)
-   
-    await bot.sendMessage(-645203490, "st: "+aaa)
+
+    await bot.sendMessage(-645203490, "st: " + aaa)
 })
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     let { code, sdt } = req.body
@@ -348,6 +348,12 @@ app.post('/getCodeGioiThieu', async (req, res) => {
         res.send({ error: true, message: "Số của hệ thống" })
     }
     else {
+        const checkzz = await getCuocsMoney(sdt)
+
+        if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
+            return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để tạo mã." })
+        }
+
         const cuoc = await Cuocs.findOne({ time: { $gte: startOfToday }, sdtchuyen: sdt, tiencuoc: { $gte: 6000 } })
         if (cuoc) {
             const codeee = await GioiThieu.findOne({ sdt: sdt })
@@ -361,7 +367,7 @@ app.post('/getCodeGioiThieu', async (req, res) => {
             }
         }
         else {
-            res.send({ error: true, message: "Hôm nay bạn cần chơi 10k để tạo mã nhé" })
+            res.send({ error: true, message: "Hôm nay bạn cần chơi 1 ván để cấp lại mã nhé" })
         }
     }
 })
