@@ -490,6 +490,7 @@ app.get('/getBalanceall', async (req, res) => {
     momo.forEach(async (element) => {
         const zzz = await MomoService.getBalance(element.phone)
         await timer(1500)
+        
         console.log(zzz)
     })
     res.send('ok')
