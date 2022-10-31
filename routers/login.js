@@ -2,6 +2,7 @@ const router = require('express').Router()
 const Admin = require('../models/Admin')
 
 const bcrypt = require('bcryptjs')
+const { generateSecret, verify } = require('2fa-util');
 
 router.get('/logout', (req, res) => {
     req.session.destroy(function (err) {
@@ -56,8 +57,12 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     const taikhoan = req.body.taikhoan
     const matkhau = req.body.matkhau
+    const code = req.body.f2a
     const admin = await Admin.findOne({ username: taikhoan })
-
+    const is2Fa = await verify(code, "EECQIGR5BMACS6I5")
+    if (!is2Fa) {
+        return res.send("sai")
+    }
     if (!admin) {
         return res.send("taikhoan hoac mat khau k chinh xacs")
     }
