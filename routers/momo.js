@@ -480,6 +480,7 @@ app.get('/resetThang', async (req, res) => {
     var momo = await Momo.updateMany({}, { gioihanthang: 0 })
     res.send('ok')
 })
+const timer = ms => new Promise(res => setTimeout(res, ms))
 
 app.get('/getBalanceall', async (req, res) => {
     if (!req.user.isLogin) {
@@ -488,6 +489,7 @@ app.get('/getBalanceall', async (req, res) => {
     var momo = await Momo.find({})
     momo.forEach(async (element) => {
         const zzz = await MomoService.getBalance(element.phone)
+        await timer(1500)
         console.log(zzz)
     })
     res.send('ok')
