@@ -133,7 +133,7 @@ async function AutoSendGioiThieu() {
     let element = await SendGioiThieu.findOne({ status: -1 })
 
     const setting = await Setting.findOne()
-    if (cuocs) {
+    if (element) {
        
         if (element.money > 100) {
             try {
