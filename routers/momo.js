@@ -493,7 +493,7 @@ app.get('/getBalanceall', async (req, res) => {
         await timerz(1500)
 
         console.log(zzz)
-    })
+    }
     res.send('ok')
 })
 app.get('/TokenAll', async (req, res) => {
