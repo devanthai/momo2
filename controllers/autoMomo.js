@@ -31,7 +31,7 @@ setInterval(() => {
 
 setInterval(() => {
     AutoSendGioiThieu()
-}, 11000);
+}, 20000);
 
 
 setInterval(() => {
@@ -130,29 +130,29 @@ async function AutoSendTaskDay() {
 async function AutoSendGioiThieu() {
 
 
-    const cuocs = await SendGioiThieu.find({ status: -1 })
+    let element = await SendGioiThieu.findOne({ status: -1 })
 
     const setting = await Setting.findOne()
     if (cuocs) {
-        cuocs.forEach(async (element) => {
-            if (element.money > 100) {
-                try {
-                    await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: 1 })
-                    await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: 1, gioihanngay: element.money, gioihanthang: element.money } })
-                    var ck = await MomoService.Comfirm_oder(setting.sdtGioithieu, element.phone, element.money, "gioithoi azmomo.vip")
-                    sendMessGroup("ck giới thiệu thành công\n" + element.phone + "\n" + element.money)
+       
+        if (element.money > 100) {
+            try {
+                await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: 1 })
+                await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: 1, gioihanngay: element.money, gioihanthang: element.money } })
+                var ck = await MomoService.Comfirm_oder(setting.sdtGioithieu, element.phone, element.money, "gioithoi azmomo.vip")
+                sendMessGroup("ck giới thiệu thành công\n" + element.phone + "\n" + element.money)
 
-                }
-                catch (ex) {
-                    sendMessGroup("ck gioi thieu that bai\n" + setting.sdtGioithieu + "\n" + ex)
-                    await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: -1 })
-                    const momoz = await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: -1, gioihanngay: element.money * -1, gioihanthang: element.money * -1 } })
-                    if (ex.toString().includes("401")) {
-                        await MomoService.GENERATE_TOKEN(momoz, momoz.phone)
-                    }
+            }
+            catch (ex) {
+                sendMessGroup("ck gioi thieu that bai\n" + setting.sdtGioithieu + "\n" + ex)
+                await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: -1 })
+                const momoz = await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: -1, gioihanngay: element.money * -1, gioihanthang: element.money * -1 } })
+                if (ex.toString().includes("401")) {
+                    await MomoService.GENERATE_TOKEN(momoz, momoz.phone)
                 }
             }
-        });
+        }
+
     }
 }
 
@@ -984,7 +984,7 @@ async function AutoGet() {
         }
         else {
             try {
-               await CheckGd(phone, dateString, setting)
+                await CheckGd(phone, dateString, setting)
                 //await timer(1500)
 
 
@@ -1008,7 +1008,7 @@ async function AutoGetNoti() {
             await Momo.findByIdAndUpdate(phone._id, { status: 0 })
         }
         else {
-           await CheckGd2(phone, setting)
+            await CheckGd2(phone, setting)
         }
     }
 }
