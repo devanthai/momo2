@@ -11,7 +11,7 @@ app.set('trust proxy', 1)
 
 const session = cookieSession({
     name: 'session',
-    keys: ["dfghfgjh,,,,.y","6y7ighfgfgfg"],
+    keys: ["dfghfgjh,4,,,.y","6y7i4ghfgfgfg"],
     maxAge: 2400 * 60 * 60 * 10,
     cookie: {
         httpOnly: true,

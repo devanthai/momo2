@@ -8,6 +8,7 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
+    "2fa-util": "^1.1.1",
     "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
