@@ -293,10 +293,10 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
     else if (!checkyc.kyc) {
         return res.send({ error: true, message: "Momo của bạn chưa xác thực CMND" })
     }
-    // let sdt05 = sdt.toString().substring(0, 2);
-    // if (sdt05 == "05") {
-    //     return res.send({ error: true, message: "Không hỗ trợ mạng VietNamMobie" })
-    // }
+    let sdt05 = sdt.toString().substring(0, 2);
+    if (sdt05 == "05") {
+        return res.send({ error: true, message: "Không hỗ trợ mạng VietNamMobie" })
+    }
     console.log(sdt)
 
     let checkgt = await GioiThieu.findOne({ code: code })
