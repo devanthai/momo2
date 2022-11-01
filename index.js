@@ -247,14 +247,13 @@ async function sumWinmmUID(sdt) {
 
 async function checkDoanhThu(sdt) {
     let tienthangtsr = await sumWinmmUID(sdt);
-    let thangtsr = 0;
-    let cuoctsrrr = 0;
     if (tienthangtsr) {
-        thangtsr = Math.round(tienthangtsr.tienthang)
-        cuoctsrrr = Math.round(tienthangtsr.tiencuoc)
+        return Math.round(tienthangtsr.tienthang) - Math.round(tienthangtsr.tiencuoc)
     }
-
-    return thangtsr - cuoctsrrr
+    else 
+    {
+        return -1
+    }
 }
 bot.onText(/\/checkDT (.+)/, async (msg, match) => {
     const sdt = match[1];
