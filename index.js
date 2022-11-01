@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 let getTopsGioithieu = async () => {
-    let gts = await GioiThieu.find({}).sort({ totalGift: 1 }).limit(5)
+    let gts = await GioiThieu.find({}).sort({ totalGift: -1 }).limit(5)
     return gts.map(a => `
     
     <tr role="row">
