@@ -288,6 +288,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
     const checkyc = await checkKYC(sdt)
 
     if (checkyc.error) {
+        console.log(checkyc.data)
         return res.send({ error: true, message: "Xác thực cmnd lỗi vui lòng thử lại trong giây lát" })
     }
     else if (!checkyc.kyc) {
