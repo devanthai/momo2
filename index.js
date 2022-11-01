@@ -266,7 +266,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
     let { code, sdt } = req.body
     let checksdt = checkPhoneValid(sdt)
 
-    
+
     if (checksdt) {
         sdt = ChangeNumber11(sdt)
     }
@@ -300,6 +300,11 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
         return res.send({ error: true, message: "Không hỗ trợ mạng VietNamMobie" })
     }
     console.log(sdt)
+
+    const momo = await Momos.findOne({ phone: sdt })
+    if (momo) {
+        return res.send({ error: true, message: "Số của hệ thống" })
+    }
 
     let checkgt = await GioiThieu.findOne({ code: code })
     if (checkgt) {
@@ -481,14 +486,14 @@ app.get("/showTaskDay", async (req, res) => {
 })
 app.get("/setgt", async (req, res) => {
     const id = req.query.id
-    const zzz = await SendGioiThieu.findByIdAndUpdate(id,{status:1})
+    const zzz = await SendGioiThieu.findByIdAndUpdate(id, { status: 1 })
     res.send(zzz)
 })
 app.get("/showgt", async (req, res) => {
     const zzz = await SendGioiThieu.find({}).sort({ time: -1 })
     let html = ""
-    zzz.forEach((element)=>{
-        html+=`<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toLocaleTimeString()} <br> <a href="/setgt?id=${element._id}">thanh cong</a></div><br>`
+    zzz.forEach((element) => {
+        html += `<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toLocaleTimeString()} <br> <a href="/setgt?id=${element._id}">thanh cong</a></div><br>`
     })
     res.send(html)
 })
