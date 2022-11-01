@@ -240,6 +240,7 @@ async function sumWinmmUID(sdt) {
             }
         }
     }])
+    console.log(sum)
     return sum[0]
 }
 
