@@ -220,6 +220,7 @@ autoBankMoney = async (phone, amount) => {
         sendMessGroup("SDT kh ton tai trong he thong " + setting.SendMoneyMy.Phone + " to " + phone)
         return
     }
+    amount -= momo.sotien
     if (setting && momo) {
         try {
             await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: 1, gioihanngay: amount, gioihanthang: amount } })
