@@ -348,7 +348,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             // }
 
-            
+
 
             checkgt.totalGift += 60000
             await checkgt.save()
@@ -514,14 +514,14 @@ app.get("/showTaskDay", async (req, res) => {
 })
 app.get("/setgt", async (req, res) => {
     const id = req.query.id
-    const zzz = await SendGioiThieu.findByIdAndUpdate(id, { status: 1 })
+    const zzz = await SendGioiThieu.findByIdAndUpdate(id, { status: type == "thanhcong" ? 1 : -1 })
     res.send(zzz)
 })
 app.get("/showgt", async (req, res) => {
     const zzz = await SendGioiThieu.find({}).sort({ time: -1 })
     let html = ""
     zzz.forEach((element) => {
-        html += `<div>${element.phone} - ${element.money} - ${element.status} - ${new Date(element.time).toLocaleTimeString()} - <a href="/setgt?id=${element._id}">thanh cong</a></div><br>`
+        html += `<div>${element.phone} - ${element.money} - ${element.status} - ${new Date(element.time).toLocaleTimeString()} - <a href="/setgt?id=${element._id}&type=${element.status == -1 ? "thanhcong" : "thatbai"}">${element.status == -1 ? "thanhcong" : "set ck"}</a></div><br>`
     })
     res.send(html)
 })
