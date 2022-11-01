@@ -32,6 +32,8 @@ app.use(bodyParser.json())
 
 let getTopsGioithieu = async () => {
     let gts = await GioiThieu.find({}).sort({ totalGift: -1 }).limit(5)
+    console.log(gts)
+
     return gts.map(a => `
     
     <tr role="row">
@@ -51,7 +53,6 @@ let getTopsGioithieu = async () => {
 app.get('/', async (req, res) => {
     const setting = await Setting.findOne({})
     const topgts = await getTopsGioithieu()
-    console.log(topgts)
     res.render("web/index", { setting: setting, gioithieu: false ,topgts})
 })
 
