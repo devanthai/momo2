@@ -262,8 +262,8 @@ bot.onText(/\/checkDT (.+)/, async (msg, match) => {
 })
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     // return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
-
     let { code, sdt } = req.body
+
     let checksdt = checkPhoneValid(sdt)
 
 
@@ -285,6 +285,19 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
     await redisCache.set(keyWaituser, dateNow)
 
 
+    const keyWaituserz = "keywait" + code
+    const getRedisz = await redisCache.get(keyWaituser)
+    const dateNowz = Date.now()
+    if (getRedisz) {
+        if (dateNowz - getRedisz < 10000) {
+            return res.send({ error: true, message: "Nhanh quá vui lòng chờ 10 giây và nhập lại" })
+        }
+    }
+    await redisCache.set(keyWaituserz, dateNowz)
+
+
+
+    console.log(dateNow)
 
     // const checkyc = await checkKYC(sdt)
 
@@ -335,6 +348,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             // }
 
+            
 
             checkgt.totalGift += 60000
             await checkgt.save()
@@ -347,6 +361,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
                 checkgtz.totalGift += 40000
                 checkgtz.save()
             }
+
 
             const zz1 = await new SendGioiThieu({ phone: sdt, money: 40000 }).save()
             const zz2 = await new SendGioiThieu({ phone: checkgt.sdt, money: 60000 }).save()
