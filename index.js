@@ -36,14 +36,14 @@ let getTopsGioithieu = async () => {
     
     <tr role="row">
                                   
-                                    <td class="text-left">
+                                    <td class="text-center">
 
                                         <b>${a.sdt.substring(0, a.sdt.length - 4) + "****"}</b>
                                     </td>
 
                                     <td class="text-center">+${numberWithCommas(a.totalGift)} vnđ</td>
                                 </tr>
-    `)
+    `).join('')
 
 }
 
