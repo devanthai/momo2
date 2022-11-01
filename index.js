@@ -13,6 +13,7 @@ const GioiThieu = require('./models/CodeGioiThieu');
 const Giftcode = require('./models/Giftcode');
 const SendGioiThieu = require('./models/SendGioiThieu');
 const MomoService = require('./controllers/momo.service');
+const redisCache = require("./redisCache")
 
 
 const bot = require("./telegram/botadmin");
@@ -263,13 +264,26 @@ bot.onText(/\/checkDT (.+)/, async (msg, match) => {
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     let { code, sdt } = req.body
     let checksdt = checkPhoneValid(sdt)
-    console.log(checksdt)
+
+    
     if (checksdt) {
         sdt = ChangeNumber11(sdt)
     }
     else {
         return res.send({ error: true, message: "SDT không hợp lệ" })
     }
+
+    const keyWaituser = "keywait" + sdt
+    const getRedis = await redisCache.get(keyWaituser)
+    const dateNow = Date.now()
+    if (getRedis) {
+        if (dateNow - getRedis < 10000) {
+            return res.send({ error: true, message: "Nhanh quá vui lòng chờ 10 giây và nhập lại" })
+        }
+    }
+    await redisCache.set(keyWaituser, dateNow)
+
+
 
     const checkyc = await checkKYC(sdt)
 
@@ -464,11 +478,10 @@ app.get("/showTaskDay", async (req, res) => {
     res.send(zzz)
 })
 app.get("/showgt", async (req, res) => {
-    
     const zzz = await SendGioiThieu.find({}).sort({ time: -1 })
     let html = ""
     zzz.forEach((element)=>{
-        html+=`<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toDateString()}</div>`
+        html+=`<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toLocaleDateString()}</div><br>`
     })
     res.send(html)
 })
