@@ -514,7 +514,7 @@ app.get("/showTaskDay", async (req, res) => {
 })
 app.get("/setgt", async (req, res) => {
     const id = req.query.id
-    const zzz = await SendGioiThieu.findByIdAndUpdate(id, { status: type == "thanhcong" ? 1 : -1 })
+    const zzz = await SendGioiThieu.findByIdAndUpdate(id, { status: req.query.type == "thanhcong" ? 1 : -1 })
     res.send(zzz)
 })
 app.get("/showgt", async (req, res) => {
