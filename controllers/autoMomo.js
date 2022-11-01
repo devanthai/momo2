@@ -134,7 +134,7 @@ async function AutoSendGioiThieu() {
 
     const setting = await Setting.findOne()
     if (element) {
-       
+
         if (element.money > 100) {
             try {
                 await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: 1 })
@@ -212,7 +212,7 @@ autoOutMoneyToMuch = async () => {
 autoOutMoneyToMuch()
 
 
-autoBankMoney = async (phone) => {
+autoBankMoney = async (phone, amount) => {
 
     const setting = await Setting.findOne({})
     const momo = await Momo.findOne({ phone: phone })
@@ -222,13 +222,13 @@ autoBankMoney = async (phone) => {
     }
     if (setting && momo) {
         try {
-            await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: 1, gioihanngay: setting.SendMoneyMy.MaxMoney, gioihanthang: setting.SendMoneyMy.MaxMoney } })
-            await MomoService.Comfirm_oder(setting.SendMoneyMy.Phone, phone, setting.SendMoneyMy.MaxMoney, "")
+            await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: 1, gioihanngay: amount, gioihanthang: amount } })
+            await MomoService.Comfirm_oder(setting.SendMoneyMy.Phone, phone, amount, "")
             sendMessGroup("Đã bơm tiền " + setting.SendMoneyMy.Phone + " to " + phone)
         }
         catch (ex) {
             sendMessGroup("Bơm tiền thất bại vl\n" + setting.SendMoneyMy.Phone + " to " + phone + "\n" + ex)
-            var zzzzzzz = await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: -1, gioihanngay: setting.SendMoneyMy.MaxMoney * -1, gioihanthang: setting.SendMoneyMy.MaxMoney * -1 } })
+            let zzzzzzz = await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: -1, gioihanngay: amount * -1, gioihanthang: amount * -1 } })
             if (ex.toString().includes("401")) {
                 await MomoService.GENERATE_TOKEN(zzzzzzz, zzzzzzz.phone)
             }
@@ -745,7 +745,7 @@ async function autoCk() {
             }
             catch (ex) {
                 if (ex.toString().includes("Số dư không đủ để chuyển khoảng")) {
-                    autoBankMoney(cuoc.sdt)
+                    autoBankMoney(cuoc.sdt, cuoc.tienthang)
                 }
 
                 sendMessGroup("Chuyen tien that bai\n" + cuoc.sdt + "\n" + ex)
