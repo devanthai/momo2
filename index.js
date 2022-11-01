@@ -262,6 +262,8 @@ bot.onText(/\/checkDT (.+)/, async (msg, match) => {
     await bot.sendMessage(-645203490, "st: " + aaa)
 })
 app.post("/nhapCodeGioiThieu", async (req, res) => {
+    return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
+
     let { code, sdt } = req.body
     let checksdt = checkPhoneValid(sdt)
 
@@ -352,6 +354,8 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
     }
 })
 app.post('/getCodeGioiThieu', async (req, res) => {
+    return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
+
     let sdt = req.body.sdt
     if (checkPhoneValid(sdt)) {
         sdt = ChangeNumber11(sdt)
