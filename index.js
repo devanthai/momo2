@@ -250,8 +250,7 @@ async function checkDoanhThu(sdt) {
     if (tienthangtsr) {
         return Math.round(tienthangtsr.tienthang) - Math.round(tienthangtsr.tiencuoc)
     }
-    else 
-    {
+    else {
         return -1
     }
 }
@@ -262,7 +261,7 @@ bot.onText(/\/checkDT (.+)/, async (msg, match) => {
     await bot.sendMessage(-645203490, "st: " + aaa)
 })
 app.post("/nhapCodeGioiThieu", async (req, res) => {
-    return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
+    // return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
 
     let { code, sdt } = req.body
     let checksdt = checkPhoneValid(sdt)
@@ -321,12 +320,17 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             let now = new Date();
             let DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
 
-            const checkzz = await getCuocsMoney(sdt)
-            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
-                return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để nhận thưởng nhé." })
+            const count100k = await Cuocs.countDocuments({ sdtchuyen: sdt, tiencuoc: { $gte: 100000 } })
+            if (count100k < 3) {
+                return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng (300k)." })
             }
-            let doanhthuZ = await checkDoanhThu(sdt)
-            console.log(sdt, doanhthuZ)
+
+            // const checkzz = await getCuocsMoney(sdt)
+            // if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
+            //     return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để nhận thưởng nhé." })
+            // }
+            // let doanhthuZ = await checkDoanhThu(sdt)
+            // console.log(sdt, doanhthuZ)
             // if (doanhthuZ > -70000) {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             // }
@@ -354,7 +358,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
     }
 })
 app.post('/getCodeGioiThieu', async (req, res) => {
-    return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
+    // return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
 
     let sdt = req.body.sdt
     if (checkPhoneValid(sdt)) {
@@ -372,11 +376,17 @@ app.post('/getCodeGioiThieu', async (req, res) => {
         res.send({ error: true, message: "Số của hệ thống" })
     }
     else {
-        const checkzz = await getCuocsMoney(sdt)
 
-        if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
-            return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để tạo mã." })
+        const count100k = await Cuocs.countDocuments({ sdtchuyen: sdt, tiencuoc: { $gte: 100000 } })
+        if (count100k < 3) {
+            return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng (300k)." })
         }
+
+
+        // const checkzz = await getCuocsMoney(sdt)
+        // if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
+        //     return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để tạo mã." })
+        // }
 
         const cuoc = await Cuocs.findOne({ time: { $gte: startOfToday }, sdtchuyen: sdt, tiencuoc: { $gte: 6000 } })
         if (cuoc) {
