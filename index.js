@@ -337,6 +337,11 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             if (count100k < 3) {
                 return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng." })
             }
+            const count5 = await Cuocs.countDocuments({ sdtchuyen: sdt, tiencuoc: { $gte: 6000 } })
+            if (count5 < 5) {
+                return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng ." })
+
+            }
 
             // const checkzz = await getCuocsMoney(sdt)
             // if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
