@@ -227,7 +227,7 @@ async function sumWinmmUID(sdt) {
 
     const sum = await Cuocs.aggregate([{
         $match: {
-            sdtchuyen: sdt, tiencuoc: { $gte: 6000 }, $or: noidungs
+            sdtchuyen: sdt, $or: noidungs
         },
     }, {
         $group: {
