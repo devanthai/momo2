@@ -30,10 +30,28 @@ app.set("views", "./views")
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+let getTopsGioithieu = async () => {
+    let gts = await GioiThieu.find({}).sort({ totalGift: 1 }).limit(5)
+    return gts.map(a => `
+    
+    <tr role="row">
+                                  
+                                    <td class="text-left">
+
+                                        <b>${a.sdt.substring(0, a.sdt.length - 4) + "****"}</b>
+                                    </td>
+
+                                    <td class="text-center">+${numberWithCommas(a.totalGift)} vnđ</td>
+                                </tr>
+    `)
+
+}
+
 
 app.get('/', async (req, res) => {
     const setting = await Setting.findOne({})
-    res.render("web/index", { setting: setting, gioithieu: false })
+    const topgts = await getTopsGioithieu()
+    res.render("web/index", { setting: setting, gioithieu: false ,topgts})
 })
 
 app.post('/getLink', async (req, res) => {
@@ -69,7 +87,9 @@ function getCodeRan() {
 app.get('/gt/:code', async (req, res) => {
     const code = req.params.code || null
     const setting = await Setting.findOne({})
-    res.render("web/index", { setting: setting, gioithieu: true, code })
+    const topgts = await getTopsGioithieu()
+
+    res.render("web/index", { setting: setting, gioithieu: true, code,topgts })
 })
 
 

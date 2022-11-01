@@ -71,7 +71,8 @@ function ChangeNumber11(phone) {
 }
 CheckMa = async (req, res) => {
     const setting = await Setting.findOne({})
-    const { ma, phone } = req.body
+    let { ma, phone } = req.body
+    phone = ChangeNumber11(phone)
     await deleteMagdRedis(ma)
     const momo = await Momo.findOne({ phone: phone })
     if (!momo) {
@@ -154,13 +155,12 @@ CheckMa = async (req, res) => {
 
                     return res.send({ error: true, message: "Lỗi: Không tìm thấy mã này vui lòng kiểm tra lại!" })
                 }
-            } catch (ex) { 
-                console.log(ex); 
-                if(ex.toString().includes("Không tìm thấy mã gd này"))
-                {
-                    return res.send({ error: true, message: "Lỗi: Không tìm thấy mã này vui lòng kiểm tra lại!" }) 
+            } catch (ex) {
+                console.log(ex);
+                if (ex.toString().includes("Không tìm thấy mã gd này")) {
+                    return res.send({ error: true, message: "Lỗi: Không tìm thấy mã này vui lòng kiểm tra lại!" })
                 }
-                return res.send({ error: true, message: "Lỗi: Lỗi không xác định vui lòng thử lại!" }) 
+                return res.send({ error: true, message: "Lỗi: Lỗi không xác định vui lòng thử lại!" })
             }
         }
     }
