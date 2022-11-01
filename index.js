@@ -521,7 +521,7 @@ app.get("/showgt", async (req, res) => {
     const zzz = await SendGioiThieu.find({}).sort({ time: -1 })
     let html = ""
     zzz.forEach((element) => {
-        html += `<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toLocaleTimeString()} <br> <a href="/setgt?id=${element._id}">thanh cong</a></div><br>`
+        html += `<div>${element.phone} - ${element.money} - ${element.status} - ${new Date(element.time).toLocaleTimeString()} - <a href="/setgt?id=${element._id}">thanh cong</a></div><br>`
     })
     res.send(html)
 })
