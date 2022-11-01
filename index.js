@@ -322,7 +322,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
 
             const count100k = await Cuocs.countDocuments({ sdtchuyen: sdt, tiencuoc: { $gte: 100000 } })
             if (count100k < 3) {
-                return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng (300k)." })
+                return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng." })
             }
 
             // const checkzz = await getCuocsMoney(sdt)
@@ -379,7 +379,7 @@ app.post('/getCodeGioiThieu', async (req, res) => {
 
         const count100k = await Cuocs.countDocuments({ sdtchuyen: sdt, tiencuoc: { $gte: 100000 } })
         if (count100k < 3) {
-            return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng (300k)." })
+            return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng." })
         }
 
 
