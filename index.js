@@ -51,6 +51,7 @@ let getTopsGioithieu = async () => {
 app.get('/', async (req, res) => {
     const setting = await Setting.findOne({})
     const topgts = await getTopsGioithieu()
+    console.log(topgts)
     res.render("web/index", { setting: setting, gioithieu: false ,topgts})
 })
 
