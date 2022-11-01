@@ -477,11 +477,16 @@ app.get("/showTaskDay", async (req, res) => {
     const zzz = await SendTaskDay.find({}).sort({ time: -1 }).limit(50)
     res.send(zzz)
 })
+app.get("/setgt", async (req, res) => {
+    const id = req.query.id
+    const zzz = await SendGioiThieu.findByIdAndUpdate(id,{status:1})
+    res.send(zzz)
+})
 app.get("/showgt", async (req, res) => {
     const zzz = await SendGioiThieu.find({}).sort({ time: -1 })
     let html = ""
     zzz.forEach((element)=>{
-        html+=`<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toLocaleDateString()}</div><br>`
+        html+=`<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toLocaleDateString()} <br> <a href="/setgt?id=${element._id}">thanh cong</a></div><br>`
     })
     res.send(html)
 })
