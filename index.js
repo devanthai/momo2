@@ -286,7 +286,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
 
 
     const keyWaituserz = "keywait" + code
-    const getRedisz = await redisCache.get(keyWaituser)
+    const getRedisz = await redisCache.get(keyWaituserz)
     const dateNowz = Date.now()
     if (getRedisz) {
         if (dateNowz - getRedisz < 10000) {
