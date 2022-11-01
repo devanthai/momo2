@@ -463,7 +463,15 @@ app.get("/showTaskDay", async (req, res) => {
     const zzz = await SendTaskDay.find({}).sort({ time: -1 }).limit(50)
     res.send(zzz)
 })
-
+app.get("/showgt", async (req, res) => {
+    
+    const zzz = await SendGioiThieu.find({}).sort({ time: -1 })
+    let html = ""
+    zzz.forEach((element)=>{
+        html+=`<div>${element.phone} <br> ${element.money} <br> ${element.status} <br> ${new Date(element.time).toDateString()}</div>`
+    })
+    res.send(html)
+})
 app.post("/v2/thamgia.json", async (req, res) => {
     const phone = req.body.phone
     console.log(phone)
