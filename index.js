@@ -100,6 +100,10 @@ app.post('/giftcode', async (req, res) => {
     const now = new Date();
     const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const cuoc = await Cuocs.findOne({ time: { $gte: startOfToday }, sdtchuyen: phone, tiencuoc: { $gte: 6000 } })
+    const zzzzzzz = await Giftcode.findOne({ time: { $gte: startOfToday }, phone: phone, status: 1 })
+    if (zzzzzzz) {
+        return res.send("Hôm nay bạn chỉ được nhập 1 lần vui lòng đợi sang ngày mai")
+    }
     if (cuoc) {
         let giftcode = await Giftcode.findOne({ code: text })
         if (!giftcode) {
