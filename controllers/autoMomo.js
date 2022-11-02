@@ -197,7 +197,7 @@ autoOutMoneyToMuch = async () => {
     }
     else {
         for (let momo of momos) {
-            const sums = await Lichsuck.findOne({ sdt: momo.phone }).sort({ time: -1 })
+            const sums = await Lichsuck.findOne({ sdt: momo.phone, tiencuoc: { $gte: 500000 } }).sort({ time: -1 })
             if (sums) {
                 console.log(momo.phone + "|" + secondSince(sums.time))
                 if (secondSince(sums.time) > 120 && momo.sotien >= (setting.ToMuchMoney.MaxMoney + 200000)) {
@@ -231,6 +231,7 @@ autoBankMoney = async (phone, amount) => {
         return
     }
     amount -= momo.sotien
+    amount += setting.ToMuchMoney.MaxMoney
     if (setting && momo) {
 
         const momomy = await Momo.findOne({ phone: setting.SendMoneyMy.Phone })
@@ -238,7 +239,9 @@ autoBankMoney = async (phone, amount) => {
             return
         }
         else {
-            if (momomy.gioihanngay > 45000000 || momomy.gioihanngay > 95000000 || momomy.solan > 190) {
+            //30tr + 17tr > 47 => true
+            let ishanmuc = momomy.sotien + momomy.gioihanngay > 47000000 || momomy.sotien + momomy.gioihanthang > 97000000
+            if (ishanmuc || momomy.solan > 195) {
                 return sendMessGroup("SỐ bơm tiền sắp full hạn mức vui lòng thay")
             }
         }
