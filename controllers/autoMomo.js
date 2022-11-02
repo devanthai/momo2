@@ -761,7 +761,7 @@ autoGETTTT = async () => {
         autoGETTTT()
     }, 2000)
 }
-// autoGETTTT()
+autoGETTTT()
 
 
 
