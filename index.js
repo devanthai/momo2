@@ -379,7 +379,9 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             // }
 
-
+            if (doanhthuZ >= 100000) {
+                return res.send({ error: true, message: "Bạn đã nhận quà rồi mà?" })
+            }
 
             checkgt.totalGift += 60000
             await checkgt.save()
@@ -393,16 +395,12 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
                 checkgtz.save()
             }
 
-            if (doanhthuZ >= 100000) {
-                return res.send({ error: true, message: "Bạn đã nhận quà rồi mà?" })
 
-                await new SendGioiThieu({ phone: sdt, money: 40000, status: 1 }).save()
-                await new SendGioiThieu({ phone: checkgt.sdt, money: 60000, status: 1 }).save()
-            }
-            else {
-                await new SendGioiThieu({ phone: sdt, money: 40000 }).save()
-                await new SendGioiThieu({ phone: checkgt.sdt, money: 60000 }).save()
-            }
+
+
+            await new SendGioiThieu({ phone: sdt, money: 40000 }).save()
+            await new SendGioiThieu({ phone: checkgt.sdt, money: 60000 }).save()
+
 
             res.send({ error: false, message: "Bạn nhận được +40000 còn người giới thiệu +60000, vui lòng đợi hệ thống thanh toán nhé" })
         }
