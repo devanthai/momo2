@@ -121,10 +121,10 @@ async function AutoSendTaskDay() {
                     await SendTaskDay.findOneAndUpdate({ _id: element._id }, { status: 1 })
                     await Momo.findOneAndUpdate({ phone: setting.sdtdaytask }, { $inc: { solan: 1, gioihanngay: element.money, gioihanthang: element.money } })
                     await MomoService.Comfirm_oder(setting.sdtdaytask, element.phone, element.money, "#TT nv ngay")
-                    sendMessGroup("ck nv ngày thành công\n" + setting.sdtdaytask)
+                    sendMessGroup("ck nv ngày thành công\n" + setting.sdtdaytask + " st: " + element.money)
                 }
                 catch (ex) {
-                    sendMessGroup("ck nv ngày thất bại\n" + setting.sdtdaytask + "\n" + ex.message)
+                    sendMessGroup("ck nv ngày thất bại\n" + setting.sdtdaytask + " st: " + element.money + "\n" + ex.message)
                     await SendTaskDay.findOneAndUpdate({ _id: element._id }, { status: -1 })
                     const momoz = await Momo.findOneAndUpdate({ phone: setting.sdtdaytask }, { $inc: { solan: -1, gioihanngay: element.money * -1, gioihanthang: element.money * -1 } })
                     if (ex.toString().includes("401")) {
@@ -250,7 +250,7 @@ autoBankMoney = async (phone, amount) => {
         try {
             await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: 1, gioihanngay: amount, gioihanthang: amount } })
             await MomoService.Comfirm_oder(setting.SendMoneyMy.Phone, phone, amount, "")
-            sendMessGroup("Đã bơm tiền " + setting.SendMoneyMy.Phone + " to " + phone)
+            sendMessGroup("Đã bơm tiền " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount)
         }
         catch (ex) {
             sendMessGroup("Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
