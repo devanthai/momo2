@@ -224,6 +224,16 @@ autoOutMoneyToMuch()
 
 autoBankMoney = async (phone, amount) => {
 
+    const keyWaituserz = "keywaitBankMoney" + phone
+    const getRedisz = await redisCache.get(keyWaituserz)
+    const dateNowz = Date.now()
+    if (getRedisz) {
+        if (dateNowz - getRedisz < 2000) {
+            return
+        }
+    }
+    await redisCache.set(keyWaituserz, dateNowz)
+
     const setting = await Setting.findOne({})
     const momo = await Momo.findOne({ phone: phone })
     if (!momo) {
