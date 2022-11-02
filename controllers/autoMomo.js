@@ -590,6 +590,11 @@ bot.on('message', async (msg) => {
 
         sendTong()
     }
+    else if (msg.text == "/doanhthu2" || msg.text == "doanhthu2") {
+        console.log("asasdasfsafsfsdfsdfsdfsfsdf")
+
+        sendTong2()
+    }
     else if (msg.text == "/giftcode") {
         const gifcodes = await Giftcode.find({ status: -1 })
 
@@ -631,6 +636,28 @@ async function sendTong() {
         thuatsrthang = Math.round(tienthuatsrthang.tiencuoc)
     }
     await bot.sendMessage(groupID, "Month: " + numberWithCommas(thuatsrthang - (thangtsrthang - cuoctsrrrthang)))
+}
+async function sendTong2() {
+    var tienthangtsr = await sumWinmm();
+    var thangtsr = 0;
+    var cuoctsrrr = 0;
+    if (tienthangtsr) {
+        thangtsr = Math.round(tienthangtsr.tienthang)
+        cuoctsrrr = Math.round(tienthangtsr.tiencuoc)
+    }
+
+    await bot.sendMessage(groupID, "Today: " + numberWithCommas(thangtsr - cuoctsrrr))
+
+
+    var tienthangtsrthang = await sumWinmmThang();
+    var thangtsrthang = 0;
+    var cuoctsrrrthang = 0;
+    if (tienthangtsrthang) {
+        thangtsrthang = Math.round(tienthangtsrthang.tienthang)
+        cuoctsrrrthang = Math.round(tienthangtsrthang.tiencuoc)
+    }
+
+    await bot.sendMessage(groupID, "Month: " + numberWithCommas(thangtsrthang - cuoctsrrrthang))
 }
 sendMessGroup = (mess) => {
     bot.sendMessage(groupID, mess);
