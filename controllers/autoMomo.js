@@ -766,7 +766,7 @@ autoGETTTT()
 
 
 autoGETTTTNOTI = async () => {
-    await AutoGetNoti()
+     AutoGetNoti()
     console.log("get noti")
     setTimeout(async () => {
         autoGETTTTNOTI()
