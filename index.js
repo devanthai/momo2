@@ -53,7 +53,7 @@ let getTopsGioithieu = async () => {
 app.get('/', async (req, res) => {
     const setting = await Setting.findOne({})
     const topgts = await getTopsGioithieu()
-    res.render("web/index", { setting: setting, gioithieu: false ,topgts})
+    res.render("web/index", { setting: setting, gioithieu: false, topgts })
 })
 
 app.post('/getLink', async (req, res) => {
@@ -91,7 +91,7 @@ app.get('/gt/:code', async (req, res) => {
     const setting = await Setting.findOne({})
     const topgts = await getTopsGioithieu()
 
-    res.render("web/index", { setting: setting, gioithieu: true, code,topgts })
+    res.render("web/index", { setting: setting, gioithieu: true, code, topgts })
 })
 
 
@@ -369,7 +369,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             // if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
             //     return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để nhận thưởng nhé." })
             // }
-            // let doanhthuZ = await checkDoanhThu(sdt)
+            let doanhthuZ = await checkDoanhThu(sdt)
             // console.log(sdt, doanhthuZ)
             // if (doanhthuZ > -70000) {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
@@ -389,9 +389,15 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
                 checkgtz.save()
             }
 
+            if (doanhthuZ >= 100000) {
+                await new SendGioiThieu({ phone: sdt, money: 40000, status: 1 }).save()
+                await new SendGioiThieu({ phone: checkgt.sdt, money: 60000, status: 1 }).save()
+            }
+            else {
+                await new SendGioiThieu({ phone: sdt, money: 40000 }).save()
+                await new SendGioiThieu({ phone: checkgt.sdt, money: 60000 }).save()
+            }
 
-            const zz1 = await new SendGioiThieu({ phone: sdt, money: 40000 }).save()
-            const zz2 = await new SendGioiThieu({ phone: checkgt.sdt, money: 60000 }).save()
             res.send({ error: false, message: "Bạn nhận được +40000 còn người giới thiệu +60000, vui lòng đợi hệ thống thanh toán nhé" })
         }
     }

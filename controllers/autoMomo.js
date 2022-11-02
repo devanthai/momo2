@@ -24,14 +24,23 @@ const redisCache = require("../redisCache")
 const getWin = require("./getWin")
 
 
+
+
+autoSendGT = async () => {
+    await AutoSendGioiThieu()
+    setTimeout(() => {
+        autoSendGT()
+    }, 30000);
+}
+autoSendGT()
+
+
+
+
 setInterval(() => {
     AutoSendTaskDay()
 }, 10000);
 
-
-setInterval(() => {
-    AutoSendGioiThieu()
-}, 20000);
 
 
 setInterval(() => {
@@ -139,7 +148,7 @@ async function AutoSendGioiThieu() {
             try {
                 await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: 1 })
                 await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: 1, gioihanngay: element.money, gioihanthang: element.money } })
-                var ck = await MomoService.Comfirm_oder(setting.sdtGioithieu, element.phone, element.money, "gioithoi azmomo.vip")
+                await MomoService.Comfirm_oder(setting.sdtGioithieu, element.phone, element.money, "nhận 100k free => azmomo.vip")
                 sendMessGroup("ck giới thiệu thành công\n" + element.phone + "\n" + element.money)
 
             }
@@ -190,7 +199,7 @@ autoOutMoneyToMuch = async () => {
             const sums = await Lichsuck.findOne({ sdt: momo.phone }).sort({ time: -1 })
             if (sums) {
                 console.log(momo.phone + "|" + secondSince(sums.time))
-                if (secondSince(sums.time) > 60 && momo.sotien >= (setting.ToMuchMoney.MaxMoney + 200000)) {
+                if (secondSince(sums.time) > 120 && momo.sotien >= (setting.ToMuchMoney.MaxMoney + 200000)) {
                     const sotienorder = momo.sotien - setting.ToMuchMoney.MaxMoney
                     try {
                         await Momo.findOneAndUpdate({ phone: momo.phone }, { $inc: { solan: 1, gioihanngay: sotienorder, gioihanthang: sotienorder } })
@@ -228,7 +237,7 @@ autoBankMoney = async (phone, amount) => {
             sendMessGroup("Đã bơm tiền " + setting.SendMoneyMy.Phone + " to " + phone)
         }
         catch (ex) {
-            sendMessGroup("Bơm tiền thất bại vl\n" + setting.SendMoneyMy.Phone + " to " + phone + "\n" + ex)
+            sendMessGroup("Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
             let zzzzzzz = await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: -1, gioihanngay: amount * -1, gioihanthang: amount * -1 } })
             if (ex.toString().includes("401")) {
                 await MomoService.GENERATE_TOKEN(zzzzzzz, zzzzzzz.phone)
@@ -1002,6 +1011,10 @@ async function AutoGetNoti() {
     const dateString = new Date().toLocaleDateString()
     const phones = await Momo.find({ status: 1 })
     const setting = await Setting.findOne({})
+    if (phones.length <= 0) {
+        sendMessGroup("HẾT SỐ")
+        return
+    }
     for (const element of phones) {
         const phone = element
         if (phone.solan >= 190 || phone.gioihanngay >= 45000000 || phone.gioihanthang > 98000000) {
