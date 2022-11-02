@@ -7,7 +7,7 @@ const Cuocs = require('../models/Cuoc');
 const moment = require('moment')
 const checklogin = require('./checklogin')
 const login = require('./login')
-const bot = require("../telegram/botadmin")
+const bot = require("../bot")
 function numberWithCommas(x) {
     try {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
