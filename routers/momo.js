@@ -550,8 +550,8 @@ app.post('/getuser', async (req, res) => {
     var momo = await Momo.findOne({ _id: id })
     if (momo) {
         try {
-            //const zzz = await MomoService.login(momo.phone);
-            const zzz = await MomoService.getNoti(momo.phone, 1000)
+            const zzz = await MomoService.login(momo.phone);
+            // const zzz = await MomoService.getNoti(momo.phone, 1000)
             console.log(zzz)
 
         } catch (ex) {
