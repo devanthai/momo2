@@ -150,11 +150,11 @@ async function AutoSendGioiThieu() {
                 await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: 1 })
                 await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: 1, gioihanngay: element.money, gioihanthang: element.money } })
                 await MomoService.Comfirm_oder(setting.sdtGioithieu, element.phone, element.money, "nhận 100k free => azmomo.vip")
-                sendMessGroup("ck giới thiệu thành công\n"+ setting.sdtGioithieu +" to "+element.phone+"\n" + element.money)
+                sendMessGroup("ck giới thiệu thành công\n" + setting.sdtGioithieu + " to " + element.phone + "\n" + element.money)
 
             }
             catch (ex) {
-                sendMessGroup("ck gioi thieu that bai: " + setting.sdtGioithieu +" to "+element.phone+ "\n" + ex.message)
+                sendMessGroup("ck gioi thieu that bai: " + setting.sdtGioithieu + " to " + element.phone + "\n" + ex.message)
                 await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: -1 })
                 const momoz = await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: -1, gioihanngay: element.money * -1, gioihanthang: element.money * -1 } })
                 if (ex.toString().includes("401")) {
@@ -232,6 +232,18 @@ autoBankMoney = async (phone, amount) => {
     }
     amount -= momo.sotien
     if (setting && momo) {
+
+        const momomy = await Momo.findOne({ phone: setting.SendMoneyMy.Phone })
+        if (!momomy) {
+            return
+        }
+        else {
+            if (momomy.gioihanngay > 45000000 || momomy.gioihanngay > 95000000 || momomy.solan > 190) {
+                return sendMessGroup("SỐ bơm tiền sắp full hạn mức vui lòng thay")
+            }
+        }
+
+
         try {
             await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: 1, gioihanngay: amount, gioihanthang: amount } })
             await MomoService.Comfirm_oder(setting.SendMoneyMy.Phone, phone, amount, "")
