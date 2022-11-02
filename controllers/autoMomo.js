@@ -870,7 +870,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
         // console.log(hiss)
-        console.log("checkgd2 " + phone.phone + "  " + hiss.momoMsg.length)
+     console.log("checkgd2 " + phone.phone + "  " + hiss.momoMsg.length)
 
         let zz = hiss
         hiss = hiss.momoMsg
@@ -879,10 +879,9 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
                 const io = his.io
                 const transId = his.transId
-                console.log(his)
                 const checkGdredis = await checkMagdRedis(transId)
-
-                if (checkGdredis) {
+                const sotienenn = his.totalAmount
+                if (checkGdredis && sotienenn >= setting.tile.min) {
                     console.log("check redis: " + checkGdredis, transId)
 
                     const postBalance = his.postBalance
@@ -1002,7 +1001,7 @@ async function CheckGd2(phone, setting) {
 
 
             const checkGdredis = await checkMagdRedis(magdd)
-            if (checkGdredis) {
+            if (checkGdredis && amount >= setting.tile.min) {
                 console.log("check redis noti: " + checkGdredis, tranId)
                 const postBalance = -99999
                 const checkz = await Lichsuck.findOne({ magd: tranId })
