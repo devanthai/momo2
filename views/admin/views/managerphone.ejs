@@ -133,7 +133,21 @@
         });
 
     }
+    function getAcc(id) {
 
+     
+$.ajax({
+    url: "/getuser",
+    type: "post",
+    data: {
+        id: id
+    },
+    success: function (result) {
+        alert(result)
+    }
+});
+
+}
     function getotp() {
 
         $.ajax({

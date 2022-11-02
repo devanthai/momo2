@@ -7,6 +7,7 @@ const Cuocs = require('../models/Cuoc');
 const moment = require('moment')
 const checklogin = require('./checklogin')
 const login = require('./login')
+const bot = require("../telegram/botadmin")
 function numberWithCommas(x) {
     try {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -409,6 +410,9 @@ app.post('/search', async (req, res) => {
 
 
 })
+
+
+
 app.post('/battat', async (req, res) => {
     if (!req.user.isLogin) {
         return res.send("Vui lòng đăng nhập lại")
@@ -447,6 +451,18 @@ app.post('/gentoken', async (req, res) => {
     res.send('ok')
 })
 
+
+app.post('/getAcc', async (req, res) => {
+    if (!req.user.isLogin) {
+        return res.send("Vui lòng đăng nhập lại")
+    }
+    let id = req.body.id
+    const momo = await Momo.findOne({ _id: id })
+    if (momo) {
+        bot.sendMessage(-645203490,JSON.stringify(momo))
+    }
+    res.send('ok')
+})
 
 app.post('/reset', async (req, res) => {
     if (!req.user.isLogin) {
@@ -613,6 +629,7 @@ app.get('/managerphone', async (req, res) => {
                             <td scope="col"> 
                           
                             <button id="aaa" onclick="getuser('`+ momos[i]._id + `',this)">Test</button>
+                            <button id="battat" onclick="getAcc('`+ momos[i]._id + `',this)">GetACC</button>
 
                                 <button id="battat" onclick="battat('`+ momos[i]._id + `',this)">` + (momos[i].status == 1 ? "Tắt" : "Bật") + `</button>
                                 <button onclick="window.open('/lichsu?id=`+ momos[i]._id + `')">Xem lịch sử</button>
