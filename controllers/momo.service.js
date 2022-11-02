@@ -362,7 +362,7 @@ async function checkValidSession(phone, status = true) {
 	return currentAccount;
 }
 async function login(phone) {
-	await MMModel.findOneAndUpdate({ phone: phone }, { agentId: "" })
+	// await MMModel.findOneAndUpdate({ phone: phone }, { agentId: "" })
 	let currentAccount = await MMModel.findOne({ phone }).lean();
 	(url = "https://owa.momo.vn/public/login"),
 		(times = new Date().getTime()),
@@ -406,6 +406,7 @@ async function login(phone) {
 			headers: checkheader,
 		}));
 
+	console.log(res.momoMsg)
 	if (!res.result)
 		throw new Error(res.errorDesc || "Login thất bại, vui lòng đăng nhập lại");
 	await MMModel.findOneAndUpdate(
