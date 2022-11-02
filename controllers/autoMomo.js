@@ -879,7 +879,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
                 const io = his.io
                 const transId = his.transId
-
+                console.log(his)
                 const checkGdredis = await checkMagdRedis(transId)
 
                 if (checkGdredis) {
