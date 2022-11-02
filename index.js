@@ -280,7 +280,7 @@ bot.onText(/\/checkDT (.+)/, async (msg, match) => {
     const sdt = match[1];
     let aaa = await checkDoanhThu(sdt)
 
-    await bot.sendMessage(-645203490, "st: " + aaa)
+    await bot.sendMessage(-645203490, "doanh thu: " + aaa)
 })
 app.post("/nhapCodeGioiThieu", async (req, res) => {
     // return res.send({ error: true, message: "Bảo trì tạm thời vui lòng quay lại sau" })
