@@ -759,7 +759,7 @@ autoGETTTT = async () => {
     await AutoGet()
     setTimeout(async () => {
         autoGETTTT()
-    }, 5000)
+    }, 10000)
 }
 autoGETTTT()
 
@@ -770,7 +770,7 @@ autoGETTTTNOTI = async () => {
     console.log("get noti")
     setTimeout(async () => {
         autoGETTTTNOTI()
-    }, 5000)
+    }, 8000)
 }
 autoGETTTTNOTI()
 
@@ -873,7 +873,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
         // console.log(hiss)
-     console.log("checkgd2 " + phone.phone + "  " + hiss.momoMsg.length)
+        console.log("checkgd2 " + phone.phone + "  " + hiss.momoMsg.length)
 
         let zz = hiss
         hiss = hiss.momoMsg
@@ -976,7 +976,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
         }
     }
-    console.log("Lịch sử thường "+phone.phone +" time: "+(Date.now() - timeFirt))
+    console.log("Lịch sử thường " + phone.phone + " time: " + (Date.now() - timeFirt))
 
 }
 
@@ -987,7 +987,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 async function CheckGd2(phone, setting) {
     let timeFirt = Date.now()
     try {
-        
+
         const notis = await MomoService.getNoti(phone.phone, 1000000)
         for (let noti of notis) {
 
@@ -1036,7 +1036,7 @@ async function CheckGd2(phone, setting) {
     } catch (ex) {
         console.log(ex)
     }
-    console.log("Lịch sử noti "+phone.phone +" time: "+(Date.now() - timeFirt))
+    console.log("Lịch sử noti " + phone.phone + " time: " + (Date.now() - timeFirt))
 }
 
 
@@ -1054,7 +1054,7 @@ async function AutoGet() {
         }
         else {
             try {
-                 CheckGd(phone, dateString, setting)
+                CheckGd(phone, dateString, setting)
                 //await timer(1500)
 
 
