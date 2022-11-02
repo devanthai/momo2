@@ -101,7 +101,7 @@ async function AutoSendGiftcode() {
                 await MomoService.Comfirm_oder(setting.sdtGiftcode, element.phone, element.money, "#GiftCodeAzmomo")
             }
             catch (ex) {
-                sendMessGroup("Chuyen tien GIFTCODE that bai\n" + setting.sdtGiftcode + "\n" + ex)
+                sendMessGroup("Chuyen tien GIFTCODE that bai: " + setting.sdtGiftcode + "\n" + ex.message)
                 const momoz = await Momo.findOneAndUpdate({ phone: setting.sdtGiftcode }, { $inc: { solan: -1, gioihanngay: element.money * -1, gioihanthang: element.money * -1 } })
                 if (ex.toString().includes("401")) {
                     await MomoService.GENERATE_TOKEN(momoz, momoz.phone)
@@ -120,10 +120,11 @@ async function AutoSendTaskDay() {
                 try {
                     await SendTaskDay.findOneAndUpdate({ _id: element._id }, { status: 1 })
                     await Momo.findOneAndUpdate({ phone: setting.sdtdaytask }, { $inc: { solan: 1, gioihanngay: element.money, gioihanthang: element.money } })
-                    var ck = await MomoService.Comfirm_oder(setting.sdtdaytask, element.phone, element.money, "#TT nv ngay")
+                    await MomoService.Comfirm_oder(setting.sdtdaytask, element.phone, element.money, "#TT nv ngay")
+                    sendMessGroup("ck nv ngày thành công\n" + setting.sdtdaytask)
                 }
                 catch (ex) {
-                    sendMessGroup("Chuyen tien that bai\n" + setting.sdtdaytask + "\n" + ex)
+                    sendMessGroup("ck nv ngày thất bại\n" + setting.sdtdaytask + "\n" + ex.message)
                     await SendTaskDay.findOneAndUpdate({ _id: element._id }, { status: -1 })
                     const momoz = await Momo.findOneAndUpdate({ phone: setting.sdtdaytask }, { $inc: { solan: -1, gioihanngay: element.money * -1, gioihanthang: element.money * -1 } })
                     if (ex.toString().includes("401")) {
@@ -149,11 +150,11 @@ async function AutoSendGioiThieu() {
                 await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: 1 })
                 await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: 1, gioihanngay: element.money, gioihanthang: element.money } })
                 await MomoService.Comfirm_oder(setting.sdtGioithieu, element.phone, element.money, "nhận 100k free => azmomo.vip")
-                sendMessGroup("ck giới thiệu thành công\n" + element.phone + "\n" + element.money)
+                sendMessGroup("ck giới thiệu thành công\n"+ setting.sdtGioithieu +" to "+element.phone+"\n" + element.money)
 
             }
             catch (ex) {
-                sendMessGroup("ck gioi thieu that bai\n" + setting.sdtGioithieu + "\n" + ex)
+                sendMessGroup("ck gioi thieu that bai: " + setting.sdtGioithieu +" to "+element.phone+ "\n" + ex.message)
                 await SendGioiThieu.findOneAndUpdate({ _id: element._id }, { status: -1 })
                 const momoz = await Momo.findOneAndUpdate({ phone: setting.sdtGioithieu }, { $inc: { solan: -1, gioihanngay: element.money * -1, gioihanthang: element.money * -1 } })
                 if (ex.toString().includes("401")) {
@@ -758,7 +759,7 @@ async function autoCk() {
                     autoBankMoney(cuoc.sdt, cuoc.tienthang)
                 }
 
-                sendMessGroup("Chuyen tien that bai\n" + cuoc.sdt + "\n" + ex)
+                sendMessGroup("Chuyen tien that bai: " + cuoc.sdt + "\n" + ex.message)
                 cuoc.status = -1
                 cuoc.save()
 
