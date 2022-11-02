@@ -394,6 +394,8 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             }
 
             if (doanhthuZ >= 100000) {
+                return res.send({ error: true, message: "Bạn đã nhận quà rồi mà?" })
+
                 await new SendGioiThieu({ phone: sdt, money: 40000, status: 1 }).save()
                 await new SendGioiThieu({ phone: checkgt.sdt, money: 60000, status: 1 }).save()
             }
