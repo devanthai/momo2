@@ -532,11 +532,16 @@ app.get('/loginAll', async (req, res) => {
     if (!req.user.isLogin) {
         return res.redirect('/auth/')
     }
+
     var momo = await Momo.find({})
-    momo.forEach(async (element) => {
-        const zzz = await MomoService.login(element.phone)
-        console.log(zzz)
-    })
+    for (const element of momo) {
+        try
+        {
+            const zzz = await MomoService.login(element.phone)
+            console.log(zzz)
+        }catch{}
+        await timerz(1000)
+    }
     res.send('ok')
 })
 app.post('/getuser', async (req, res) => {
