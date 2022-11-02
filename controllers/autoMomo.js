@@ -759,7 +759,7 @@ autoGETTTT = async () => {
     await AutoGet()
     setTimeout(async () => {
         autoGETTTT()
-    }, 10000)
+    }, 2000)
 }
 autoGETTTT()
 
@@ -770,7 +770,7 @@ autoGETTTTNOTI = async () => {
     console.log("get noti")
     setTimeout(async () => {
         autoGETTTTNOTI()
-    }, 8000)
+    }, 1500)
 }
 autoGETTTTNOTI()
 
@@ -1054,7 +1054,7 @@ async function AutoGet() {
         }
         else {
             try {
-                CheckGd(phone, dateString, setting)
+                await CheckGd(phone, dateString, setting)
                 //await timer(1500)
 
 
@@ -1082,7 +1082,7 @@ async function AutoGetNoti() {
             await Momo.findByIdAndUpdate(phone._id, { status: 0 })
         }
         else {
-            CheckGd2(phone, setting)
+            await CheckGd2(phone, setting)
         }
     }
 }
