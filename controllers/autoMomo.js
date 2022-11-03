@@ -882,7 +882,11 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
                 const io = his.io
                 const transId = his.transId
+    let timeFirtz = Date.now()
+
                 const checkGdredis = await checkMagdRedis(transId)
+        console.log("Lịch sử thường redis " + phone.phone + " time: " + (Date.now() - timeFirtz))
+
                 const sotienenn = his.totalAmount
                 if (checkGdredis && sotienenn >= setting.tile.min) {
                     console.log("check redis: " + checkGdredis, transId)
