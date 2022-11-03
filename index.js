@@ -363,25 +363,25 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             if (count100k < 3) {
                 return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng." })
             }
-            const count5 = await Cuocs.countDocuments({ sdtchuyen: sdt, tiencuoc: { $gte: 6000 } })
-            if (count5 < 5) {
-                return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng ." })
+            // const count5 = await Cuocs.countDocuments({ sdtchuyen: sdt, tiencuoc: { $gte: 6000 } })
+            // if (count5 < 5) {
+            //     return res.send({ error: true, message: "Bạn cần chơi tối thiểu 3 ván 100k để nhận thưởng ." })
 
-            }
-
-            // const checkzz = await getCuocsMoney(sdt)
-            // if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 300000)) {
-            //     return res.send({ error: true, message: "Vui lòng chơi trên 300.000 vnđ để nhận thưởng nhé." })
             // }
-            let doanhthuZ = await checkDoanhThu(sdt)
+
+            const checkzz = await getCuocsMoney(sdt)
+            if (checkzz.length <= 0 || (checkzz.length > 0 && checkzz[0].tiencuoc < 1000000)) {
+                return res.send({ error: true, message: "Vui lòng chơi trên 1.000.000 vnđ để nhận thưởng nhé." })
+            }
+           // let doanhthuZ = await checkDoanhThu(sdt)
             // console.log(sdt, doanhthuZ)
             // if (doanhthuZ > -70000) {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             // }
 
-            if (doanhthuZ >= 80000) {
-                return res.send({ error: true, message: "Bạn đã nhận quà rồi mà?" })
-            }
+            // if (doanhthuZ >= 80000) {
+            //     return res.send({ error: true, message: "Bạn đã nhận quà rồi mà?" })
+            // }
 
             checkgt.totalGift += 60000
             await checkgt.save()
