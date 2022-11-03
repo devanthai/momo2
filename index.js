@@ -379,7 +379,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             // }
 
-            if (doanhthuZ >= 80000) {
+            if (doanhthuZ < -80000) {
                 return res.send({ error: true, message: "Bạn đã nhận quà rồi mà?" })
             }
 
