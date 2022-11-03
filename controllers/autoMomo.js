@@ -756,21 +756,28 @@ autoFIXcomment()
 
 
 autoGETTTT = async () => {
+    const timefirt = Date.now()
+
     await AutoGet()
+    console.log("Lịch sử thường time: " + (Date.now() - timefirt))
+
     setTimeout(async () => {
         autoGETTTT()
-    }, 2000)
+    }, 500)
 }
 autoGETTTT()
 
 
 
 autoGETTTTNOTI = async () => {
+
+    const timefirt = Date.now()
     await AutoGetNoti()
-    console.log("get noti")
+    console.log("Lịch sử noti time: " + (Date.now() - timefirt))
+
     setTimeout(async () => {
         autoGETTTTNOTI()
-    }, 1500)
+    }, 500)
 }
 autoGETTTTNOTI()
 
@@ -867,13 +874,11 @@ function ChangeNumber11(phone) {
 
 
 async function CheckGd(phone, dateString, setting, limit = 10) {
-    let timeFirt = Date.now()
 
 
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
         // console.log(hiss)
-        console.log("Lịch sử thường 1 " + phone.phone + " time: " + (Date.now() - timeFirt))
 
         let zz = hiss
         hiss = hiss.momoMsg
@@ -885,7 +890,6 @@ async function CheckGd(phone, dateString, setting, limit = 10) {
                 let timeFirtz = Date.now()
 
                 const checkGdredis = await checkMagdRedis(transId)
-                console.log("Lịch sử thường redis " + phone.phone + " time: " + (Date.now() - timeFirtz))
 
                 const sotienenn = his.totalAmount
                 if (checkGdredis && sotienenn >= setting.tile.min) {
@@ -980,7 +984,6 @@ async function CheckGd(phone, dateString, setting, limit = 10) {
 
         }
     }
-    console.log("Lịch sử thường 2" + phone.phone + " time: " + (Date.now() - timeFirt))
 
 }
 
@@ -989,11 +992,9 @@ async function CheckGd(phone, dateString, setting, limit = 10) {
 
 
 async function CheckGd2(phone, setting) {
-    let timeFirt = Date.now()
     try {
 
         const notis = await MomoService.getNoti(phone.phone, 300000)
-        console.log("Lịch sử noti 1 " + phone.phone + " time: " + (Date.now() - timeFirt))
 
         for (let noti of notis) {
 
@@ -1042,7 +1043,6 @@ async function CheckGd2(phone, setting) {
     } catch (ex) {
         console.log(ex)
     }
-    console.log("Lịch sử noti 2 " + phone.phone + " time: " + (Date.now() - timeFirt))
 }
 
 
