@@ -325,15 +325,15 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
 
     console.log(dateNow)
 
-    // const checkyc = await checkKYC(sdt)
+    const checkyc = await checkKYC(sdt)
 
-    // if (checkyc.error) {
-    //     console.log(checkyc.data)
-    //     return res.send({ error: true, message: "Xác thực cmnd lỗi vui lòng thử lại trong giây lát" })
-    // }
-    // else if (!checkyc.kyc) {
-    //     return res.send({ error: true, message: "Momo của bạn chưa xác thực CMND" })
-    // }
+    if (checkyc.error) {
+        console.log(checkyc.data)
+        return res.send({ error: true, message: "Xác thực cmnd lỗi vui lòng thử lại trong giây lát" })
+    }
+    else if (!checkyc.kyc) {
+        return res.send({ error: true, message: "Momo của bạn chưa xác thực CMND" })
+    }
     let sdt05 = sdt.toString().substring(0, 2);
     if (sdt05 == "05") {
         return res.send({ error: true, message: "Không hỗ trợ mạng VietNamMobie" })
@@ -379,7 +379,7 @@ app.post("/nhapCodeGioiThieu", async (req, res) => {
             //     return res.send({ error: true, message: "Bạn vui lòng chơi thêm đễ nhận thưởng nhé. Bạn đã đủ điều kiện nhưng hệ thống cần phải xác thực bạn là người chơi thực thụ thì mới có thể nhận được. Vui lòng tiếp tục chơi để hệ thống xác minh" })
             // }
 
-            if (doanhthuZ < -80000) {
+            if (doanhthuZ > -80000) {
                 return res.send({ error: true, message: "Bạn đã nhận quà rồi mà?" })
             }
 
