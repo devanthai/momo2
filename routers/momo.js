@@ -656,7 +656,7 @@ app.get('/lichsuck', async (req, res) => {
         return res.redirect('/auth/')
     }
     var now = new Date();
-    var DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
+    var DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() -  (req.query.day || 0));
     var data = await Lichsuck.find({ time: { $gte: DATE } }).sort({ 'time': -1 });
     res.render('admin/index', { page: "views/lichsuchuyentien", data: req.user, products: data })
 })
@@ -668,7 +668,7 @@ app.get('/lichsucuocs', async (req, res) => {
     }
 
     var now = new Date();
-    var DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (req.query.day || 2));
+    var DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (req.query.day || 0));
     var data = await Cuocs.find({ time: { $gte: DATE } }).sort({ 'time': -1 });
     res.render('admin/index', { page: "views/lscuoc", data: req.user, products: data })
 })
