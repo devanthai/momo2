@@ -873,7 +873,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
     try {
         let hiss = await MomoService.getTranshis(phone.phone, dateString, dateString, limit)
         // console.log(hiss)
-        console.log("checkgd2 " + phone.phone + "  " + hiss.momoMsg.length)
+        console.log("Lịch sử thường 1 " + phone.phone + " time: " + (Date.now() - timeFirt))
 
         let zz = hiss
         hiss = hiss.momoMsg
@@ -976,7 +976,7 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
         }
     }
-    console.log("Lịch sử thường " + phone.phone + " time: " + (Date.now() - timeFirt))
+    console.log("Lịch sử thường 2" + phone.phone + " time: " + (Date.now() - timeFirt))
 
 }
 
@@ -989,6 +989,8 @@ async function CheckGd2(phone, setting) {
     try {
 
         const notis = await MomoService.getNoti(phone.phone, 1000000)
+    console.log("Lịch sử noti 1 " + phone.phone + " time: " + (Date.now() - timeFirt))
+
         for (let noti of notis) {
 
             const io = 1
@@ -1036,7 +1038,7 @@ async function CheckGd2(phone, setting) {
     } catch (ex) {
         console.log(ex)
     }
-    console.log("Lịch sử noti " + phone.phone + " time: " + (Date.now() - timeFirt))
+    console.log("Lịch sử noti 2 " + phone.phone + " time: " + (Date.now() - timeFirt))
 }
 
 
