@@ -866,7 +866,7 @@ function ChangeNumber11(phone) {
 }
 
 
-async function CheckGd(phone, dateString, setting, limit = 20) {
+async function CheckGd(phone, dateString, setting, limit = 10) {
     let timeFirt = Date.now()
 
 
@@ -882,10 +882,10 @@ async function CheckGd(phone, dateString, setting, limit = 20) {
 
                 const io = his.io
                 const transId = his.transId
-    let timeFirtz = Date.now()
+                let timeFirtz = Date.now()
 
                 const checkGdredis = await checkMagdRedis(transId)
-        console.log("Lịch sử thường redis " + phone.phone + " time: " + (Date.now() - timeFirtz))
+                console.log("Lịch sử thường redis " + phone.phone + " time: " + (Date.now() - timeFirtz))
 
                 const sotienenn = his.totalAmount
                 if (checkGdredis && sotienenn >= setting.tile.min) {
@@ -992,8 +992,8 @@ async function CheckGd2(phone, setting) {
     let timeFirt = Date.now()
     try {
 
-        const notis = await MomoService.getNoti(phone.phone, 1000000)
-    console.log("Lịch sử noti 1 " + phone.phone + " time: " + (Date.now() - timeFirt))
+        const notis = await MomoService.getNoti(phone.phone, 300000)
+        console.log("Lịch sử noti 1 " + phone.phone + " time: " + (Date.now() - timeFirt))
 
         for (let noti of notis) {
 
