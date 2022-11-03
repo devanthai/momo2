@@ -512,7 +512,7 @@ app.get('/getBalanceall', async (req, res) => {
 
 
         }catch{}
-        await timerz(2000)
+        await timerz(300)
 
     }
     res.send('ok')
