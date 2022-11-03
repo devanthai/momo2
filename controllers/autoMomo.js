@@ -206,7 +206,7 @@ autoOutMoneyToMuch = async () => {
                     try {
                         await Momo.findOneAndUpdate({ phone: momo.phone }, { $inc: { solan: 1, gioihanngay: sotienorder, gioihanthang: sotienorder } })
                         const ck = await MomoService.Comfirm_oder(momo.phone, setting.ToMuchMoney.Phone, sotienorder, "")
-                        sendMessGroup("Đã rút tiền " + momo.phone + " to " + setting.ToMuchMoney.Phone)
+                        sendMessGroup("Đã rút tiền " + momo.phone + " to " + setting.ToMuchMoney.Phone+" sotien: "+sotienorder)
                     }
                     catch (ex) {
                         sendMessGroup("rút tiền thất bại \n" + momo.phone + " to " + setting.ToMuchMoney.Phone + "\n" + ex)
