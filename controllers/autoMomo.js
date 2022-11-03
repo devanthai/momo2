@@ -206,7 +206,7 @@ autoOutMoneyToMuch = async () => {
                     try {
                         await Momo.findOneAndUpdate({ phone: momo.phone }, { $inc: { solan: 1, gioihanngay: sotienorder, gioihanthang: sotienorder } })
                         const ck = await MomoService.Comfirm_oder(momo.phone, setting.ToMuchMoney.Phone, sotienorder, "")
-                        sendMessGroup("Đã rút tiền " + momo.phone + " to " + setting.ToMuchMoney.Phone+" sotien: "+sotienorder)
+                        sendMessGroup("Đã rút tiền " + momo.phone + " to " + setting.ToMuchMoney.Phone + " sotien: " + sotienorder)
                     }
                     catch (ex) {
                         sendMessGroup("rút tiền thất bại \n" + momo.phone + " to " + setting.ToMuchMoney.Phone + "\n" + ex)
@@ -352,7 +352,7 @@ async function sumWinmm() {
     var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const sum = await Cuocs.aggregate([{
         $match: {
-            time: { $gte: startOfToday }, status: 1, $or: noidungs
+            time: { $gte: startOfToday }, status: 1, noidung: { $in: noidung2s }
         },
     }, {
         $group: {
@@ -372,7 +372,7 @@ async function sumDemm() {
     var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const sum = await Cuocs.aggregate([{
         $match: {
-            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, $or: noidungs
+            time: { $gte: startOfToday }, status: 2, tiencuoc: { $gte: 0 }, noidung: { $in: noidung2s }
         },
     }, {
         $group: {
