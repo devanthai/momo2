@@ -197,11 +197,16 @@ autoOutMoneyToMuch = async () => {
     }
     else {
         for (let momo of momos) {
-            const sums = await Lichsuck.findOne({ sdt: momo.phone, tiencuoc: { $gte: 500000 }, $or: noidungs}).sort({ time: -1 })
+            const sums = await Lichsuck.findOne({
+                $and: [
+                    { sdt: momo.phone, tiencuoc: { $gte: 500000 } },
+                    { $or: noidungs }
+                ]
+            }).sort({ time: -1 })
             console.log(sums)
             if (sums) {
-                console.log("checkrut tiennnnnnnnnnn "+momo.phone + "|" + secondSince(sums.time))
-                if (secondSince(sums.time) > 60 && momo.sotien >= (setting.ToMuchMoney.MaxMoney + 200000)) {
+                console.log("checkrut tiennnnnnnnnnn " + momo.phone + "|" + secondSince(sums.time))
+                if (secondSince(sums.time) > 60 && momo.sotien >= (setting.ToMuchMoney.MaxMoney + 100000)) {
                     const sotienorder = momo.sotien - setting.ToMuchMoney.MaxMoney
                     try {
                         await Momo.findOneAndUpdate({ phone: momo.phone }, { $inc: { solan: 1, gioihanngay: sotienorder, gioihanthang: sotienorder } })
