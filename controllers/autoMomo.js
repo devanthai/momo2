@@ -267,14 +267,18 @@ autoBankMoney = async (phone, amount) => {
     const getRedisz = await redisCache.get(keyWaituserz)
     const dateNowz = Date.now()
     if (getRedisz) {
-        if (dateNowz - getRedisz < 2000) {
+        if (dateNowz - getRedisz < 3000) {
             return
         }
     }
     await redisCache.set(keyWaituserz, dateNowz)
 
     const setting = await Setting.findOne({})
-    
+
+    try {
+        const checkbalance = await MomoService.getBalance(phone)
+    } catch { }
+
     const momo = await Momo.findOne({ phone: phone })
     if (!momo) {
         sendMessGroup("SDT kh ton tai trong he thong " + setting.SendMoneyMy.Phone + " to " + phone)
