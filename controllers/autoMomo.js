@@ -10,8 +10,10 @@ const DayTask = require('../models/DayTask')
 const Giftcode = require('../models/Giftcode')
 const Momo = require('../models/momo.model')
 const Bot2 = require('../telegram/botgroup')
+const BotWarning = require('../telegram/botWarning')
 const Group2Id = -1001630788325
 const groupID = -645203490
+const groupIDwarning = -602326387
 console.log("Hello ba gia")
 console.log("Hello ba gia")
 console.log("Hello ba gia")
@@ -289,6 +291,8 @@ autoBankMoney = async (phone, amount) => {
             //30tr + 17tr > 47 => true
             let ishanmuc = momomy.sotien + momomy.gioihanngay > 47000000 || momomy.sotien + momomy.gioihanthang > 97000000
             if (ishanmuc || momomy.solan > 195) {
+                await BotWarning.sendMessage(groupIDwarning, "SỐ bơm tiền sắp full hạn mức vui lòng thay")
+                return
                 return sendMessGroup("SỐ bơm tiền sắp full hạn mức vui lòng thay")
             }
         }
@@ -1111,11 +1115,10 @@ async function AutoGet() {
 
 
 async function AutoGetNoti() {
-    const dateString = new Date().toLocaleDateString()
     const phones = await Momo.find({ status: 1 })
     const setting = await Setting.findOne({})
     if (phones.length <= 0) {
-        sendMessGroup("HẾT SỐ")
+        await BotWarning.sendMessage(groupIDwarning, "HẾT SỐ RỒI")
         return
     }
     for (const element of phones) {
