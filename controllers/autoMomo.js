@@ -274,6 +274,7 @@ autoBankMoney = async (phone, amount) => {
     await redisCache.set(keyWaituserz, dateNowz)
 
     const setting = await Setting.findOne({})
+    
     const momo = await Momo.findOne({ phone: phone })
     if (!momo) {
         sendMessGroup("SDT kh ton tai trong he thong " + setting.SendMoneyMy.Phone + " to " + phone)
@@ -289,6 +290,7 @@ autoBankMoney = async (phone, amount) => {
         }
         else {
             //30tr + 17tr > 47 => true
+
             let ishanmuc = momomy.sotien + momomy.gioihanngay > 47000000 || momomy.sotien + momomy.gioihanthang > 97000000
             if (ishanmuc || momomy.solan > 195) {
                 await BotWarning.sendMessage(groupIDwarning, "SỐ bơm tiền sắp full hạn mức vui lòng thay")
