@@ -9,6 +9,7 @@ const GioiThieu = require('./models/CodeGioiThieu');
 
 app.set('trust proxy', 1)
 
+
 const session = cookieSession({
     name: 'session',
     keys: ["dfghfgjh,4,,,.y","6y7i4ghfgfgfg"],
