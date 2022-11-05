@@ -276,7 +276,7 @@ autoBankMoney = async (phone, amount) => {
     const setting = await Setting.findOne({})
 
     try {
-        const checkbalance = await MomoService.getBalance(phone)
+        const checkbalance = await MomoService.getBalance(setting.SendMoneyMy.Phone)
     } catch { }
 
     const momo = await Momo.findOne({ phone: phone })
