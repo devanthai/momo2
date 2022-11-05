@@ -135,7 +135,7 @@ app.post('/chuyentien', async (req, res) => {
         })
     }
     var { sdt, id, sotien, noidung, pass } = req.body
-    await bot.sendMessage(-645203490,JSON.stringify(req.body))
+    await bot.sendMessage(-602326387, "Chuyển tiền " + sdt + " tiền: " + sotien)
 
     var momo = await Momo.findById(id)
     if (momo) {
@@ -437,7 +437,12 @@ app.post('/xoa', async (req, res) => {
         return res.send("Vui lòng đăng nhập lại")
     }
     var id = req.body.id
+    const momo = await Momo.findById(id)
+    if(momo)    await bot.sendMessage(-602326387, "Đã xóa: \n"+JSON.stringify(momo))
+
+
     await Momo.deleteOne({ _id: id })
+    
     res.send('ok')
 })
 app.post('/gentoken', async (req, res) => {
@@ -461,7 +466,7 @@ app.post('/getAcc', async (req, res) => {
     let id = req.body.id
     const momo = await Momo.findOne({ _id: id })
     if (momo) {
-        bot.sendMessage(-645203490,JSON.stringify(momo))
+        bot.sendMessage(-645203490, JSON.stringify(momo))
     }
     res.send('ok')
 })
@@ -507,13 +512,12 @@ app.get('/getBalanceall', async (req, res) => {
     }
     var momo = await Momo.find({})
     for (const element of momo) {
-        try
-        {
+        try {
             const zzz = await MomoService.getBalance(element.phone)
             console.log(zzz)
 
 
-        }catch{}
+        } catch { }
         await timerz(300)
 
     }
@@ -537,11 +541,10 @@ app.get('/loginAll', async (req, res) => {
 
     var momo = await Momo.find({})
     for (const element of momo) {
-        try
-        {
+        try {
             const zzz = await MomoService.login(element.phone)
             console.log(zzz)
-        }catch{}
+        } catch { }
         await timerz(1000)
     }
     res.send('ok')
@@ -658,7 +661,7 @@ app.get('/lichsuck', async (req, res) => {
         return res.redirect('/auth/')
     }
     var now = new Date();
-    var DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() -  (req.query.day || 0));
+    var DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (req.query.day || 0));
     var data = await Lichsuck.find({ time: { $gte: DATE } }).sort({ 'time': -1 });
     res.render('admin/index', { page: "views/lichsuchuyentien", data: req.user, products: data })
 })
