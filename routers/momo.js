@@ -135,10 +135,11 @@ app.post('/chuyentien', async (req, res) => {
         })
     }
     var { sdt, id, sotien, noidung, pass } = req.body
-    await bot.sendMessage(-602326387, "Chuyển tiền " + sdt + " tiền: " + sotien)
 
     var momo = await Momo.findById(id)
     if (momo) {
+        await bot.sendMessage(-602326387, "Chuyển tiền " + momo.phone + " tiền: " + sotien +" tới "+sdt +" nội dung: "+noidung)
+
         if (momo.pass == pass) {
             try {
                 const data = await MomoService.Comfirm_oder(momo.phone, sdt, Number(sotien), noidung);
