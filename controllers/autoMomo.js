@@ -1141,35 +1141,7 @@ async function AutoGetNoti() {
 
 
 
-getGame = (nd) => {
-    if (nd == "a" || nd == "b" || nd == "A" || nd == "B") {
-        return "Chẵn lẻ"
-    }
-    else if (nd == "T" || nd == "X" || nd == "t" || nd == "x") {
-        return "Tài xỉu"
-    }
-    else if (nd == "A2" || nd == "B2" || nd == "a2" || nd == "b2" || nd == "T2" || nd == "X2" || nd == "t2" || nd == "x2") {
-        return "Chẵn lẻ 2"
-    }
-    else if ((nd == "g3" || nd == "G3")) {
-        return "Gấp 3"
-    }
-    else if ((nd == "s" || nd == "S")) {
-        return "Tổng 3 số"
-    }
-    else if ((nd == "N1" || nd == "n1")) {
-        return "Gấp 3"
-    }
-    else if ((nd == "N2" || nd == "n2")) {
-        return "Gấp 3"
-    }
-    else if ((nd == "N3" || nd == "n3")) {
-        return "Gấp 3"
-    }
-    else {
-        return ""
-    }
-}
+
 
 
 
