@@ -4,7 +4,28 @@ const fs = require('fs');
 
 const Cuoc = require('./models/Cuoc')
 
-(async () => {
+auto = async () => {
+    let cccz = await Cuoc.aggregate([
+        { $match: { } }
+        ,
+        {
+            $group: {
+                _id: {
+                    "sdtchuyen": "$sdtchuyen"
+                },
+                "tiencuoc": { $sum: "$tiencuoc" }
+            }
+        },
+        {
+            "$project": {
+                "_id": 0,
+                "sdt": "$_id.sdtchuyen",
+                "tiencuoc": "$_id.tiencuoc"
+            
+            }
+        },
+        { $sort: { "tiencuoc": -1 } }
+    ])
     let ccc = await Cuoc.aggregate([
         {
             $group: {
@@ -21,7 +42,7 @@ const Cuoc = require('./models/Cuoc')
             }
         }
     ])
-    console.log(ccc)
+    console.log(cccz)
     let content = '';
 
 
@@ -38,4 +59,7 @@ const Cuoc = require('./models/Cuoc')
 	  console.error(err);
 	}
 
-})
+}
+console.log("sdf")
+
+auto()
