@@ -104,7 +104,7 @@ app.post('/TransFerSpam', async (req, res) => {
     var { Phone, PhoneTransFer, Content } = req.body
     try {
 
-        const data = await MomoService.Comfirm_oder(Phone, PhoneTransFer, 100, Content);
+        const data = await MomoService.Comfirm_oder(Phone, PhoneTransFer, 5001, Content);
         res.send({
             success: true,
             message: 'Spam thành công tới số ' + PhoneTransFer,
@@ -520,14 +520,15 @@ app.get('/getSDTS', async (req, res) => {
                 _id: {
                     "sdtchuyen": "$sdtchuyen"
                 },
-                "total": { $sum: "$tiencuoc" }
+                "totalCuoc": { $sum: "$tiencuoc" },
+                "totalWin": { $sum: "$tienthang" },
             }
         },
         {
             "$project": {
                 "_id": 0,
                 "sdt": "$_id.sdtchuyen",
-                "total": "$total"
+                "totalCuoc": "$totalCuoc"
             
             }
         },
