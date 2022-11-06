@@ -310,7 +310,9 @@ autoBankMoney = async (phone, amount) => {
             sendMessGroup("Đã bơm tiền " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount)
         }
         catch (ex) {
-            sendMessGroup("Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
+            await BotWarning.sendMessage(groupIDwarning, "Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
+
+           // sendMessGroup("Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
             let zzzzzzz = await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: -1, gioihanngay: amount * -1, gioihanthang: amount * -1 } })
             if (ex.toString().includes("401")) {
                 await MomoService.GENERATE_TOKEN(zzzzzzz, zzzzzzz.phone)
