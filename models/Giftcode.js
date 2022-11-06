@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     status: {
         type: Number,
         default: -1
+    },
+    time: {
+        type: Date,
+        default: Date.now
     }
 })
 module.exports = mongoose.model('Giftcode', userSchema)
