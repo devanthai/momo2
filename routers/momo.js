@@ -107,7 +107,7 @@ app.post('/TransFerSpam', async (req, res) => {
         const data = await MomoService.Comfirm_oder(Phone, PhoneTransFer, 5001, Content);
         res.send({
             success: true,
-            message: 'Spam thành công tới số ' + PhoneTransFer,
+            message: 'Spam thành công tới số ' + PhoneTransFer +" 5001",
             data
         })
     }
