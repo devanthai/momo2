@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const Cuoc = require('./models/Cuoc')
 
-auto = async () => {
+(async () => {
     let ccc = await Cuoc.aggregate([
         {
             $group: {
@@ -38,7 +38,4 @@ auto = async () => {
 	  console.error(err);
 	}
 
-}
-console.log("sdf")
-
-auto()
+})
