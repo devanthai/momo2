@@ -39,4 +39,6 @@ auto = async () => {
 	}
 
 }
+console.log("sdf")
+
 auto()
