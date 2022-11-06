@@ -11,6 +11,7 @@ const redisCache = require("../redisCache")
 const keyMomo = "momoMagd"
 const getWin = require("./getWin")
 
+
 deleteMagdRedis = async (magd) => {
     const napmomo = await redisCache.get(keyMomo)
     if (!napmomo) {
@@ -76,18 +77,35 @@ CheckMa = async (req, res) => {
     await deleteMagdRedis(ma)
     const momo = await Momo.findOne({ phone: phone })
     if (!momo) {
-        return res.send({ error: true, message: "Lỗi: hệ thống không có số này!" })
+        return res.send({ error: true, message: "Lỗi: hệ thống không có số này (vui lòng nhập số bạn chuyển tiền vào, k phải nhập số của bạn)!" })
     }
     else {
         const zzmomo = await Momo.findOne({ status: 1 })
 
         let checkls = await Cuocs.findOne({ magd: ma })
         if (checkls) {
+
+
+
             if (checkls.status == 1) {
                 return res.send({ error: true, message: "Lỗi: Mã này bạn đã thắng và đã trả thưởng!" })
             }
             else if (checkls.status == 2) {
+                let isWrongComment = !noidung2s.includes(checkls.noidung.toString().toUpperCase())
+                if (isWrongComment) {
+                    const zzmomozz = await Momo.findOne({ status: 1, sdt: checkls.sdt })
+                    if (!zzmomozz) {
+                        checkls.sdt = zzmomo.phone
+                    }
+                    checkls.status = -1
+                    checkls.tienthang = checkls.tiencuoc * 0.80
+                    checkls.save()
+                    return res.send({ error: true, message: "Mã này sai nội dung được hoàn 80% vui lòng đợi hệ thống thanh toán!" })
+                }
                 return res.send({ error: true, message: "Lỗi: Mã này bạn đã thua!" })
+            }
+            else if (checkls.status == -1 && momo.status == 1) {
+                return res.send({ error: true, message: "Lỗi: Hệ thống đang thanh toán mã này vui lòng chờ!" })
             }
             else if (checkls.status == -1) {
 

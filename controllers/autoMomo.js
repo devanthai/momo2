@@ -259,7 +259,36 @@ const noidung2s = [
     "N2",
     "n2",
     "n3",
-    "N3"]
+    "N3",
+
+
+    "lt",
+    "lx",
+    "ct",
+    "cx",
+    "LT",
+    "LX",
+    "CT",
+    "CX",
+    "d1",
+    "d2",
+    "d3",
+    "d4",
+    "d5",
+    "d6",
+    "d7",
+    "d8",
+    "d9",
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+]
 
 autoBankMoney = async (phone, amount) => {
 
@@ -357,7 +386,34 @@ const noidungs = [
     { noidung: "N2" },
     { noidung: "n2" },
     { noidung: "n3" },
-    { noidung: "N3" }]
+    { noidung: "N3" },
+    { noidung: "ct" },
+    { noidung: "cx" },
+    { noidung: "lt" },
+    { noidung: "lx" },
+    { noidung: "CT" },
+    { noidung: "CX" },
+    { noidung: "LT" },
+    { noidung: "LX" },
+    { noidung: "d1" },
+    { noidung: "d2" },
+    { noidung: "d3" },
+    { noidung: "d4" },
+    { noidung: "d5" },
+    { noidung: "d6" },
+    { noidung: "d7" },
+    { noidung: "d8" },
+    { noidung: "d9" },
+    { noidung: "D1" },
+    { noidung: "D2" },
+    { noidung: "D3" },
+    { noidung: "D4" },
+    { noidung: "D5" },
+    { noidung: "D6" },
+    { noidung: "D7" },
+    { noidung: "D8" },
+    { noidung: "D9" }
+]
 
 async function sumWinmm() {
     var now = new Date();
