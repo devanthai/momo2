@@ -3,29 +3,34 @@ mongoose.connect("mongodb://127.0.0.1:27017/momo", { useUnifiedTopology: true, u
 const fs = require('fs');
 
 const Cuoc = require('./models/Cuoc')
+Cuoc.aggregate([
+    { $match: { } }
+    ,
+    {
+        $group: {
+            _id: {
+                "sdtchuyen": "$sdtchuyen"
+            },
+            "tiencuoc": { $sum: "$tiencuoc" }
+        }
+    },
+    {
+        "$project": {
+            "_id": 0,
+            "sdt": "$_id.sdtchuyen",
+            "tiencuoc": "$_id.tiencuoc"
+        
+        }
+    },
+    { $sort: { "tiencuoc": -1 } }
+]).exec(function (err, user) {
+    console.log(user)
+});
+
+
 
 auto = async () => {
-    let cccz = await Cuoc.aggregate([
-        { $match: { } }
-        ,
-        {
-            $group: {
-                _id: {
-                    "sdtchuyen": "$sdtchuyen"
-                },
-                "tiencuoc": { $sum: "$tiencuoc" }
-            }
-        },
-        {
-            "$project": {
-                "_id": 0,
-                "sdt": "$_id.sdtchuyen",
-                "tiencuoc": "$_id.tiencuoc"
-            
-            }
-        },
-        { $sort: { "tiencuoc": -1 } }
-    ])
+    
     let ccc = await Cuoc.aggregate([
         {
             $group: {
