@@ -512,7 +512,7 @@ app.get('/getSDTS', async (req, res) => {
         return res.redirect('/auth/')
     }
 
-   let zzz = await Cuoc.aggregate([
+   let zzz = await Cuocs.aggregate([
         { $match: { } }
         ,
         {
