@@ -527,7 +527,7 @@ app.get('/getSDTS', async (req, res) => {
             "$project": {
                 "_id": 0,
                 "sdt": "$_id.sdtchuyen",
-                "total": "$_id.tiencuoc"
+                "total": "tiencuoc"
             
             }
         },
