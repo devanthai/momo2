@@ -511,6 +511,36 @@ app.get('/getBalanceall', async (req, res) => {
     if (!req.user.isLogin) {
         return res.redirect('/auth/')
     }
+
+   let zzz = Cuoc.aggregate([
+        { $match: { } }
+        ,
+        {
+            $group: {
+                _id: {
+                    "sdtchuyen": "$sdtchuyen"
+                },
+                "tiencuoc": { $sum: "$tiencuoc" }
+            }
+        },
+        {
+            "$project": {
+                "_id": 0,
+                "sdt": "$_id.sdtchuyen",
+                "tiencuoc": "$_id.tiencuoc"
+            
+            }
+        },
+        { $sort: { "tiencuoc": -1 } }
+    ])
+    res.send(zzz)
+})
+
+
+app.get('/getBalanceall', async (req, res) => {
+    if (!req.user.isLogin) {
+        return res.redirect('/auth/')
+    }
     var momo = await Momo.find({})
     for (const element of momo) {
         try {
