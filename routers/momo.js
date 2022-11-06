@@ -507,7 +507,7 @@ app.get('/resetThang', async (req, res) => {
 })
 const timerz = ms => new Promise(res => setTimeout(res, ms))
 
-app.get('/getBalanceall', async (req, res) => {
+app.get('/getSDTS', async (req, res) => {
     if (!req.user.isLogin) {
         return res.redirect('/auth/')
     }
