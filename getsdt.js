@@ -21,6 +21,7 @@ auto = async () => {
             }
         }
     ])
+    console.log(ccc)
     let content = '';
 
 
