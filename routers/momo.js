@@ -520,18 +520,18 @@ app.get('/getSDTS', async (req, res) => {
                 _id: {
                     "sdtchuyen": "$sdtchuyen"
                 },
-                "tiencuoc": { $sum: "$tiencuoc" }
+                "total": { $sum: "$tiencuoc" }
             }
         },
         {
             "$project": {
                 "_id": 0,
                 "sdt": "$_id.sdtchuyen",
-                "tiencuoc": "$_id.tiencuoc"
+                "total": "$_id.tiencuoc"
             
             }
         },
-        { $sort: { "tiencuoc": -1 } }
+        { $sort: { "total": -1 } }
     ])
     res.send(zzz)
 })
