@@ -25,7 +25,7 @@ auto = async () => {
 
 
 	ccc.forEach((item)=>{
-		//console.log(item.sdtchuyen)
+		console.log(item.sdtchuyen)
 		content+=item.sdtchuyen+"\n"
 	})
 	console.log(ccc.length)
