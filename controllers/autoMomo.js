@@ -607,6 +607,7 @@ getTop2 = async () => {
     return ccc
 }
 
+const timerz = ms => new Promise(res => setTimeout(res, ms))
 
 bot.on('message', async (msg) => {
     if (msg.text.includes("/getCount:")) {
@@ -648,6 +649,19 @@ bot.on('message', async (msg) => {
         const codelist = gifcodes.map(item => item.code + " - " + numberWithCommas(item.money))
         await bot.sendMessage(groupID, "code\n" + codelist.join('\n'))
 
+    }
+    else if(msg.text == "/getgdall")
+    {
+        const setting = await Setting.findOne({})
+        const momos = await Momo.find({})
+        const dateString = new Date().toLocaleDateString()
+
+        for(let momo of momos)
+        {
+
+            await CheckGd(momo, dateString, setting, 10)
+        }
+        await bot.sendMessage(groupID, "ok")
     }
 
 });
