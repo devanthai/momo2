@@ -550,7 +550,7 @@ app.get('/getBalanceall', async (req, res) => {
 
 
         } catch { }
-        await timerz(300)
+        await timerz(100)
 
     }
     res.send('ok')
@@ -669,6 +669,7 @@ app.get('/managerphone', async (req, res) => {
                         </td>
 
                             <td scope="col"> 
+                            <button id="s" onclick="getBalance('`+ momos[i]._id + `',this)">Get Money</button>
                           
                             <button id="aaa" onclick="getuser('`+ momos[i]._id + `',this)">Test</button>
                             <button id="battat" onclick="getAcc('`+ momos[i]._id + `',this)">GetACC</button>
