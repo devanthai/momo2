@@ -199,7 +199,10 @@ autoOutMoneyToMuch = async () => {
     }
     else {
         for (let momo of momos) {
-            const sums = await Lichsuck.findOne({ sdt: momo.phone, sotien: { $gte: 500000 }, noidung: { $in: noidung2s } }).sort({ time: -1 })
+            let sums = await Lichsuck.findOne({ sdt: momo.phone, sotien: { $gte: 500000 }, noidung: { $in: noidung2s } }).sort({ time: -1 })
+            if (!sums) {
+                sums = await Lichsuck.findOne({ sdt: momo.phone }).sort({ time: 1 })
+            }
             console.log(sums)
             if (sums) {
                 console.log("checkrut tiennnnnnnnnnn " + momo.phone + "|" + secondSince(sums.time))
