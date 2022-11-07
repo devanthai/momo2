@@ -150,6 +150,9 @@ CheckMa = async (req, res) => {
         if (checkls) {
 
 
+            if (checkls.tiencuoc < setting.tile.min || checkls.tiencuoc > setting.tile.max) {
+                return res.send({ error: true, message: "Lỗi: Sai hạn mức vui lòng ib admin để được hoàn trả!" })
+            }
 
             if (checkls.status == 1) {
                 return res.send({ error: true, message: "Lỗi: Mã này bạn đã thắng và đã trả thưởng!" })
