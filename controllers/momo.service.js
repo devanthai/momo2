@@ -406,9 +406,7 @@ async function login(phone) {
 			headers: checkheader,
 		}));
 
-	console.log(res.momoMsg)
-	if (!res.result)
-		throw new Error(res.errorDesc || "Login thất bại, vui lòng đăng nhập lại");
+	if (!res.result) { throw new Error(res.errorDesc || "Login thất bại, vui lòng đăng nhập lại"); }
 	await MMModel.findOneAndUpdate(
 		{ phone },
 		{
@@ -419,6 +417,8 @@ async function login(phone) {
 			},
 		}
 	);
+	console.log(res)
+
 	try {
 		await getBalance(phone)
 	}
@@ -627,7 +627,7 @@ async function getTranId(phone, tranId, currentAccounts = null) {
 	if (comment == undefined || comment == null) {
 		//console.log(response.momoMsg)
 	}
-//	console.log(response.momoMsg.transId, comment)
+	//	console.log(response.momoMsg.transId, comment)
 	//console.log(response)
 	const transactions = {
 		phone,
@@ -1118,7 +1118,8 @@ async function getRoom(phone, targetPhone) {
 	}
 }
 
-module.exports = {createRoom,getRoom,
+module.exports = {
+	createRoom, getRoom,
 	getDetails,
 	getUser,
 	GET_OTP,
