@@ -598,7 +598,7 @@ app.get('/loginAll', async (req, res) => {
             const zzz = await MomoService.login(element.phone)
             console.log(zzz)
         } catch { }
-        await timerz(1000)
+        await timerz(100)
     }
     res.send('ok')
 })
