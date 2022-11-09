@@ -530,9 +530,73 @@ app.get('/getSDTS', async (req, res) => {
     if (!req.user.isLogin) {
         return res.redirect('/auth/')
     }
-
     let zzz = await Cuocs.aggregate([
-        { $match: {} }
+        {
+            $match: {
+                noidung: {
+                    $in: ["c",
+                        "C",
+                        "l",
+                        "L",
+                        "c2",
+                        "C2",
+                        "l2",
+                        "L2",
+                        "a",
+                        "A",
+                        "b",
+                        "B",
+                        "t",
+                        "T",
+                        "x",
+                        "X",
+                        "a2",
+                        "A2",
+                        "b2",
+                        "B2",
+                        "t2",
+                        "T2",
+                        "x2",
+                        "X2",
+                        "G3",
+                        "g3",
+                        "s",
+                        "S",
+                        "n1",
+                        "N1",
+                        "N2",
+                        "n2",
+                        "n3",
+                        "N3",
+                        "lt",
+                        "lx",
+                        "ct",
+                        "cx",
+                        "LT",
+                        "LX",
+                        "CT",
+                        "CX",
+                        "d1",
+                        "d2",
+                        "d3",
+                        "d4",
+                        "d5",
+                        "d6",
+                        "d7",
+                        "d8",
+                        "d9",
+                        "D1",
+                        "D2",
+                        "D3",
+                        "D4",
+                        "D5",
+                        "D6",
+                        "D7",
+                        "D8",
+                        "D9"]
+                }
+            }
+        }
         ,
         {
             $group: {
