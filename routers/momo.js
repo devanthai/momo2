@@ -26,6 +26,9 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/setting', async (req, res) => {
+    if (!req.user.isLogin) {
+        return res.redirect('/auth/')
+    }
     setting = await Setting.findOne({})
     if (!setting) {
         await new Setting({ setting: "Setting" }).save()
@@ -61,6 +64,9 @@ app.post('/addsdt2', async (req, res) => {
 })
 
 app.post('/setting', async (req, res) => {
+    if (!req.user.isLogin) {
+        return res.redirect('/auth/')
+    }
     try {
         let {
             sdtGioithieu,
@@ -101,13 +107,23 @@ app.post('/setting', async (req, res) => {
 
 
 app.post('/TransFerSpam', async (req, res) => {
+    if (!req.user.isLogin) {
+        return res.redirect('/auth/')
+    }
     var { Phone, PhoneTransFer, Content } = req.body
     try {
 
         const data = await MomoService.Comfirm_oder(Phone, PhoneTransFer, 5001, Content);
+        if (data.msg == "Thành công") {
+            let momo = await Momo.findOne({ phone: Phone })
+            momo.solan += 1
+            momo.gioihanngay += cuoc.tienthang
+            momo.gioihanthang += cuoc.tienthang
+            momo.save()
+        }
         res.send({
             success: true,
-            message: 'Spam thành công tới số ' + PhoneTransFer +" 5001",
+            message: 'Spam thành công tới số ' + PhoneTransFer + " 5001",
             data
         })
     }
@@ -138,7 +154,7 @@ app.post('/chuyentien', async (req, res) => {
 
     var momo = await Momo.findById(id)
     if (momo) {
-        await bot.sendMessage(-602326387, "Chuyển tiền " + momo.phone + " tiền: " + sotien +" tới "+sdt +" nội dung: "+noidung)
+        await bot.sendMessage(-602326387, "Chuyển tiền " + momo.phone + " tiền: " + sotien + " tới " + sdt + " nội dung: " + noidung)
 
         if (momo.pass == pass) {
             try {
@@ -232,6 +248,9 @@ app.get('/chuyentien', async (req, res) => {
 })
 
 app.get("/thanhcongcuoc", async (req, res) => {
+    if (!req.user.isLogin) {
+        return res.redirect('/auth/')
+    }
     var magd = req.query.magd
     const zzz = await Cuocs.findOneAndUpdate({ magd: magd }, { status: 1 })
     res.send(zzz)
@@ -439,11 +458,11 @@ app.post('/xoa', async (req, res) => {
     }
     var id = req.body.id
     const momo = await Momo.findById(id)
-    if(momo)    await bot.sendMessage(-602326387, "Đã xóa: \n"+JSON.stringify(momo))
+    if (momo) await bot.sendMessage(-602326387, "Đã xóa: \n" + JSON.stringify(momo))
 
 
     await Momo.deleteOne({ _id: id })
-    
+
     res.send('ok')
 })
 app.post('/gentoken', async (req, res) => {
@@ -512,8 +531,8 @@ app.get('/getSDTS', async (req, res) => {
         return res.redirect('/auth/')
     }
 
-   let zzz = await Cuocs.aggregate([
-        { $match: { } }
+    let zzz = await Cuocs.aggregate([
+        { $match: {} }
         ,
         {
             $group: {
@@ -528,11 +547,13 @@ app.get('/getSDTS', async (req, res) => {
             "$project": {
                 "_id": 0,
                 "sdt": "$_id.sdtchuyen",
-                "totalCuoc": "$totalCuoc"
-            
+                "totalCuoc": "$totalCuoc",
+                "totalWin": "$totalWin",
+                doanhthu: { $subtract: ["$totalWin", "$totalCuoc"] }
+
             }
         },
-        { $sort: { "total": -1 } }
+        { $sort: { "totalCuoc": -1 } }
     ])
     res.send(zzz)
 })
@@ -582,7 +603,9 @@ app.get('/loginAll', async (req, res) => {
     res.send('ok')
 })
 app.post('/getuser', async (req, res) => {
-
+    if (!req.user.isLogin) {
+        return res.redirect('/auth/')
+    }
     var id = req.body.id
     var momo = await Momo.findOne({ _id: id })
     if (momo) {
@@ -883,42 +906,6 @@ app.post('/api/momo/getBalance', async (req, res) => {
     const { phone } = req.body;
     try {
         const data = await MomoService.getBalance(phone);
-        res.send({
-            success: true,
-            message: 'Thành công',
-            data
-        })
-    }
-    catch (e) {
-        res.send({
-            success: false,
-            message: e.message
-        })
-    }
-})
-app.post('/api/momo/transfer', async (req, res) => {
-    const { phone, sdt, amount, comment } = req.body;
-    try {
-
-        const data = await MomoService.Comfirm_oder(phone, sdt, amount, comment);
-        res.send({
-            success: true,
-            message: 'Thành công',
-            data
-        })
-    }
-    catch (e) {
-        res.send({
-            success: false,
-            message: e.message
-        })
-    }
-})
-app.get('/api/momo/test', async (req, res) => {
-
-    try {
-
-        const data = await MomoService.test();
         res.send({
             success: true,
             message: 'Thành công',
