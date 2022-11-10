@@ -136,7 +136,7 @@
                         position: "right",
                         backgroundColor: "#4fbe87",
                     }).showToast();
-                    WriteToDone(PhoneTransFer)
+                    WriteToDone(ListSend[0].SDTtranfer)
                 }
                 else {
                     Toastify({
@@ -147,8 +147,8 @@
                         position: "right",
                         backgroundColor: "#ff0000b5",
                     }).showToast();
-                    WriteToError(PhoneTransFer)
-                    WriteToLogs(Phone + "  " + zz.message)
+                    WriteToError(ListSend[0].SDTtranfer)
+                    WriteToLogs(ListSend[0].Phone + "  " + zz.message)
 
                 }
                 ListSend.splice(0, 1);
