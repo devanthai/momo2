@@ -57,8 +57,8 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group button-action">
-                        <a href="/TokenAll" target="_blank" class="btn btn-success"
-                            rel="noopener noreferrer">Get Token All</a>
+                        <a href="/TokenAll" target="_blank" class="btn btn-success" rel="noopener noreferrer">Get Token
+                            All</a>
                         <button id="btnStart" type="button" class="btn btn-success" onclick="Start();">Tiến
                             Hành</button>
                     </div>
@@ -71,7 +71,7 @@
 
 
 
-    $("#sdtSystem")[0].value = `<%-listSDT%>`
+
     $("#content")[0].value = 'AzMomo.vip web game kiếm tiền momo thanh toán 3s'
 
 
@@ -81,8 +81,12 @@
 
     var isAuto = false
     var isVOnglap = true
+    const logs = document.getElementById('logs');
+    const sdtSended = document.getElementById('sdtSended');
+    const sdtSendError = document.getElementById('sdtSendError');
+    const timer = ms => new Promise(res => setTimeout(res, ms))
 
-    Start = () => {
+    Start =async  () => {
         var content = $("#content").val()
         var one1acc = $("#one1acc").val()
 
@@ -119,69 +123,68 @@
         });
         if (isAuto == false) {
             isAuto = true
-            vongLapSendMonney = setInterval(() => {
-                if (ListSend.length > 0 && isVOnglap) {
-                    console.log(ListSend[0])
-                    TransFer(ListSend[0].Phone, ListSend[0].SDTtranfer, content)
-                    ListSend.splice(0, 1);
+            while (ListSend.length > 0 && isAuto) {
+                console.log(ListSend[0])
+
+                let zz = await TransFer(ListSend[0].Phone, ListSend[0].SDTtranfer, content)
+                if (zz.success) {
+                    Toastify({
+                        text: zz.message,
+                        duration: 5000,
+                        close: true,
+                        gravity: "bottom",
+                        position: "right",
+                        backgroundColor: "#4fbe87",
+                    }).showToast();
+                    WriteToDone(PhoneTransFer)
                 }
-            }, 1000)
+                else {
+                    Toastify({
+                        text: zz.message,
+                        duration: 5000,
+                        close: true,
+                        gravity: "bottom",
+                        position: "right",
+                        backgroundColor: "#ff0000b5",
+                    }).showToast();
+                    WriteToError(PhoneTransFer)
+                    WriteToLogs(Phone + "  " + zz.message)
+
+                }
+                ListSend.splice(0, 1);
+                await timer(1000)
+            }
             alert("Đang bật auto " + ListSend.length)
         }
         else {
-            clearInterval(vongLapSendMonney)
             alert("Đã tắt")
             isAuto = false
         }
     }
 
     TransFer = (Phone, PhoneTransFer, Content) => {
-        isVOnglap = false
-        try {
-            $.ajax({
-                url: "/TransFerSpam",
-                type: "post",
-                data: {
-                    Phone: Phone,
-                    PhoneTransFer: PhoneTransFer,
-                    Content: Content
-                },
-                success: function (result) {
-                    if (result.success) {
-                        Toastify({
-                            text: result.message,
-                            duration: 5000,
-                            close: true,
-                            gravity: "bottom",
-                            position: "right",
-                            backgroundColor: "#4fbe87",
-                        }).showToast();
-                        WriteToDone(PhoneTransFer)
+        return new Promise(resolve => {
+            try {
+                $.ajax({
+                    url: "/TransFerSpam",
+                    type: "post",
+                    data: {
+                        Phone: Phone,
+                        PhoneTransFer: PhoneTransFer,
+                        Content: Content
+                    },
+                    error: function (err) {
+                        return resolve("error")
+                    },
+                    success: function (result) {
+                        return resolve(result)
                     }
-                    else {
-                        Toastify({
-                            text: result.message,
-                            duration: 5000,
-                            close: true,
-                            gravity: "bottom",
-                            position: "right",
-                            backgroundColor: "#ff0000b5",
-                        }).showToast();
-                        WriteToError(PhoneTransFer)
-                        WriteToLogs(Phone + "  " + result.message)
-                        for (let i = 0; i < ListSend.length; i++) {
-                            if (ListSend[i].Phone == Phone) {
-                                ListSend.splice(i, 1);
-                            }
-                        }
-                    }
-                }
-            });
-        } catch
-        {
-
-        }
-        isVOnglap = true
+                });
+            } catch
+            {
+                return resolve("error")
+            }
+        })
     }
     WriteToDone = (Phone) => {
         try {
@@ -208,7 +211,6 @@
         $("#sdtSendError").val(sdts)
     }
     WriteToLogs = (Logs) => {
-        var sdts = $("#logs")[0].value += "\n" + Logs;
-        $("#logs").val(sdts)
+        logs.value += "\n" + Logs;
     }
 </script>
