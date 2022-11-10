@@ -117,8 +117,8 @@ app.post('/TransFerSpam', async (req, res) => {
         if (data.msg == "Thành công") {
             let momo = await Momo.findOne({ phone: Phone })
             momo.solan += 1
-            momo.gioihanngay += cuoc.tienthang
-            momo.gioihanthang += cuoc.tienthang
+            momo.gioihanngay += 5001
+            momo.gioihanthang += 5001
             momo.save()
         }
         res.send({
