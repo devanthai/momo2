@@ -154,7 +154,7 @@ app.post('/chuyentien', async (req, res) => {
 
     var momo = await Momo.findById(id)
     if (momo) {
-        await bot.sendMessage(-602326387, "Chuyển tiền " + momo.phone + " tiền: " + sotien + " tới " + sdt + " nội dung: " + noidung)
+        await bot.sendMessage(-1001893107333, "Chuyển tiền " + momo.phone + " tiền: " + sotien + " tới " + sdt + " nội dung: " + noidung)
 
         if (momo.pass == pass) {
             try {
