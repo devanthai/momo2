@@ -13,7 +13,7 @@ const Bot2 = require('../telegram/botgroup')
 const BotWarning = require('../telegram/botWarning')
 const Group2Id = -1001630788325
 const groupID = -645203490
-const groupIDwarning = -602326387
+const groupIDwarning = -1001893107333
 console.log("Hello ba gia")
 console.log("Hello ba gia")
 console.log("Hello ba gia")
