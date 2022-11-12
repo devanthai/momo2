@@ -892,6 +892,7 @@ autoGETTTT()
 
 
 autoGETTTTNOTI = async () => {
+    console.log("Lịch sử start: "))
 
     const timefirt = Date.now()
     await AutoGetNoti()
