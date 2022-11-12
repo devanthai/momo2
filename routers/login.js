@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
 
     const admin = await Admin.findOne({ username: taikhoan })
     console.log(process.env.secret2fa)
-    const is2Fa = await verify(code, "GYRCEDRFDFYV25DY")
+    const is2Fa = await verify(code, process.env.secret2fa)
     if (!is2Fa) {
         return res.send("taikhoan hoac mat khau k chinh xacs")
     }
