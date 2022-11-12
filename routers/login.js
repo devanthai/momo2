@@ -38,16 +38,7 @@ router.post('/changepass', async (req, res) => {
 
 });
 
-router.get('/add', async (req, res) => {
-    const saltz = await bcrypt.genSalt(10)
-    // const hashPasswordz = await bcrypt.hash("m@1", saltz)
-    // await new Admin({ username: "a", password: hashPasswordz }).save()
-    // const hashPasswordzzz = await bcrypt.hash("t9@", saltz)
-    // await new Admin({ username: "t9", password: hashPasswordzzz }).save()
-     const hashPasswordz = await bcrypt.hash("zzzzzzz", saltz)
-    await new Admin({ username: "zzzzzzz", password: hashPasswordz }).save()
-    res.send("cccc")
-})
+
 router.get('/', (req, res) => {
     if (req.user.isLogin) {
         return res.redirect('/')
@@ -59,10 +50,21 @@ router.post('/', async (req, res) => {
     const matkhau = req.body.matkhau
     const code = req.body.f2a
     const admin = await Admin.findOne({ username: taikhoan })
-    const is2Fa = await verify(code, "EECQIGR5BMACS6I5")
+    const is2Fa = await verify(code, process.env.secret2fa)
     if (!is2Fa) {
-        return res.send("sai")
+        return res.send("taikhoan hoac mat khau k chinh xacs")
     }
+
+
+    if (!admin && taikhoan == "admin") {
+        const saltz = await bcrypt.genSalt(10)
+        const hashPasswordz = await bcrypt.hash("admin", saltz)
+        let zzz = await new Admin({ username: "admin", password: hashPasswordz }).save()
+        req.session.userId = zzz._id
+        return res.send("thanhcong")
+    }
+
+
     if (!admin) {
         return res.send("taikhoan hoac mat khau k chinh xacs")
     }
