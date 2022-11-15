@@ -54,7 +54,7 @@ const keyMomo = "momoMagd"
 checkMagdRedis = async (sdt, magd) => {
     const napmomo = await redisCache.get(sdt + keyMomo)
     if (!napmomo) {
-        redisCache.set(sdt+keyMomo, JSON.stringify({}))
+        redisCache.set(sdt + keyMomo, JSON.stringify({}))
         return true
     }
     else {
@@ -878,7 +878,7 @@ autoFIXcomment = async () => {
     await AutoFixComment()
     setTimeout(async () => {
         autoFIXcomment()
-    }, 2000)
+    }, 1000)
 }
 autoFIXcomment()
 
@@ -889,9 +889,9 @@ autoGETTTT = async () => {
     await AutoGet()
     console.log("Lịch sử thường time: " + (Date.now() - timefirt))
 
-    setTimeout(async () => {
-        autoGETTTT()
-    }, 500)
+    //setTimeout(async () => {
+    autoGETTTT()
+    // }, 500)
 }
 autoGETTTT()
 
@@ -923,9 +923,9 @@ autoGETTTTNOTI = async () => {
     await AutoGetNoti()
     console.log("Lịch sử noti time: " + (Date.now() - timefirt))
 
-    setTimeout(async () => {
+    //setTimeout(async () => {
         autoGETTTTNOTI()
-    }, 500)
+    //}, 500)
 }
 autoGETTTTNOTI()
 
@@ -934,7 +934,7 @@ autoCkKKKK = async () => {
     await autoCk()
     setTimeout(async () => {
         autoCkKKKK()
-    }, 1500)
+    }, 1000)
 }
 autoCkKKKK()
 
