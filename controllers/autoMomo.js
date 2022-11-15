@@ -64,7 +64,7 @@ checkMagdRedis = async (sdt, magd) => {
         if (jMomos.length > 10) {
             delete jMomos[keys[0]]
         }
-        console.log(sdt,"count: "+keys.length)
+        //console.log(sdt,"count: "+keys.length)
         if (jMomos[magd] != undefined) {
             return false
         }

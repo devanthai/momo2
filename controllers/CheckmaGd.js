@@ -87,7 +87,7 @@ deleteMagdRedis = async (sdt, magd) => {
         if (jMomos[magd] != undefined) {
             console.log("firt: ", jMomos.length)
             delete jMomos[magd]
-            redisCache.set(keyMomo, JSON.stringify(jMomos))
+            redisCache.set(sdt + keyMomo, JSON.stringify(jMomos))
             console.log("last: ", jMomos.length)
             return true
         }
