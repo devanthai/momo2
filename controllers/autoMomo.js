@@ -54,7 +54,7 @@ const keyMomo = "momoMagd"
 checkMagdRedis = async (sdt, magd) => {
     const napmomo = await redisCache.get(sdt + keyMomo)
     if (!napmomo) {
-        redisCache.set(keyMomo, JSON.stringify({}))
+        redisCache.set(sdt+keyMomo, JSON.stringify({}))
         return true
     }
     else {
@@ -70,7 +70,7 @@ checkMagdRedis = async (sdt, magd) => {
         }
         else {
             jMomos[magd] = magd
-            redisCache.set(keyMomo, JSON.stringify(jMomos))
+            redisCache.set(sdt + keyMomo, JSON.stringify(jMomos))
             return true
         }
     }
@@ -78,7 +78,7 @@ checkMagdRedis = async (sdt, magd) => {
 deleteMagdRedis = async (sdt, magd) => {
     const napmomo = await redisCache.get(sdt + keyMomo)
     if (!napmomo) {
-        redisCache.set(keyMomo, JSON.stringify({}))
+        redisCache.set(sdt + keyMomo, JSON.stringify({}))
         return true
     }
     else {
@@ -86,7 +86,7 @@ deleteMagdRedis = async (sdt, magd) => {
         if (jMomos[magd] != undefined) {
             console.log("firt: ", jMomos.length)
             delete jMomos[magd]
-            redisCache.set(keyMomo, JSON.stringify(jMomos))
+            redisCache.set(sdt + keyMomo, JSON.stringify(jMomos))
             console.log("last: ", jMomos.length)
             return true
         }
