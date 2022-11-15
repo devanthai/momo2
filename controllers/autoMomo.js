@@ -51,14 +51,20 @@ setInterval(() => {
 
 
 const keyMomo = "momoMagd"
-checkMagdRedis = async (magd) => {
-    const napmomo = await redisCache.get(keyMomo)
+checkMagdRedis = async (sdt, magd) => {
+    const napmomo = await redisCache.get(sdt + keyMomo)
     if (!napmomo) {
         redisCache.set(keyMomo, JSON.stringify({}))
         return true
     }
     else {
         let jMomos = JSON.parse(napmomo)
+
+        let keys = Object.keys(vcccc)
+        if (jMomos.length > 10) {
+            delete jMomos[keys[0]]
+        }
+        console.log(sdt,"count: "+keys.length)
         if (jMomos[magd] != undefined) {
             return false
         }
@@ -69,8 +75,8 @@ checkMagdRedis = async (magd) => {
         }
     }
 }
-deleteMagdRedis = async (magd) => {
-    const napmomo = await redisCache.get(keyMomo)
+deleteMagdRedis = async (sdt, magd) => {
+    const napmomo = await redisCache.get(sdt + keyMomo)
     if (!napmomo) {
         redisCache.set(keyMomo, JSON.stringify({}))
         return true
@@ -581,10 +587,12 @@ function getGiftcodeRan() {
 }
 
 
-bot.onText(/\/delRedis (.+)/, async (msg, match) => {
+bot.onText(/\/delRedis (.+) (.+)/, async (msg, match) => {
 
-    const magd = (match[1])
-    await deleteMagdRedis(magd)
+    const sdt = (match[1])
+
+    const magd = (match[2])
+    await deleteMagdRedis(sdt, magd)
 
     await bot.sendMessage(groupID, "ok")
 
@@ -1029,7 +1037,7 @@ async function CheckGd(phone, dateString, setting, limit = 10) {
                 const transId = his.transId
                 let timeFirtz = Date.now()
 
-                const checkGdredis = await checkMagdRedis(transId)
+                const checkGdredis = await checkMagdRedis(phone.phone, transId)
 
                 const sotienenn = his.totalAmount
                 if (checkGdredis && sotienenn >= setting.tile.min) {
@@ -1095,7 +1103,7 @@ async function CheckGd(phone, dateString, setting, limit = 10) {
                             }
                         }
                         catch (ex) {
-                            deleteMagdRedis(transId)
+                            deleteMagdRedis(phone.phone, transId)
                             if (!ex.toString().includes("commentValue")) {
                                 if (ex.toString().includes("401")) {
                                     try {
@@ -1154,7 +1162,7 @@ async function CheckGd2(phone, setting) {
 
 
 
-            const checkGdredis = await checkMagdRedis(magdd)
+            const checkGdredis = await checkMagdRedis(phone.phone, magdd)
             if (checkGdredis && amount >= setting.tile.min) {
                 console.log("check redis noti: " + checkGdredis, tranId)
                 const postBalance = -99999

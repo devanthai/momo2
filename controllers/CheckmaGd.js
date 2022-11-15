@@ -76,8 +76,8 @@ const noidung2s = [
     "D9",
 ]
 
-deleteMagdRedis = async (magd) => {
-    const napmomo = await redisCache.get(keyMomo)
+deleteMagdRedis = async (sdt, magd) => {
+    const napmomo = await redisCache.get(sdt + keyMomo)
     if (!napmomo) {
         redisCache.set(keyMomo, JSON.stringify({}))
         return true
@@ -138,7 +138,7 @@ CheckMa = async (req, res) => {
     const setting = await Setting.findOne({})
     let { ma, phone } = req.body
     phone = ChangeNumber11(phone)
-    await deleteMagdRedis(ma)
+    await deleteMagdRedis(phone, ma)
     const momo = await Momo.findOne({ phone: phone })
     if (!momo) {
         return res.send({ error: true, message: "Lỗi: hệ thống không có số này (vui lòng nhập số bạn chuyển tiền vào, k phải nhập số của bạn)!" })
