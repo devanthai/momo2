@@ -1005,7 +1005,7 @@ async function CheckGd(phone, dateString, setting, limit = 10) {
 
         let zz = hiss
         hiss = hiss.momoMsg
-        if (zz.message == "successfuly") {
+        if (zz.message == "Giao dịch thành công") {
             for (const his of hiss) {
 
                 const io = his.io

@@ -545,7 +545,7 @@ async function getTranshis(phone, begin, end, limit, currentAccounts = null) {
 	let currentAccount = currentAccounts || (await checkValidSession(phone)),
 		keyrd = randomkey(32),
 		requestkey = encryptRSA(keyrd),
-		url = "https://api.momo.vn/sync/transhis/browse",
+		url = "https://api.momo.vn/transhis/api/transhis/browse",
 		times = new Date().getTime(),
 		data = await encryptAES(
 			JSON.stringify({

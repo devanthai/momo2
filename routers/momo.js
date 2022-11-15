@@ -307,7 +307,7 @@ app.get('/lichsu', async (req, res) => {
 
 
         var html = ""
-        if (data.message == "successfuly" && data.momoMsg) {
+        if (data.message == "Giao dịch thành công" && data.momoMsg) {
             //console.log(data.momoMsg)
             data.momoMsg.forEach(async (ls) => {
                 if (ls.status == 6) {
