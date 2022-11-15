@@ -344,7 +344,7 @@ autoBankMoney = async (phone, amount) => {
         catch (ex) {
             await BotWarning.sendMessage(groupIDwarning, "Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
 
-           // sendMessGroup("Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
+            // sendMessGroup("Bơm tiền thất bại " + setting.SendMoneyMy.Phone + " to " + phone + " số tiền: " + amount + "\n" + ex.message)
             let zzzzzzz = await Momo.findOneAndUpdate({ phone: setting.SendMoneyMy.Phone }, { $inc: { solan: -1, gioihanngay: amount * -1, gioihanthang: amount * -1 } })
             if (ex.toString().includes("401")) {
                 await MomoService.GENERATE_TOKEN(zzzzzzz, zzzzzzz.phone)
@@ -711,14 +711,12 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(groupID, "code\n" + codelist.join('\n'))
 
     }
-    else if(msg.text == "/getgdall")
-    {
+    else if (msg.text == "/getgdall") {
         const setting = await Setting.findOne({})
         const momos = await Momo.find({})
         const dateString = new Date().toLocaleDateString()
 
-        for(let momo of momos)
-        {
+        for (let momo of momos) {
 
             await CheckGd(momo, dateString, setting, 10)
         }
@@ -888,6 +886,25 @@ autoGETTTT = async () => {
     }, 500)
 }
 autoGETTTT()
+
+
+
+autoBatSo = async () => {
+
+    const momos = await Momo.find({ status: 1 })
+    if (momos.length < 3) {
+        const momo = await Momo.findOneAndUpdate({ solan: 0, gioihanngay: 0, gioihanthang: 0, status: 0, sotien: 0 }, { status: 1 })
+        if (momo) {
+            await BotWarning.sendMessage(groupIDwarning, "Đã bật số: " + momo.phone)
+        }
+    }
+
+    setTimeout(async () => {
+        autoBatSo()
+    }, 5000)
+}
+autoBatSo()
+
 
 
 
@@ -1193,6 +1210,9 @@ async function AutoGet() {
         }
     }
 }
+
+
+
 
 
 
