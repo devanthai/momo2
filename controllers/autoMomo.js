@@ -892,7 +892,7 @@ autoGETTTT()
 autoBatSo = async () => {
 
     const momos = await Momo.find({ status: 1 })
-    if (momos.length < 9) {
+    if (momos.length < 4) {
         const momo = await Momo.findOneAndUpdate({ solan: 0, gioihanngay: 0, gioihanthang: 0, status: 0, sotien: 0 }, { status: 1 })
         if (momo) {
             await BotWarning.sendMessage(groupIDwarning, "Đã bật số: " + momo.phone)
